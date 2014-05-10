@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">RAS</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Drawer layout -->
+    <string name="drawer_open">open</string>
+    <string name="drawer_close">closed</string>
+    
+    <!-- Login page -->
+    <string name="login_title">Login</string>
+    <string name="login_username">Username</string>
+    <string name="login_password">Password</string>
+    
+    <!-- Profile page -->
+    <string name="profile_title">Profile</string>
+    <string name="age_title">Age</string>
+    <string name="length_title">Length</string>
+    <string name="weight_title">Weight</string>
+    <string name="gender_title">Gender</string>
+    <string name="location_title">Location</string>
+    <string name="vault_button_title">See vaults</string>
+    
+    <!-- Vault page -->
+    <string name="vault_title">Vault</string>
+    <string name="duration_title">Duration</string>
+    <string name="e_score_title">E-Score</string>
+    <string name="d_score_title">D-Score</string>
+    <string name="vault_type_title">Vault type</string>
+    <string name="compare_button_title">Compare this vault</string>
+    
+</resources>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical" >
+	
+	    <LinearLayout
+	    	android:layout_width="match_parent"
+	    	android:layout_height="match_parent"
+	    	android:layout_marginLeft="@dimen/activity_horizontal_margin"
+	    	android:layout_marginTop="@dimen/activity_vertical_margin"
+	    	android:layout_marginRight="@dimen/activity_horizontal_margin"
+	    	android:layout_marginBottom="@dimen/activity_vertical_margin"
+	    	android:orientation="vertical" >
+	
+	        <TextView
+	            android:id="@+id/profile_name_container"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:textSize="@dimen/large_font"
+	            android:text="Sjoerd Nijhof" />
+	        
+	        <TextView
+	            android:id="@+id/date_container"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:textSize="@dimen/small_font"
+	            android:textColor="@color/dark_gray"
+	            android:text="18 februari 2014" />
+	        
+	        <TableLayout
+	            android:id="@+id/user_information_table"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="@dimen/activity_vertical_margin">
+	            
+	            <TableRow
+			        android:id="@+id/tableRow1"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content" >
+			 
+			        <TextView
+			            android:id="@+id/vault_duration_title"
+			            android:text="@string/duration_title"
+			            style="@style/table_row_title_style" />
+			 
+			        <TextView
+			            android:id="@+id/vault_duration_container"
+			            android:text="Column 2"
+			            style="@style/table_row_input_style" />
+			    </TableRow>
+			    
+	            <TableRow
+			        android:id="@+id/tableRow1"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content" >
+			 
+			        <TextView
+			            android:id="@+id/vault_d_score_title"
+			            android:text="@string/d_score_title"
+			            style="@style/table_row_title_style" />
+			 
+			        <TextView
+			            android:id="@+id/vault_d_score_container"
+			            android:text="Column 2"
+			            style="@style/table_row_input_style" />
+			    </TableRow>
+			    
+	            <TableRow
+			        android:id="@+id/tableRow1"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content" >
+			 
+			        <TextView
+			            android:id="@+id/vault_e_score_title"
+			            android:text="@string/e_score_title"
+			            style="@style/table_row_title_style" />
+			 
+			        <TextView
+			            android:id="@+id/vault_e_score_container"
+			            android:text="Column 2"
+			            style="@style/table_row_input_style" />
+			    </TableRow>
+			    
+	            <TableRow
+			        android:id="@+id/tableRow1"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content" >
+			 
+			        <TextView
+			            android:id="@+id/vault_type_title"
+			            android:text="@string/vault_type_title"
+			            style="@style/table_row_title_style" />
+			 
+			        <TextView
+			            android:id="@+id/vault_type_container"
+			            android:text="Column 2"
+			            style="@style/table_row_input_style" />
+			    </TableRow>
+			    
+	            <TableRow
+			        android:id="@+id/tableRow1"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content" >
+			 
+			        <TextView
+			            android:id="@+id/vault_location_title"
+			            android:text="@string/location_title"
+			            style="@style/table_row_title_style" />
+			 
+			        <TextView
+			            android:id="@+id/vault_location_container"
+			            android:text="Column 2"
+			            style="@style/table_row_input_style" />
+			    </TableRow>
+	            
+	        </TableLayout>
+	        
+	        <Button 
+		        android:id="@+id/compare_button"
+		        android:text="@string/compare_button_title"
+		        style="@style/button_style"/>
+	        
+	    </LinearLayout>
+    </LinearLayout>
+</ScrollView>

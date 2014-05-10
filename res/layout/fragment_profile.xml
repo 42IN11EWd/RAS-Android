@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical" >
+	    
+	    <ImageView
+	        android:id="@+id/profile_image"
+	        android:layout_width="match_parent"
+	        android:layout_height="250dp"
+	        android:scaleType="fitXY"
+	        android:src="@drawable/epke" />
+	
+	    <LinearLayout
+	    	android:layout_width="match_parent"
+	    	android:layout_height="match_parent"
+	    	android:layout_marginLeft="@dimen/activity_horizontal_margin"
+	    	android:layout_marginTop="@dimen/activity_vertical_margin"
+	    	android:layout_marginRight="@dimen/activity_horizontal_margin"
+	    	android:layout_marginBottom="@dimen/activity_vertical_margin"
+	    	android:orientation="vertical" >
+	
+	        <TextView
+	            android:id="@+id/profile_name_container"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:textSize="@dimen/large_font"
+	            android:text="Epke zonderland" />
+	        
+	        <TableLayout
+	            android:id="@+id/user_information_table"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="@dimen/activity_vertical_margin">
+	            
+	            <TableRow
+			        android:id="@+id/tableRow1"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content" >
+			 
+			        <TextView
+			            android:id="@+id/profile_age_title"
+			            android:text="@string/age_title"
+			            style="@style/table_row_title_style" />
+			 
+			        <TextView
+			            android:id="@+id/profile_age_container"
+			            android:text="Column 2"
+			            style="@style/table_row_input_style" />
+			    </TableRow>
+			    
+	            <TableRow
+			        android:id="@+id/tableRow1"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content" >
+			 
+			        <TextView
+			            android:id="@+id/profile_length_title"
+			            android:text="@string/length_title"
+			            style="@style/table_row_title_style" />
+			 
+			        <TextView
+			            android:id="@+id/profile_length_container"
+			            android:text="Column 2"
+			            style="@style/table_row_input_style" />
+			    </TableRow>
+			    
+	            <TableRow
+			        android:id="@+id/tableRow1"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content" >
+			 
+			        <TextView
+			            android:id="@+id/profile_weight_title"
+			            android:text="@string/weight_title"
+			            style="@style/table_row_title_style" />
+			 
+			        <TextView
+			            android:id="@+id/profile_weight_container"
+			            android:text="Column 2"
+			            style="@style/table_row_input_style" />
+			    </TableRow>
+			    
+	            <TableRow
+			        android:id="@+id/tableRow1"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content" >
+			 
+			        <TextView
+			            android:id="@+id/profile_gender_title"
+			            android:text="@string/gender_title"
+			            style="@style/table_row_title_style" />
+			 
+			        <TextView
+			            android:id="@+id/profile_gender_container"
+			            android:text="Column 2"
+			            style="@style/table_row_input_style" />
+			    </TableRow>
+			    
+	            <TableRow
+			        android:id="@+id/tableRow1"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content" >
+			 
+			        <TextView
+			            android:id="@+id/profile_training_location_title"
+			            android:text="@string/location_title"
+			            style="@style/table_row_title_style" />
+			 
+			        <TextView
+			            android:id="@+id/profile_training_location_container"
+			            android:text="Column 2"
+			            style="@style/table_row_input_style" />
+			    </TableRow>
+	            
+	        </TableLayout>
+	        
+	        <Button 
+		        android:id="@+id/vault_button"
+		        android:text="@string/vault_button_title"
+		        style="@style/button_style"/>
+	        
+	    </LinearLayout>
+    </LinearLayout>
+</ScrollView>
