@@ -1,8 +1,10 @@
 package nl.avans.ras.fragments;
 
 import nl.avans.ras.R;
+import nl.avans.ras.fragments.ProfileFragment.OnShowVaultsListener;
 import nl.avans.ras.model.Gymnast;
 import nl.avans.ras.model.Vault;
+import android.app.Activity;
 import android.app.Fragment;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -14,6 +16,9 @@ import android.widget.TextView;
 
 public class VaultFragment extends Fragment implements View.OnClickListener {
 
+	// Abstract methods
+	OnCompareVaultListener mCompareVaultListener;
+	
 	// Fields
 	private Gymnast gymnast;
 	private Vault vault;
@@ -28,6 +33,21 @@ public class VaultFragment extends Fragment implements View.OnClickListener {
 	public void setGymnast(Gymnast gymnast) {
 		if (gymnast != null) {
 			this.gymnast = gymnast;
+		}
+	}
+	
+	// Interfaces
+	public interface OnCompareVaultListener {
+		public void OnCompareVault(Vault vault);
+	}
+
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		try {
+			mCompareVaultListener = (OnCompareVaultListener) activity;
+		} catch (ClassCastException e) {
+			throw new ClassCastException(activity.toString() + " must implement OnShowVaultsListener");
 		}
 	}
 	
@@ -97,6 +117,10 @@ public class VaultFragment extends Fragment implements View.OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		
+		switch (v.getId()) {
+		case R.id.compare_button:
+			mCompareVaultListener.OnCompareVault(vault);
+			break;
+		}
 	}
 }

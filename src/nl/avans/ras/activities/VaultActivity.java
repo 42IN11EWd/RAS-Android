@@ -7,10 +7,11 @@ import nl.avans.ras.R;
 import nl.avans.ras.database.DatabaseHelper;
 import nl.avans.ras.fragments.ListViewFragment;
 import nl.avans.ras.fragments.ProfileFragment;
+import nl.avans.ras.fragments.VaultCompareFragment;
 import nl.avans.ras.fragments.VaultFragment;
-import nl.avans.ras.model.AdapterKind;
 import nl.avans.ras.model.Gymnast;
 import nl.avans.ras.model.Vault;
+import nl.avans.ras.model.enums.AdapterKind;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -18,7 +19,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class VaultActivity extends Activity implements ListViewFragment.OnDateSelectedListener,
-													   ListViewFragment.OnVaultSelectedListener {
+													   ListViewFragment.OnVaultSelectedListener,
+													   VaultFragment.OnCompareVaultListener {
 
 	// Fields
 	private DatabaseHelper dbHelper = new DatabaseHelper(this);
@@ -99,6 +101,21 @@ public class VaultActivity extends Activity implements ListViewFragment.OnDateSe
      	// Replace the fragment
 		FragmentTransaction transaction = getFragmentManager().beginTransaction();
      	transaction.replace(R.id.fragment_container, vaultFragment);
+     	transaction.addToBackStack(null);
+     	transaction.commit();
+	}
+
+	@Override
+	public void OnCompareVault(Vault vault) {
+		// Create a new vault fragment
+    	VaultCompareFragment vaultCompareFragment = new VaultCompareFragment();
+     	
+    	// Get the gymnast and vault
+    	vaultCompareFragment.addVault(vault);
+    	
+     	// Replace the fragment
+		FragmentTransaction transaction = getFragmentManager().beginTransaction();
+     	transaction.replace(R.id.fragment_container, vaultCompareFragment);
      	transaction.addToBackStack(null);
      	transaction.commit();
 	}

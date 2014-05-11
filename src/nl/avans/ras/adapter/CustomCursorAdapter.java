@@ -2,7 +2,7 @@ package nl.avans.ras.adapter;
 
 import static nl.avans.ras.database.DatabaseNodes.*;
 import nl.avans.ras.R;
-import nl.avans.ras.model.AdapterKind;
+import nl.avans.ras.model.enums.AdapterKind;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Typeface;

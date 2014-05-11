@@ -4,7 +4,7 @@ import static nl.avans.ras.network.NetworkConnections.*;
 
 import java.util.ArrayList;
 
-import nl.avans.ras.model.AdapterKind;
+import nl.avans.ras.model.enums.AdapterKind;
 import nl.avans.ras.parser.JSONParser;
 import android.content.Context;
 

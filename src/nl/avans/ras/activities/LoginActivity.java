@@ -5,11 +5,15 @@ import java.util.Date;
 import nl.avans.ras.R;
 import nl.avans.ras.database.DatabaseHelper;
 import nl.avans.ras.fragments.LoginFragment;
+import nl.avans.ras.model.Gymnast;
+import nl.avans.ras.model.User;
+import nl.avans.ras.model.enums.UserType;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
@@ -21,38 +25,26 @@ public class LoginActivity extends Activity implements LoginFragment.OnLoginList
 
 	// Fields
 	private DatabaseHelper dbHelper = new DatabaseHelper(this);
+	public static final String ACTIVE_USER = "active_user";
+	public static final String IS_LOGGED_IN	= "is_logged_in";
 	private boolean doubleBackToExitPressedOnce = false;
-	
-	private View mSplashScreen, mFragmentHolder;
-	private int mShortAnimationDuration;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
-//		
-//		mSplashScreen = findViewById(R.id.splashscreen);
-//		mFragmentHolder = findViewById(R.id.fragment_container);
-//		
-//		getActionBar().hide();
-//		mFragmentHolder.setVisibility(View.GONE);
-//		mShortAnimationDuration = getResources().getInteger(android.R.integer.config_mediumAnimTime);
 
-		// Create a new login fragment
-    	LoginFragment loginFragment = new LoginFragment();
-     	
-     	// Replace the fragment
-		FragmentTransaction transaction = getFragmentManager().beginTransaction();
-     	transaction.replace(R.id.fragment_container, loginFragment);
-     	transaction.commit();
-		
-//		new Handler().postDelayed(new Runnable() {
-//     		@Override
-//     		public void run() {
-//     			// Let the splashscreen fade out
-//     			showContentOrSplashScreen();
-//			}					
-//		}, 1500);
+		if (isLoggedIn()) {
+			startActivity(new Intent(this, ProfileActivity.class));
+		} else {
+			// Create a new login fragment
+	    	LoginFragment loginFragment = new LoginFragment();
+	     	
+	     	// Replace the fragment
+			FragmentTransaction transaction = getFragmentManager().beginTransaction();
+	     	transaction.replace(R.id.fragment_container, loginFragment);
+	     	transaction.commit();
+		}
 	}
 
 	@Override
@@ -98,57 +90,31 @@ public class LoginActivity extends Activity implements LoginFragment.OnLoginList
 			super.onBackPressed();
 		}
 	}
+	
+	private boolean isLoggedIn() {
+		// Check if the user is logged in
+		SharedPreferences sharedPreferences =  this.getSharedPreferences(LoginActivity.ACTIVE_USER, 0);
+		UserType type = sharedPreferences.getInt(User.USER_TYPE, 1) == 0 ? UserType.TRAINER : UserType.GYMNAST;
+		return false;		
+	}
 
 	@Override
 	public void OnLogin(String username, String password) {
+		// TODO: Check if the login credentials are correct
+		User user = new User(UserType.TRAINER);
+		
+		// Set shared preferences for user name and profile url
+		SharedPreferences sharedPreferences =  this.getSharedPreferences(ACTIVE_USER, 0);
+						
+		// Save user data in model
+		SharedPreferences.Editor mEditor = sharedPreferences.edit();
+		mEditor.putInt(User.USER_TYPE, user.getType() == UserType.TRAINER ? 0 : 1);
+		mEditor.putInt(Gymnast.GYMNAST_ID, user.getGymnastId());
+		mEditor.putBoolean(IS_LOGGED_IN, true);
+		mEditor.commit();
+		
+		// Start the profile activity
 		startActivity(new Intent(this, ProfileActivity.class));
 		this.finish();
 	}
-	
-//	/******************************************************************
-//	 * 
-//	 *                         Animations
-//	 *
-//	 ******************************************************************/
-//	
-//    private void showContentOrSplashScreen() {
-//        // Decide which view to hide and which to show.
-//        final View showView = mFragmentHolder;
-//        final View hideView = mSplashScreen;
-//
-//        // Set the "show" view to 0% opacity but visible, so that it is visible
-//        // (but fully transparent) during the animation.
-//        showView.setAlpha(0f);
-//        showView.setVisibility(View.VISIBLE);
-//
-//        // Animate the "show" view to 100% opacity, and clear any animation listener set on
-//        // the view. Remember that listeners are not limited to the specific animation
-//        // describes in the chained method calls. Listeners are set on the
-//        // ViewPropertyAnimator object for the view, which persists across several
-//        // animations.
-//        showView.animate()
-//                .alpha(1f)
-//                .setDuration(mShortAnimationDuration)
-//                .setListener(null);
-//
-//        // Animate the "hide" view to 0% opacity. After the animation ends, set its visibility
-//        // to GONE as an optimization step (it won't participate in layout passes, etc.)
-//        hideView.animate()
-//                .alpha(0f)
-//                .setDuration(mShortAnimationDuration)
-//                .setListener(new AnimatorListenerAdapter() {
-//                    @Override
-//                    public void onAnimationEnd(Animator animation) {
-//                        hideView.setVisibility(View.GONE);
-//                    }
-//                });
-//        
-//        // Show the actionbar
-//     	new Handler().postDelayed(new Runnable() {
-//     		@Override
-//     		public void run() {
-//     			getActionBar().show();
-//     		}
-//     	}, 750);
-//    }
 }

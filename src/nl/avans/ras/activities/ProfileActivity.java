@@ -7,12 +7,17 @@ import nl.avans.ras.database.DatabaseHelper;
 import nl.avans.ras.fragments.ListViewFragment;
 import nl.avans.ras.fragments.LoginFragment;
 import nl.avans.ras.fragments.ProfileFragment;
-import nl.avans.ras.model.AdapterKind;
 import nl.avans.ras.model.Gymnast;
+import nl.avans.ras.model.User;
+import nl.avans.ras.model.enums.AdapterKind;
+import nl.avans.ras.model.enums.UserType;
+import nl.avans.ras.activities.LoginActivity;
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.ListActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -47,13 +52,29 @@ public class ProfileActivity extends Activity implements ListViewFragment.OnProf
 		}
 		dbHelper.insertGymnastCollection(tempList);
 		
-		// Create a new profile list fragment
-    	ListViewFragment profileListFragment = new ListViewFragment();
-    	profileListFragment.setAdapterKind(AdapterKind.PROFILES);
+		// Create a new fragment
+		Fragment fragment;
+		
+		// Check if the user is a gymnast or a trainer
+		SharedPreferences sharedPreferences =  this.getSharedPreferences(LoginActivity.ACTIVE_USER, 0);
+		UserType type = sharedPreferences.getInt(User.USER_TYPE, 1) == 0 ? UserType.TRAINER : UserType.GYMNAST;
+		
+		if (type == UserType.GYMNAST) {
+			// Create a new profile list fragment
+	    	ProfileFragment profileFragment = new ProfileFragment();
+	    	Gymnast gymnast = dbHelper.getGymnast(sharedPreferences.getInt(Gymnast.GYMNAST_ID, 0));
+	    	profileFragment.setGymnast(gymnast);
+	    	fragment = profileFragment;
+		} else {
+			// Create a new profile list fragment
+	    	ListViewFragment profileListFragment = new ListViewFragment();
+	    	profileListFragment.setAdapterKind(AdapterKind.PROFILES);
+	     	fragment = profileListFragment;
+		}
      	
      	// Replace the fragment
 		FragmentTransaction transaction = getFragmentManager().beginTransaction();
-     	transaction.replace(R.id.fragment_container, profileListFragment);
+     	transaction.replace(R.id.fragment_container, fragment);
      	transaction.commit();
      	
         getActionBar().setDisplayHomeAsUpEnabled(true);

@@ -8,7 +8,7 @@ import nl.avans.ras.R;
 import nl.avans.ras.activities.VaultActivity;
 import nl.avans.ras.adapter.CustomCursorAdapter;
 import nl.avans.ras.database.DatabaseHelper;
-import nl.avans.ras.model.AdapterKind;
+import nl.avans.ras.model.enums.AdapterKind;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.ListFragment;

@@ -3,6 +3,7 @@ package nl.avans.ras.model;
 public class Gymnast {
 
 	// Fields
+	public static final String GYMNAST_ID = "gymnast_id";
 	private int id;
 	private String firstname, surname, surnamePrefix, name;
 	private String location;
