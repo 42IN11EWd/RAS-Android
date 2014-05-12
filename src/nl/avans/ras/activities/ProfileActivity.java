@@ -3,6 +3,7 @@ package nl.avans.ras.activities;
 import java.util.ArrayList;
 
 import nl.avans.ras.R;
+import nl.avans.ras.R.animator;
 import nl.avans.ras.database.DatabaseHelper;
 import nl.avans.ras.fragments.ListViewFragment;
 import nl.avans.ras.fragments.ProfileFragment;
@@ -10,8 +11,10 @@ import nl.avans.ras.model.Gymnast;
 import nl.avans.ras.model.User;
 import nl.avans.ras.model.enums.AdapterKind;
 import nl.avans.ras.model.enums.UserType;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -204,6 +207,7 @@ public class ProfileActivity extends Activity implements View.OnClickListener,
     	
      	// Replace the fragment
 		FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.setCustomAnimations(animator.slide_in_left, animator.slide_out_right, animator.slide_in_right, animator.slide_out_left);
      	transaction.replace(R.id.fragment_container, profileFragment);
      	transaction.addToBackStack(null);
      	transaction.commit();

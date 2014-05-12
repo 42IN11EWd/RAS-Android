@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import nl.avans.ras.R;
+import nl.avans.ras.R.animator;
 import nl.avans.ras.database.DatabaseHelper;
 import nl.avans.ras.fragments.ListViewFragment;
 import nl.avans.ras.fragments.ProfileFragment;
@@ -96,6 +97,7 @@ public class VaultActivity extends Activity implements ListViewFragment.OnDateSe
      	
      	// Replace the fragment
 		FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.setCustomAnimations(animator.slide_in_left, animator.slide_out_right, animator.slide_in_right, animator.slide_out_left);
      	transaction.replace(R.id.fragment_container, vaultListFragment);
      	transaction.addToBackStack(null);
      	transaction.commit();
@@ -114,6 +116,7 @@ public class VaultActivity extends Activity implements ListViewFragment.OnDateSe
     	
      	// Replace the fragment
 		FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.setCustomAnimations(animator.slide_in_left, animator.slide_out_right, animator.slide_in_right, animator.slide_out_left);
      	transaction.replace(R.id.fragment_container, vaultFragment);
      	transaction.addToBackStack(null);
      	transaction.commit();

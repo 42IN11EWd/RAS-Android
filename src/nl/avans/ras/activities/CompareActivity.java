@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import nl.avans.ras.R;
+import nl.avans.ras.R.animator;
 import nl.avans.ras.database.DatabaseHelper;
 import nl.avans.ras.fragments.ListViewFragment;
 import nl.avans.ras.fragments.ProfileFragment;
@@ -92,6 +93,7 @@ public class CompareActivity extends Activity implements ListViewFragment.OnProf
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		if (compareMenuItem != null) {
+			FragmentManager fm = getFragmentManager();
 			compareMenuItem.setVisible(false);
 		}
 		return super.onPrepareOptionsMenu(menu);
@@ -125,6 +127,7 @@ public class CompareActivity extends Activity implements ListViewFragment.OnProf
     	
      	// Replace the fragment
 		FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.setCustomAnimations(animator.slide_in_left, animator.slide_out_right, animator.slide_in_right, animator.slide_out_left);
      	transaction.replace(R.id.fragment_container, vaultListFragment);
      	transaction.addToBackStack(null);
      	transaction.commit();
@@ -139,6 +142,7 @@ public class CompareActivity extends Activity implements ListViewFragment.OnProf
      	
      	// Replace the fragment
 		FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.setCustomAnimations(animator.slide_in_left, animator.slide_out_right, animator.slide_in_right, animator.slide_out_left);
      	transaction.replace(R.id.fragment_container, vaultListFragment);
      	transaction.addToBackStack(null);
      	transaction.commit();

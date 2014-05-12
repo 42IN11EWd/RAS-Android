@@ -125,18 +125,9 @@ public class ListViewFragment extends Fragment implements OnItemClickListener {
 		list.setOnItemClickListener(this);
 	}
 	
-	public void setList() {
-//		customAdapter = new CustomCursorAdapter(getActivity(), new DatabaseHelper(getActivity()).getNewsOfGame(id, getCountOfNewsitems()), AdapterKind.NEWS);
-		list.setAdapter(customAdapter);
-	}
-	
 	@Override
 	public void onStart() {
 		super.onStart();
-		
-//		if (getFragmentManager().findFragmentById(R.id.news_fragment) != null) {
-//            getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-//        }
 	}
 	
 	@Override
@@ -156,21 +147,6 @@ public class ListViewFragment extends Fragment implements OnItemClickListener {
 			break;
 		}
 	}
-	
-//	@Override
-//    public void onListItemClick(ListView list, View view, int position, long id) {
-//		switch (kind) {
-//		case DATES:
-//			onDateClick(list, view, position, id);
-//			break;
-//		case PROFILES:
-//			onProfileClick(list, view, position, id);
-//			break;
-//		case VAULTS:
-//			onVaultClick(list, view, position, id);
-//			break;
-//		}
-//    }
 	
 	public void onProfileClick(ListView list, View view, int position, long id) {
 		Cursor cursor = (Cursor) list.getAdapter().getItem(position);
