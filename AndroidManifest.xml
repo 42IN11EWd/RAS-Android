@@ -35,6 +35,10 @@
             android:name="nl.avans.ras.activities.VaultActivity"
             android:label="@string/vault_title" />
         
+        <activity 
+            android:name="nl.avans.ras.activities.CompareActivity"
+            android:label="@string/vault_title" />
+        
     </application>
 
 </manifest>

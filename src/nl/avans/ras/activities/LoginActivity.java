@@ -36,6 +36,7 @@ public class LoginActivity extends Activity implements LoginFragment.OnLoginList
 
 		if (isLoggedIn()) {
 			startActivity(new Intent(this, ProfileActivity.class));
+			this.finish();
 		} else {
 			// Create a new login fragment
 	    	LoginFragment loginFragment = new LoginFragment();
@@ -94,14 +95,18 @@ public class LoginActivity extends Activity implements LoginFragment.OnLoginList
 	private boolean isLoggedIn() {
 		// Check if the user is logged in
 		SharedPreferences sharedPreferences =  this.getSharedPreferences(LoginActivity.ACTIVE_USER, 0);
-		UserType type = sharedPreferences.getInt(User.USER_TYPE, 1) == 0 ? UserType.TRAINER : UserType.GYMNAST;
-		return false;		
+		return sharedPreferences.getBoolean(IS_LOGGED_IN, false);
 	}
 
 	@Override
 	public void OnLogin(String username, String password) {
 		// TODO: Check if the login credentials are correct
-		User user = new User(UserType.TRAINER);
+		User user;
+		if (username.equals("gymnast")) {
+			user = new User(UserType.GYMNAST);
+		} else {
+			user = new User(UserType.TRAINER);
+		}
 		
 		// Set shared preferences for user name and profile url
 		SharedPreferences sharedPreferences =  this.getSharedPreferences(ACTIVE_USER, 0);

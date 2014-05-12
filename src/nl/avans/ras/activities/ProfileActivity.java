@@ -5,17 +5,14 @@ import java.util.ArrayList;
 import nl.avans.ras.R;
 import nl.avans.ras.database.DatabaseHelper;
 import nl.avans.ras.fragments.ListViewFragment;
-import nl.avans.ras.fragments.LoginFragment;
 import nl.avans.ras.fragments.ProfileFragment;
 import nl.avans.ras.model.Gymnast;
 import nl.avans.ras.model.User;
 import nl.avans.ras.model.enums.AdapterKind;
 import nl.avans.ras.model.enums.UserType;
-import nl.avans.ras.activities.LoginActivity;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.app.ListActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -26,14 +23,17 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
-public class ProfileActivity extends Activity implements ListViewFragment.OnProfileSelectedListener,
+public class ProfileActivity extends Activity implements View.OnClickListener,
+														 ListViewFragment.OnProfileSelectedListener,
 														 ProfileFragment.OnShowVaultsListener {
 
 	// Fields
 	private DatabaseHelper dbHelper = new DatabaseHelper(this);
 	private boolean doubleBackToExitPressedOnce = false;
+	private UserType type;
 	public static final String GYMNAST_ID = "gymnast_id";
 	
 	// Navigation drawer
@@ -57,7 +57,7 @@ public class ProfileActivity extends Activity implements ListViewFragment.OnProf
 		
 		// Check if the user is a gymnast or a trainer
 		SharedPreferences sharedPreferences =  this.getSharedPreferences(LoginActivity.ACTIVE_USER, 0);
-		UserType type = sharedPreferences.getInt(User.USER_TYPE, 1) == 0 ? UserType.TRAINER : UserType.GYMNAST;
+		type = sharedPreferences.getInt(User.USER_TYPE, 1) == 0 ? UserType.TRAINER : UserType.GYMNAST;
 		
 		if (type == UserType.GYMNAST) {
 			// Create a new profile list fragment
@@ -103,6 +103,7 @@ public class ProfileActivity extends Activity implements ListViewFragment.OnProf
 
         // Set the drawer toggle as the DrawerListener
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+        setMenu();
 	}
 
 	@Override
@@ -168,6 +169,18 @@ public class ProfileActivity extends Activity implements ListViewFragment.OnProf
 		super.onDestroy();
 	}
 	
+	private void setMenu() {
+		Button logoutButton = (Button) findViewById(R.id.logout_button);
+		logoutButton.setOnClickListener(this);
+	}
+	
+	private void logout() {
+		SharedPreferences sharedPreferences = this.getSharedPreferences(LoginActivity.ACTIVE_USER, MODE_PRIVATE);
+		sharedPreferences.edit().clear().commit();
+		startActivity(new Intent(this, LoginActivity.class));
+		this.finish();
+	}
+	
 	@Override
 	public void OnProfileSelected(int position, int gymnastId) {
 		// Create a new profile list fragment
@@ -190,5 +203,14 @@ public class ProfileActivity extends Activity implements ListViewFragment.OnProf
 		Intent intent = new Intent(this, VaultActivity.class);
 		intent.putExtra(GYMNAST_ID, gymnastId);
 		startActivity(intent);
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.logout_button:
+			logout();
+			break;
+		}
 	}
 }
