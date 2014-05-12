@@ -4,6 +4,9 @@ import java.util.Date;
 
 public class Vault {
 	
+	// Constants
+	public static final String VAULT_ID = "vault_id";
+	
 	// Fields
 	private int id, gymnastId;
 	private String name, type, location;

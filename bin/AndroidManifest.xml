@@ -37,7 +37,7 @@
         
         <activity 
             android:name="nl.avans.ras.activities.CompareActivity"
-            android:label="@string/vault_title" />
+            android:label="@string/compare_title" />
         
     </application>
 

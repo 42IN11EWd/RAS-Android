@@ -31,4 +31,7 @@
     <string name="vault_type_title">Vault type</string>
     <string name="compare_button_title">Compare this vault</string>
     
+    <!-- Compare page -->
+    <string name="compare_title">Compare</string>
+    
 </resources>

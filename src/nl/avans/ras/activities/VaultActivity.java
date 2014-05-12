@@ -13,7 +13,9 @@ import nl.avans.ras.model.Gymnast;
 import nl.avans.ras.model.Vault;
 import nl.avans.ras.model.enums.AdapterKind;
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -55,6 +57,10 @@ public class VaultActivity extends Activity implements ListViewFragment.OnDateSe
 		FragmentTransaction transaction = getFragmentManager().beginTransaction();
      	transaction.replace(R.id.fragment_container, vaultListFragment);
      	transaction.commit();
+     	
+     	// Set the back button in the actionbar
+     	getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
 	}
 
 	@Override
@@ -66,8 +72,16 @@ public class VaultActivity extends Activity implements ListViewFragment.OnDateSe
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			FragmentManager fm = getFragmentManager();
+			if(fm.getBackStackEntryCount() > 0) {
+				fm.popBackStack();
+		    } else {
+		    	this.finish();
+		    }
+			break;
+		case R.id.action_settings:
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -107,16 +121,8 @@ public class VaultActivity extends Activity implements ListViewFragment.OnDateSe
 
 	@Override
 	public void OnCompareVault(Vault vault) {
-		// Create a new vault fragment
-    	VaultCompareFragment vaultCompareFragment = new VaultCompareFragment();
-     	
-    	// Get the gymnast and vault
-    	vaultCompareFragment.addVault(vault);
-    	
-     	// Replace the fragment
-		FragmentTransaction transaction = getFragmentManager().beginTransaction();
-     	transaction.replace(R.id.fragment_container, vaultCompareFragment);
-     	transaction.addToBackStack(null);
-     	transaction.commit();
+		Intent intent = new Intent(this, CompareActivity.class);
+		intent.putExtra(Vault.VAULT_ID, vault.getId());
+		startActivity(intent);
 	}
 }

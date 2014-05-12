@@ -71,6 +71,13 @@ public class CustomCursorAdapter extends CursorAdapter {
 			// Set the profile cell
 			setDateCell(cursor, listTitle);
 			break;
+		case COMPARE:
+			listTitle = (TextView) view.findViewById(R.id.cell_title);
+			listTitle.setTypeface(tfl);
+			
+			// Set the profile cell
+			setVaultCell(cursor, listTitle);
+			break;
 		}
 	}
 	

@@ -5,9 +5,11 @@ import static nl.avans.ras.database.DatabaseNodes.*;
 import java.util.Date;
 
 import nl.avans.ras.R;
+import nl.avans.ras.activities.CompareActivity;
 import nl.avans.ras.activities.VaultActivity;
 import nl.avans.ras.adapter.CustomCursorAdapter;
 import nl.avans.ras.database.DatabaseHelper;
+import nl.avans.ras.model.Vault;
 import nl.avans.ras.model.enums.AdapterKind;
 import android.app.Activity;
 import android.app.Fragment;
@@ -28,6 +30,7 @@ public class ListViewFragment extends Fragment implements OnItemClickListener {
 	OnProfileSelectedListener mSelectedProfileListener;
 	OnDateSelectedListener mSelectedDateListener;
 	OnVaultSelectedListener mSelectedVaultListener;
+	OnCompareVaultSelectedListener mSelectedCompareVault;
 	
 	// Fields
 	private CustomCursorAdapter customAdapter;
@@ -54,6 +57,10 @@ public class ListViewFragment extends Fragment implements OnItemClickListener {
 		public void OnVaultSelected(int position, int vaultId);
 	}
 	
+	public interface OnCompareVaultSelectedListener {
+		public void onCompareVaultSelected(int vaultId);
+	}
+	
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
@@ -68,6 +75,8 @@ public class ListViewFragment extends Fragment implements OnItemClickListener {
 			case VAULTS:
 				mSelectedVaultListener = (OnVaultSelectedListener) activity;
 				break;
+			case COMPARE:
+				mSelectedCompareVault = (OnCompareVaultSelectedListener) activity;
 			}
 		} catch (ClassCastException e) {
 			throw new ClassCastException(activity.toString() + " must implement OnArticleSelectedListener");
@@ -96,6 +105,15 @@ public class ListViewFragment extends Fragment implements OnItemClickListener {
 		case DATES:
 			if (getActivity() instanceof VaultActivity) {
 				VaultActivity mActivity = (VaultActivity) getActivity();
+				customAdapter = new CustomCursorAdapter(mActivity, new DatabaseHelper(mActivity).getAllVaultsFromGymnast(mActivity.getGymnastId()), kind);
+			} else if (getActivity() instanceof CompareActivity) {
+				CompareActivity mActivity = (CompareActivity) getActivity();
+				customAdapter = new CustomCursorAdapter(mActivity, new DatabaseHelper(mActivity).getAllVaultsFromGymnast(mActivity.getGymnastId()), kind);
+			}
+			break;
+		case COMPARE:
+			if (getActivity() instanceof CompareActivity) {
+				CompareActivity mActivity = (CompareActivity) getActivity();
 				customAdapter = new CustomCursorAdapter(mActivity, new DatabaseHelper(mActivity).getAllVaultsFromGymnast(mActivity.getGymnastId()), kind);
 			}
 			break;
@@ -132,6 +150,9 @@ public class ListViewFragment extends Fragment implements OnItemClickListener {
 			break;
 		case VAULTS:
 			onVaultClick(list, view, position, id);
+			break;
+		case COMPARE:
+			onCompareVaultClick(list, view, position, id);
 			break;
 		}
 	}
@@ -173,5 +194,13 @@ public class ListViewFragment extends Fragment implements OnItemClickListener {
 		
 		// Notify the activity of selected item
 		mSelectedVaultListener.OnVaultSelected(position, vaultId);
+	}
+	
+	public void onCompareVaultClick(ListView list, View view, int position, long id) {
+		Cursor cursor = (Cursor) list.getAdapter().getItem(position);
+		int vaultId = cursor.getInt(cursor.getColumnIndex(COL_VAULT_ID));
+		
+		// Notify the activity of selected item
+		mSelectedCompareVault.onCompareVaultSelected(vaultId);
 	}
 }

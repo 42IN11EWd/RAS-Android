@@ -40,6 +40,11 @@ public class ProfileActivity extends Activity implements View.OnClickListener,
 	private DrawerLayout mDrawerLayout;
 	private ActionBarDrawerToggle mDrawerToggle;
     
+	// Getters
+	public UserType getUserType() {
+		return type;
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -104,6 +109,13 @@ public class ProfileActivity extends Activity implements View.OnClickListener,
         // Set the drawer toggle as the DrawerListener
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         setMenu();
+	}
+	
+	@Override
+	protected void onPostCreate(Bundle savedInstanceState) {
+	    super.onPostCreate(savedInstanceState);
+	    // Sync the toggle state after onRestoreInstanceState has occurred.
+	    mDrawerToggle.syncState();
 	}
 
 	@Override
