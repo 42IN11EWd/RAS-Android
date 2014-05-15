@@ -95,6 +95,7 @@ public class CustomCursorAdapter extends CursorAdapter {
 					if (vault.getId() == cursor.getInt(cursor.getColumnIndex(COL_VAULT_ID))) {
 						listTitle.setTextColor(Color.WHITE);
 						view.setBackgroundResource(R.color.orange);
+						break;
 					} else {
 						listTitle.setTextColor(Color.BLACK);
 						view.setBackgroundResource(android.R.color.transparent);
@@ -116,7 +117,7 @@ public class CustomCursorAdapter extends CursorAdapter {
 			title.setText(firstname + " " + surname);
 		}
 		
-		image.setBackgroundResource(R.drawable.test);
+		image.setImageResource(R.drawable.test);
 	}
 	
 	private void setVaultCell(Cursor cursor, TextView title) {

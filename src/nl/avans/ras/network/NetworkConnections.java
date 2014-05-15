@@ -17,4 +17,6 @@ public class NetworkConnections {
 	public static String getSteamLoginURL() {
 		return BASE_URL;
 	}
+	
+	
 }

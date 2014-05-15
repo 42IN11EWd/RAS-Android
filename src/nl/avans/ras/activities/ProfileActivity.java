@@ -54,11 +54,11 @@ public class ProfileActivity extends Activity implements View.OnClickListener,
 		setContentView(R.layout.activity_profile);
 		
 		// Create a test list of gymnasts
-		ArrayList<Gymnast> tempList = new ArrayList<Gymnast>();
-		for(int i = 0; i < 50; i++) {
-			tempList.add(new Gymnast(i, "Epke", "Zonderland", "", 28, 173, 69, "Lemmer"));
-		}
-		dbHelper.insertGymnastCollection(tempList);
+//		ArrayList<Gymnast> tempList = new ArrayList<Gymnast>();
+//		for(int i = 0; i < 50; i++) {
+//			tempList.add(new Gymnast(i, "Epke", "Zonderland", "", 28, 173, 69, "Lemmer"));
+//		}
+//		dbHelper.insertGymnastCollection(tempList);
 		
 		// Create a new fragment
 		Fragment fragment;

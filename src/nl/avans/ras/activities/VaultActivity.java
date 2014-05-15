@@ -41,14 +41,15 @@ public class VaultActivity extends Activity implements ListViewFragment.OnDateSe
 		setContentView(R.layout.activity_profile);
 		
 		// Create a test list of vaults
-		ArrayList<Vault> tempList = new ArrayList<Vault>();
-		for(int i = 0; i < 50; i++) {
-			for(int x = 0; x < 50; x++) {
-				Random random = new Random();
-				tempList.add(new Vault(random.nextInt(50), i, "Salto", 4.123, 8.0235, new Date()));
-			}
-		}
-		dbHelper.insertVaultCollection(tempList);
+//		ArrayList<Vault> tempList = new ArrayList<Vault>();
+//		int counter = 0;
+//		for(int i = 0; i < 50; i++) {
+//			for(int x = 0; x < 50; x++) {
+//				tempList.add(new Vault(counter, i, "Salto", 4.123, 8.0235, new Date()));
+//				counter++;
+//			}
+//		}
+//		dbHelper.insertVaultCollection(tempList);
 		
 		// Check if there is an gymnast set
 		Bundle bundle = getIntent().getExtras();
