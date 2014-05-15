@@ -4,12 +4,16 @@ import static nl.avans.ras.database.DatabaseNodes.*;
 
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import nl.avans.ras.R;
+import nl.avans.ras.activities.CompareActivity;
+import nl.avans.ras.model.Vault;
 import nl.avans.ras.model.enums.AdapterKind;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
@@ -77,12 +81,27 @@ public class CustomCursorAdapter extends CursorAdapter {
 			setDateCell(cursor, listTitle);
 			break;
 		case COMPARE:
-			listTitle = (TextView) view.findViewById(R.id.cell_title);
-			listTitle.setTypeface(tfl);
-			
-			// Set the profile cell
-			setVaultCell(cursor, listTitle);
-			break;
+			if (context instanceof CompareActivity) {
+				listTitle = (TextView) view.findViewById(R.id.cell_title);
+				listTitle.setTypeface(tfl);
+				
+				// Set the profile cell
+				setVaultCell(cursor, listTitle);
+				
+				// Check if the item is in the list
+				CompareActivity mActivity = (CompareActivity) context;
+				ArrayList<Vault> vaultCollection = mActivity.getVaultCollection();
+				for (Vault vault: vaultCollection) {
+					if (vault.getId() == cursor.getInt(cursor.getColumnIndex(COL_VAULT_ID))) {
+						listTitle.setTextColor(Color.WHITE);
+						view.setBackgroundResource(R.color.orange);
+					} else {
+						listTitle.setTextColor(Color.BLACK);
+						view.setBackgroundResource(android.R.color.transparent);
+					}
+				}
+				break;
+			}
 		}
 	}
 	
@@ -96,6 +115,8 @@ public class CustomCursorAdapter extends CursorAdapter {
 		} else {
 			title.setText(firstname + " " + surname);
 		}
+		
+		image.setBackgroundResource(R.drawable.test);
 	}
 	
 	private void setVaultCell(Cursor cursor, TextView title) {

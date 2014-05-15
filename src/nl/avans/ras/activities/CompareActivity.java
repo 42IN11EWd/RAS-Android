@@ -172,11 +172,23 @@ public class CompareActivity extends Activity implements ListViewFragment.OnProf
 	@Override
 	public void onCompareVaultSelected(int vaultId) {
 		Vault vault = dbHelper.getVault(vaultId);
-//		if (vaultCollection.contains(vault)) {
-//			vaultCollection.remove(vault);
-//		} else {
+		
+		// Check if the vault is already in the vault collection
+		Boolean checkIfInList = false;
+		for (Vault tempVault: vaultCollection) {
+			if (tempVault.getId() == vaultId) {
+				vaultCollection.remove(tempVault);
+				checkIfInList = true;
+				break;
+			}
+		}
+		
+		// Check if the vault was in the compare list
+		if (!checkIfInList) {
 			vaultCollection.add(vault);
-			invalidateOptionsMenu();
-//		}		
+		}
+
+		// Check if the menu need to change
+		invalidateOptionsMenu();
 	}
 }

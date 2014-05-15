@@ -56,7 +56,7 @@ public class ProfileActivity extends Activity implements View.OnClickListener,
 		// Create a test list of gymnasts
 		ArrayList<Gymnast> tempList = new ArrayList<Gymnast>();
 		for(int i = 0; i < 50; i++) {
-			tempList.add(new Gymnast(i, "Sjoerd", "Nijhof", "", 22, 190, 71, "Best"));
+			tempList.add(new Gymnast(i, "Epke", "Zonderland", "", 28, 173, 69, "Lemmer"));
 		}
 		dbHelper.insertGymnastCollection(tempList);
 		

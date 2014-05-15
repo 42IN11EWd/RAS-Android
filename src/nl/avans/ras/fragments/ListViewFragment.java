@@ -178,5 +178,6 @@ public class ListViewFragment extends Fragment implements OnItemClickListener {
 		
 		// Notify the activity of selected item
 		mSelectedCompareVault.onCompareVaultSelected(vaultId);
+		customAdapter.notifyDataSetChanged();
 	}
 }

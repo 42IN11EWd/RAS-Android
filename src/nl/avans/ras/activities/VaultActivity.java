@@ -2,6 +2,7 @@ package nl.avans.ras.activities;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 import nl.avans.ras.R;
 import nl.avans.ras.R.animator;
@@ -42,7 +43,10 @@ public class VaultActivity extends Activity implements ListViewFragment.OnDateSe
 		// Create a test list of vaults
 		ArrayList<Vault> tempList = new ArrayList<Vault>();
 		for(int i = 0; i < 50; i++) {
-			tempList.add(new Vault(i, i, "Salto", 4.123, 8.0235, new Date()));
+			for(int x = 0; x < 50; x++) {
+				Random random = new Random();
+				tempList.add(new Vault(random.nextInt(50), i, "Salto", 4.123, 8.0235, new Date()));
+			}
 		}
 		dbHelper.insertVaultCollection(tempList);
 		
