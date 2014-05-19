@@ -4,7 +4,10 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Vault {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Vault implements Parcelable {
 	
 	// Constants
 	public static final String VAULT_ID = "vault_id";
@@ -30,6 +33,16 @@ public class Vault {
 		this.location = "Flik Flak";
 	}
 	
+	// The following methods that are required for using Parcelable
+    private Vault(Parcel in) {
+    	id = in.readInt();
+    	gymnastId = in.readInt();
+    	name = in.readString();
+    	dScore = in.readDouble();
+    	eScore = in.readDouble();
+    	date = new Date(in.readLong());
+    }
+	
 	// Getters
 	public int 		getId() 		{ return id; }
 	public int 		getGymnastId() 	{ return gymnastId; }
@@ -41,4 +54,28 @@ public class Vault {
 	public String 	getLocation()	{ return location; }
 	public Date		getDate()		{ return date; }
 
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel out, int flags) {
+		out.writeInt(id);
+		out.writeInt(gymnastId);
+		out.writeString(name);
+		out.writeDouble(dScore);
+		out.writeDouble(eScore);
+		out.writeLong(date.getTime());
+	}
+
+    public static final Parcelable.Creator<Vault> CREATOR = new Parcelable.Creator<Vault>() {
+        public Vault createFromParcel(Parcel in) {
+            return new Vault(in);
+        }
+
+        public Vault[] newArray(int size) {
+            return new Vault[size];
+        }
+    };
 }

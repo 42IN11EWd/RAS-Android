@@ -16,6 +16,7 @@
         
         <activity
             android:name="nl.avans.ras.activities.SplashScreenActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,19 +26,27 @@
         
         <activity
             android:name="nl.avans.ras.activities.LoginActivity"
+            android:screenOrientation="portrait"
             android:label="@string/login_title" />
         
         <activity 
             android:name="nl.avans.ras.activities.ProfileActivity"
+            android:screenOrientation="portrait"
             android:label="@string/profile_title" />
         
         <activity 
             android:name="nl.avans.ras.activities.VaultActivity"
+            android:screenOrientation="portrait"
             android:label="@string/vault_title" />
         
         <activity 
             android:name="nl.avans.ras.activities.CompareActivity"
+            android:screenOrientation="portrait"
             android:label="@string/compare_title" />
+        
+        <activity 
+            android:name="nl.avans.ras.activities.ChartActivity"
+            android:label="@string/chart_title" />
         
     </application>
 

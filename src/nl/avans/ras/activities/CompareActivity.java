@@ -8,7 +8,7 @@ import nl.avans.ras.R.animator;
 import nl.avans.ras.database.DatabaseHelper;
 import nl.avans.ras.fragments.ListViewFragment;
 import nl.avans.ras.fragments.ProfileFragment;
-import nl.avans.ras.fragments.VaultCompareFragment;
+import nl.avans.ras.fragments.ChartFragment;
 import nl.avans.ras.model.Gymnast;
 import nl.avans.ras.model.User;
 import nl.avans.ras.model.Vault;
@@ -17,6 +17,7 @@ import nl.avans.ras.model.enums.UserType;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
@@ -25,6 +26,9 @@ import android.view.MenuItem;
 public class CompareActivity extends Activity implements ListViewFragment.OnProfileSelectedListener,
 														 ListViewFragment.OnDateSelectedListener,
 														 ListViewFragment.OnCompareVaultSelectedListener {
+	
+	// Constants
+	public static final String VAULT_COLLECTION = "vault_collection";
 	
 	// Fields
 	private DatabaseHelper dbHelper = new DatabaseHelper(this);
@@ -123,16 +127,19 @@ public class CompareActivity extends Activity implements ListViewFragment.OnProf
 	}
 	
 	private void setCompareView() {
-		// Create a new compare fragment
-		VaultCompareFragment vaultCompareFragment = new VaultCompareFragment();
-		vaultCompareFragment.setVaultCollection(vaultCollection);
-    	
-     	// Replace the fragment
-		FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.setCustomAnimations(animator.slide_in_left, animator.slide_out_right, animator.slide_in_right, animator.slide_out_left);
-     	transaction.replace(R.id.fragment_container, vaultCompareFragment);
-     	transaction.addToBackStack(null);
-     	transaction.commit();
+		Intent intent = new Intent(this, ChartActivity.class);
+		intent.putParcelableArrayListExtra(VAULT_COLLECTION, vaultCollection); 
+		startActivity(intent);
+//		// Create a new compare fragment
+//		ChartFragment vaultCompareFragment = new ChartFragment();
+//		vaultCompareFragment.setVaultCollection(vaultCollection);
+//    	
+//     	// Replace the fragment
+//		FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//		transaction.setCustomAnimations(animator.slide_in_left, animator.slide_out_right, animator.slide_in_right, animator.slide_out_left);
+//     	transaction.replace(R.id.fragment_container, vaultCompareFragment);
+//     	transaction.addToBackStack(null);
+//     	transaction.commit();
 	}
 	
 	@Override

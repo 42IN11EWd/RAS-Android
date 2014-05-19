@@ -9,7 +9,7 @@ import nl.avans.ras.R.animator;
 import nl.avans.ras.database.DatabaseHelper;
 import nl.avans.ras.fragments.ListViewFragment;
 import nl.avans.ras.fragments.ProfileFragment;
-import nl.avans.ras.fragments.VaultCompareFragment;
+import nl.avans.ras.fragments.ChartFragment;
 import nl.avans.ras.fragments.VaultFragment;
 import nl.avans.ras.model.Gymnast;
 import nl.avans.ras.model.Vault;
@@ -24,7 +24,8 @@ import android.view.MenuItem;
 
 public class VaultActivity extends Activity implements ListViewFragment.OnDateSelectedListener,
 													   ListViewFragment.OnVaultSelectedListener,
-													   VaultFragment.OnCompareVaultListener {
+													   VaultFragment.OnCompareVaultListener,
+													   VaultFragment.OnChartVaultListener {
 
 	// Fields
 	private DatabaseHelper dbHelper = new DatabaseHelper(this);
@@ -41,15 +42,15 @@ public class VaultActivity extends Activity implements ListViewFragment.OnDateSe
 		setContentView(R.layout.activity_profile);
 		
 		// Create a test list of vaults
-//		ArrayList<Vault> tempList = new ArrayList<Vault>();
-//		int counter = 0;
-//		for(int i = 0; i < 50; i++) {
-//			for(int x = 0; x < 50; x++) {
-//				tempList.add(new Vault(counter, i, "Salto", 4.123, 8.0235, new Date()));
-//				counter++;
-//			}
-//		}
-//		dbHelper.insertVaultCollection(tempList);
+		ArrayList<Vault> tempList = new ArrayList<Vault>();
+		int counter = 0;
+		for(int i = 0; i < 50; i++) {
+			for(int x = 0; x < 50; x++) {
+				tempList.add(new Vault(counter, i, "Salto", 4.123, 8.0235, new Date()));
+				counter++;
+			}
+		}
+		dbHelper.insertVaultCollection(tempList);
 		
 		// Check if there is an gymnast set
 		Bundle bundle = getIntent().getExtras();
@@ -130,6 +131,13 @@ public class VaultActivity extends Activity implements ListViewFragment.OnDateSe
 	@Override
 	public void OnCompareVault(Vault vault) {
 		Intent intent = new Intent(this, CompareActivity.class);
+		intent.putExtra(Vault.VAULT_ID, vault.getId());
+		startActivity(intent);
+	}
+
+	@Override
+	public void SeeChart(Vault vault) {
+		Intent intent = new Intent(this, ChartActivity.class);
 		intent.putExtra(Vault.VAULT_ID, vault.getId());
 		startActivity(intent);
 	}

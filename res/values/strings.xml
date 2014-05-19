@@ -30,8 +30,12 @@
     <string name="d_score_title">D-Score</string>
     <string name="vault_type_title">Vault type</string>
     <string name="compare_button_title">Compare this vault</string>
+    <string name="chart_button_title">Chart information</string>
     
     <!-- Compare page -->
     <string name="compare_title">Compare</string>
+    
+    <!-- Chart page -->
+    <string name="chart_title">Chart</string>
     
 </resources>

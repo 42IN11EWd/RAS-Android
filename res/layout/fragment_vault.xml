@@ -125,6 +125,11 @@
 		        android:text="@string/compare_button_title"
 		        style="@style/button_style"/>
 	        
+	        <Button 
+		        android:id="@+id/chart_info_button"
+		        android:text="@string/chart_button_title"
+		        style="@style/button_style"/>
+	        
 	    </LinearLayout>
     </LinearLayout>
 </ScrollView>

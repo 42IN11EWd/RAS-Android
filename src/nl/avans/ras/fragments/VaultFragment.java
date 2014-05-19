@@ -18,6 +18,7 @@ public class VaultFragment extends Fragment implements View.OnClickListener {
 
 	// Abstract methods
 	OnCompareVaultListener mCompareVaultListener;
+	OnChartVaultListener mChartVaultListener;
 	
 	// Fields
 	private Gymnast gymnast;
@@ -40,12 +41,17 @@ public class VaultFragment extends Fragment implements View.OnClickListener {
 	public interface OnCompareVaultListener {
 		public void OnCompareVault(Vault vault);
 	}
+	
+	public interface OnChartVaultListener {
+		public void SeeChart(Vault vault);
+	}
 
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		try {
 			mCompareVaultListener = (OnCompareVaultListener) activity;
+			mChartVaultListener = (OnChartVaultListener) activity;
 		} catch (ClassCastException e) {
 			throw new ClassCastException(activity.toString() + " must implement OnShowVaultsListener");
 		}
@@ -71,7 +77,9 @@ public class VaultFragment extends Fragment implements View.OnClickListener {
 		
 		// Set the a listener to the button
 		Button compareVaultButton = (Button) getActivity().findViewById(R.id.compare_button);
+		Button chartButton = (Button) getActivity().findViewById(R.id.chart_info_button);
 		compareVaultButton.setOnClickListener(this);
+		chartButton.setOnClickListener(this);
 				
 		// Create the titles
 		TextView durationTitle = (TextView) getActivity().findViewById(R.id.vault_duration_title);
@@ -121,6 +129,8 @@ public class VaultFragment extends Fragment implements View.OnClickListener {
 		case R.id.compare_button:
 			mCompareVaultListener.OnCompareVault(vault);
 			break;
+		case R.id.chart_info_button:
+			mChartVaultListener.SeeChart(vault);
 		}
 	}
 }
