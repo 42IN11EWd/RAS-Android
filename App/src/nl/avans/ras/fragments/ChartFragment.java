@@ -10,9 +10,9 @@ import com.jjoe64.graphview.LineGraphView;
 
 import nl.avans.ras.R;
 import nl.avans.ras.model.Vault;
-import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,13 +23,23 @@ public class ChartFragment extends Fragment {
 
 	// Fields
 	private ArrayList<Vault> vaultCollection = new ArrayList<Vault>();
-	
+	public static final String ARG_PAGE = "page";
+    private int mPageNumber;
+    
 	// Setters
 	public void setVaultCollection(ArrayList<Vault> vaultCollection) {
 		if (vaultCollection != null) {
 			this.vaultCollection = vaultCollection;
 		}
 	}
+	
+	public static ChartFragment create(int pageNumber) {
+		ChartFragment fragment = new ChartFragment();
+        Bundle args = new Bundle();
+        args.putInt(ARG_PAGE, pageNumber);
+        fragment.setArguments(args);
+        return fragment;
+    }
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
