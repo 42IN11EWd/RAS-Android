@@ -78,4 +78,14 @@ public class Vault implements Parcelable {
             return new Vault[size];
         }
     };
+
+	public double[] getSpeedGraphData() {
+		double[] graphData = {0, 1, 3, 7, 10, 13, 16, 19, 21, 23, 25, 27, 30, 30.5, 31, 31, 31, 29, 27, 25, 20};
+		return graphData;		
+	}
+	
+	public double[] getDistanceGraphData() {
+		double[] graphData = {0, 1, 2, 3, 4, 5.5, 7, 9, 11, 12.5, 16, 20, 24, 28, 32, 36, 40, 44, 47, 49, 51};
+		return graphData;		
+	}
 }
