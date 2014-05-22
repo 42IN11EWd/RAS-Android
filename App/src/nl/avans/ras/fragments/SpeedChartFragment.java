@@ -20,7 +20,7 @@ public class SpeedChartFragment extends ChartFragment {
 		
 		GraphView graphView = new LineGraphView(  
 	    	      getActivity() // context  
-	    	      , "Distance" 	// heading  
+	    	      , "Speed" 	// heading  
 	    	);
 	    	
 		// create graphviews

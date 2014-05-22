@@ -40,6 +40,13 @@
     
     <!-- Settings page -->
     <string name="settings_title">Settings</string>
+    <string name="old_password_title">Fill in your old password</string>
+    <string name="old_password">Old password</string>
+    <string name="new_password_title">Fill in your new password</string>
+    <string name="new_password">New password</string>
+    <string name="confirm_new_password">Confirm new password</string>
+    <string name="save_new_password_title">Save new password</string>
+    <string name="change_password_title">Change password</string>
     
     <!-- Menu page -->
     <string name="menu_logout_title">Logout</string>

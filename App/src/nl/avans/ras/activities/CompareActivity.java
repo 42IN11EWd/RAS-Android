@@ -130,16 +130,6 @@ public class CompareActivity extends Activity implements ListViewFragment.OnProf
 		Intent intent = new Intent(this, ChartActivity.class);
 		intent.putParcelableArrayListExtra(VAULT_COLLECTION, vaultCollection); 
 		startActivity(intent);
-//		// Create a new compare fragment
-//		ChartFragment vaultCompareFragment = new ChartFragment();
-//		vaultCompareFragment.setVaultCollection(vaultCollection);
-//    	
-//     	// Replace the fragment
-//		FragmentTransaction transaction = getFragmentManager().beginTransaction();
-//		transaction.setCustomAnimations(animator.slide_in_left, animator.slide_out_right, animator.slide_in_right, animator.slide_out_left);
-//     	transaction.replace(R.id.fragment_container, vaultCompareFragment);
-//     	transaction.addToBackStack(null);
-//     	transaction.commit();
 	}
 	
 	@Override
