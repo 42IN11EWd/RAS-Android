@@ -19,6 +19,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -185,8 +186,20 @@ public class ProfileActivity extends Activity implements View.OnClickListener,
 	}
 	
 	private void setMenu() {
+		// Create the buttons
 		Button logoutButton = (Button) findViewById(R.id.logout_button);
+		Button settingsButton = (Button) findViewById(R.id.settings_button);
+		
+		// Get the custom font
+		Typeface tfl = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
+		
+		// Set the font
+		logoutButton.setTypeface(tfl);
+		settingsButton.setTypeface(tfl);
+		
+		// Set the onclicklistener
 		logoutButton.setOnClickListener(this);
+		settingsButton.setOnClickListener(this);
 	}
 	
 	private void logout() {
@@ -226,6 +239,9 @@ public class ProfileActivity extends Activity implements View.OnClickListener,
 		switch (v.getId()) {
 		case R.id.logout_button:
 			logout();
+			break;
+		case R.id.settings_button:
+			startActivity(new Intent(this, SettingsActivity.class));
 			break;
 		}
 	}

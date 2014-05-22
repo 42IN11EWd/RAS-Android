@@ -13,7 +13,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/orange"
-        android:text="Logout"
+        android:text="@string/menu_logout_title"
+        android:background="@android:color/transparent" />
+    
+    <Button 
+        android:id="@+id/settings_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/orange"
+        android:text="@string/menu_settings_title"
         android:background="@android:color/transparent" />
     
 </LinearLayout>

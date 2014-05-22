@@ -34,6 +34,11 @@
             android:screenOrientation="portrait"
             android:label="@string/profile_title" />
         
+        <activity
+            android:name="nl.avans.ras.activities.SettingsActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/settings_title" />
+        
         <activity 
             android:name="nl.avans.ras.activities.VaultActivity"
             android:screenOrientation="portrait"
