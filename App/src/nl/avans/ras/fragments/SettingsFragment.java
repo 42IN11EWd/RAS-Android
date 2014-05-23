@@ -102,6 +102,11 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
 				if (newPassword.equals(confirmNewPassword)) {
 					mOnSavePasswordListener.OnSavePassword(newPassword);
 					
+					// Empty the containers
+					oldPasswordContainer.setText("");
+					newPasswordContainer.setText("");
+					confirmNewPasswordContainer.setText("");
+					
 					// Get the settings items
 					Button changePassword = (Button) getActivity().findViewById(R.id.change_password_button);
 							

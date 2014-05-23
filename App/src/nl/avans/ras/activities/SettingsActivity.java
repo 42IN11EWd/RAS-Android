@@ -47,7 +47,7 @@ public class SettingsActivity extends Activity implements SettingsFragment.OnSav
 	@Override
 	public void OnSavePassword(String password) {
 		// Hash the password with a salt
-		String salt = MD5.hashString("ras"); // add a user id?
+		String salt = MD5.hashString("rasavans"); // add a user id?
 		String hashedPassword = MD5.hashString(password + salt);
 		
 		// TODO: save the password through the rest API.
