@@ -1,6 +1,7 @@
 package nl.avans.ras.fragments;
 
 import nl.avans.ras.R;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
@@ -15,6 +16,24 @@ import android.widget.EditText;
 
 public class SettingsFragment extends Fragment implements View.OnClickListener {
 
+	// Abstract methods
+	OnSavePasswordListener mOnSavePasswordListener;
+	
+	// Interfaces
+	public interface OnSavePasswordListener {
+		public void OnSavePassword(String password);
+	}	
+	
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		try {
+			mOnSavePasswordListener = (OnSavePasswordListener) activity;
+		} catch (ClassCastException e) {
+			throw new ClassCastException(activity.toString() + " must implement OnShowVaultsListener");
+		}
+	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -81,7 +100,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
 			String confirmNewPassword = confirmNewPasswordContainer.getText().toString();
 			if (newPassword.length() > 5) {
 				if (newPassword.equals(confirmNewPassword)) {
-					// TODO: Send call to API that the password has changed.
+					mOnSavePasswordListener.OnSavePassword(newPassword);
 					
 					// Get the settings items
 					Button changePassword = (Button) getActivity().findViewById(R.id.change_password_button);
