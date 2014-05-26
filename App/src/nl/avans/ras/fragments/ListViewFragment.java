@@ -131,6 +131,33 @@ public class ListViewFragment extends Fragment implements OnItemClickListener {
 	}
 	
 	@Override
+	public void onResume() {
+		super.onResume();
+		VaultActivity mVaultActivity;
+		CompareActivity mCompareActivity;
+		switch (kind) {
+		case DATES:
+			if (getActivity() instanceof VaultActivity) {
+				mVaultActivity = (VaultActivity) getActivity();
+				mVaultActivity.setFilterMenuItem(false);
+			} else if (getActivity() instanceof CompareActivity) {
+				mCompareActivity = (CompareActivity) getActivity();
+//				mCompareActivity.setFilterMenuItem(false);
+			}
+			break;
+		case VAULTS:
+			mVaultActivity = (VaultActivity) getActivity();
+			mVaultActivity.setFilterMenuItem(true);
+			break;
+		case COMPARE:
+			
+			break;
+		default:
+			break;
+		}
+	}
+	
+	@Override
 	public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
 		switch (kind) {
 		case DATES:

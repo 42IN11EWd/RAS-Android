@@ -7,6 +7,7 @@ import java.util.Random;
 import nl.avans.ras.R;
 import nl.avans.ras.R.animator;
 import nl.avans.ras.database.DatabaseHelper;
+import nl.avans.ras.fragments.FilterDialogFragment;
 import nl.avans.ras.fragments.ListViewFragment;
 import nl.avans.ras.fragments.ProfileFragment;
 import nl.avans.ras.fragments.ChartFragment;
@@ -25,15 +26,24 @@ import android.view.MenuItem;
 public class VaultActivity extends Activity implements ListViewFragment.OnDateSelectedListener,
 													   ListViewFragment.OnVaultSelectedListener,
 													   VaultFragment.OnCompareVaultListener,
-													   VaultFragment.OnChartVaultListener {
+													   VaultFragment.OnChartVaultListener,
+													   FilterDialogFragment.OnSaveFilterListener {
 
 	// Fields
 	private DatabaseHelper dbHelper = new DatabaseHelper(this);
 	private int gymnastId;
+	private MenuItem filterMenuItem;
+	private boolean filterMenuItemVisible = false;
 	
 	// Getters
 	public int getGymnastId() {
 		return gymnastId;
+	}
+
+	// Setters
+	public void setFilterMenuItem(boolean visibility) {
+		filterMenuItemVisible = visibility;
+		invalidateOptionsMenu();
 	}
 	
 	@Override
@@ -69,12 +79,24 @@ public class VaultActivity extends Activity implements ListViewFragment.OnDateSe
      	getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
 	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.list, menu);
+		filterMenuItem = (MenuItem) menu.findItem(R.id.filter_menu_item);
 		return true;
+	}
+
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		if (filterMenuItem != null) {
+			if (filterMenuItemVisible) {
+				filterMenuItem.setVisible(true);
+			} else {
+				filterMenuItem.setVisible(false);
+			}
+		}
+		return super.onPrepareOptionsMenu(menu);
 	}
 
 	@Override
@@ -88,7 +110,9 @@ public class VaultActivity extends Activity implements ListViewFragment.OnDateSe
 		    	this.finish();
 		    }
 			break;
-		case R.id.action_settings:
+		case R.id.filter_menu_item:
+			FilterDialogFragment dialog = new FilterDialogFragment();
+	        dialog.show(getFragmentManager(), "NoticeDialogFragment");
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -96,10 +120,12 @@ public class VaultActivity extends Activity implements ListViewFragment.OnDateSe
 	
 	@Override
 	public void OnDateSelected(int position, Date date) {
+		// Set the menu
+		setFilterMenuItem(true);
+				
 		// Create a new profile list fragment
     	ListViewFragment vaultListFragment = new ListViewFragment();
     	vaultListFragment.setAdapterKind(AdapterKind.VAULTS);
-    	// TODO: function to set the date
      	
      	// Replace the fragment
 		FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -111,6 +137,9 @@ public class VaultActivity extends Activity implements ListViewFragment.OnDateSe
 
 	@Override
 	public void OnVaultSelected(int position, int vaultId) {
+		// Set the menu
+		setFilterMenuItem(false);
+		
 		// Create a new vault fragment
     	VaultFragment vaultFragment = new VaultFragment();
      	
@@ -140,5 +169,17 @@ public class VaultActivity extends Activity implements ListViewFragment.OnDateSe
 		Intent intent = new Intent(this, ChartActivity.class);
 		intent.putExtra(Vault.VAULT_ID, vault.getId());
 		startActivity(intent);
+	}
+
+	@Override
+	public void OnSaveFilter(String password) {
+		// Create a new profile list fragment
+    	ListViewFragment vaultListFragment = new ListViewFragment();
+    	vaultListFragment.setAdapterKind(AdapterKind.VAULTS);
+     	
+     	// Replace the fragment
+		FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.replace(R.id.fragment_container, vaultListFragment);
+     	transaction.commit();
 	}
 }

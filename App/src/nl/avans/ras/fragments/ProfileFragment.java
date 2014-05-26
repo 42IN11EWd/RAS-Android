@@ -44,14 +44,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		
-		// If the activity is recreated (screen rotation), restore
-		// the previous article selection set by onSaveInstanceState().
-		// This is primarily necessary when in the two-pane layout.
-//		if (savedInstanceState != null) {
-//			mCurrentPosition = savedInstanceState.getInt(ARG_POSITION);
-//		}
-		
 		// Inflate the layout for this fragment
 		return inflater.inflate(R.layout.fragment_profile, container, false);
 	}

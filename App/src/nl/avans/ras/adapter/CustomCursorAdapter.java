@@ -54,7 +54,7 @@ public class CustomCursorAdapter extends CursorAdapter {
 
 	@Override
 	public void bindView(View view, Context context, Cursor cursor) {
-		TextView listTitle = null;
+		TextView listTitle, listSubtitle = null;
 		ImageView imageContainer = null;
 		
 		switch (kind) {
@@ -68,14 +68,20 @@ public class CustomCursorAdapter extends CursorAdapter {
 			break;
 		case VAULTS:
 			listTitle = (TextView) view.findViewById(R.id.cell_title);
+			listSubtitle = (TextView) view.findViewById(R.id.cell_subtitle);
 			listTitle.setTypeface(tfl);
+			listSubtitle.setTypeface(tfl);
 			
 			// Set the profile cell
-			setVaultCell(cursor, listTitle);
+			setVaultCell(cursor, listTitle, listSubtitle);
 			break;
 		case DATES:
 			listTitle = (TextView) view.findViewById(R.id.cell_title);
+			listSubtitle = (TextView) view.findViewById(R.id.cell_subtitle);
 			listTitle.setTypeface(tfl);
+			
+			// Hide subtitle
+			listSubtitle.setVisibility(View.GONE);
 			
 			// Set the profile cell
 			setDateCell(cursor, listTitle);
@@ -83,10 +89,12 @@ public class CustomCursorAdapter extends CursorAdapter {
 		case COMPARE:
 			if (context instanceof CompareActivity) {
 				listTitle = (TextView) view.findViewById(R.id.cell_title);
+				listSubtitle = (TextView) view.findViewById(R.id.cell_subtitle);
 				listTitle.setTypeface(tfl);
+				listSubtitle.setTypeface(tfl);
 				
 				// Set the profile cell
-				setVaultCell(cursor, listTitle);
+				setVaultCell(cursor, listTitle, listSubtitle);
 				
 				// Check if the item is in the list
 				CompareActivity mActivity = (CompareActivity) context;
@@ -120,12 +128,17 @@ public class CustomCursorAdapter extends CursorAdapter {
 		image.setImageResource(R.drawable.test);
 	}
 	
-	private void setVaultCell(Cursor cursor, TextView title) {
+	private void setVaultCell(Cursor cursor, TextView title, TextView subtitle) {
+		// Set the title
 		long dateTime = cursor.getLong(cursor.getColumnIndex(COL_DATE));
 		Date date = new Date(dateTime);
 		Format formatter = new SimpleDateFormat("HH:mm:ss");
 		String dateText = formatter.format(date);
 		title.setText(dateText);
+		
+		// Set the subtitle
+		String vaultType = cursor.getString(cursor.getColumnIndex(COL_VAULT_NAME));
+		subtitle.setText(vaultType);
 	}
 
 	private void setDateCell(Cursor cursor, TextView title) {

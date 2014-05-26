@@ -52,4 +52,10 @@
     <string name="menu_logout_title">Logout</string>
     <string name="menu_settings_title">Settings</string>
     
+    <!-- Filter dialog page -->
+    <string name="filter_title">Filter</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="divider">Divider</string>
+    
 </resources>
