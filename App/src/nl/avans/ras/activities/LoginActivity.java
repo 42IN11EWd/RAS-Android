@@ -6,12 +6,14 @@ import nl.avans.ras.fragments.LoginFragment;
 import nl.avans.ras.model.Gymnast;
 import nl.avans.ras.model.User;
 import nl.avans.ras.model.enums.UserType;
+import nl.avans.ras.network.Networking;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -35,7 +37,10 @@ public class LoginActivity extends Activity implements LoginFragment.OnLoginList
 		} else {
 			// Create a new login fragment
 	    	LoginFragment loginFragment = new LoginFragment();
-	     	
+	    	
+	    	Networking networking = new Networking();
+	    	networking.getAllGymnasts();
+	    	
 	     	// Replace the fragment
 			FragmentTransaction transaction = getFragmentManager().beginTransaction();
 	     	transaction.replace(R.id.fragment_container, loginFragment);

@@ -3,7 +3,6 @@ package nl.avans.ras.services;
 import java.security.MessageDigest;
 
 public class MD5 {
-
 	public static String hashString(String string) {
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");

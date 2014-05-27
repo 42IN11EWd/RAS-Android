@@ -12,6 +12,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 public abstract class AbstractNetworking extends AsyncTask<String, String, String> {
 	
@@ -43,6 +44,7 @@ public abstract class AbstractNetworking extends AsyncTask<String, String, Strin
 	                response.getEntity().writeTo(out);
 	                out.close();
 	                responseString = out.toString();
+	                Log.i("responseString", responseString);
 				}
 			}
 		} catch (ClientProtocolException e) {
@@ -52,7 +54,7 @@ public abstract class AbstractNetworking extends AsyncTask<String, String, Strin
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return responseString;
 	}
 }

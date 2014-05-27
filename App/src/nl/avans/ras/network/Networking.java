@@ -1,12 +1,11 @@
 package nl.avans.ras.network;
 
-import static nl.avans.ras.network.NetworkConnections.*;
-
 import java.util.ArrayList;
 
 import nl.avans.ras.model.enums.AdapterKind;
 import nl.avans.ras.parser.JSONParser;
 import android.content.Context;
+import nl.avans.ras.network.NetworkConnections;
 
 public class Networking extends AbstractNetworking {
 
@@ -21,12 +20,74 @@ public class Networking extends AbstractNetworking {
 		this.kind = kind;
 	}
 	
-	public Networking() {
-		
+	public Networking() {}
+
+	/**************
+	 *    User    *
+	 **************/
+
+	public void getLogin(String username, String password) {
+		this.execute(new String[] {NetworkConnections.getLogin(username, password), "GET"});
 	}
 	
-	public void getGames() {
-		this.execute(new String[] {getSteamLoginURL(), "GET"});
+	/******************
+	 *    Gymnasts    *
+	 ******************/
+	
+	public void getAllGymnasts() {
+		this.execute(new String[] {NetworkConnections.getAllGymnasts(), "GET"});
+	}
+	
+	public void getSpecificGymnast(int id) {
+		this.execute(new String[] {NetworkConnections.getSpecificGymnast(id), "GET"});
+	}
+	
+	public void updateSpecificGymnast(int id) {
+		this.execute(new String[] {NetworkConnections.updateSpecificGymnast(id), "GET"});
+	}
+	
+	/******************
+	 *    Location    *
+	 ******************/
+	
+	public void getAllLocations() {
+		this.execute(new String[] {NetworkConnections.getAllLocations(), "GET"});
+	}
+	
+	public void getSpecificLocation(int id) {
+		this.execute(new String[] {NetworkConnections.getSpecificLocation(id), "GET"});
+	}
+	
+	/***************
+	 *    Vault    *
+	 ***************/
+	
+	public void getAllVaults() {
+		this.execute(new String[] {NetworkConnections.getAllVaults(), "GET"});
+	}
+	
+	public void getVaultsOfSpecificGymnast(int id) {
+		this.execute(new String[] {NetworkConnections.getVaultsOfSpecificGymnast(id), "GET"});
+	}
+	
+	public void getSpecificVault(int id) {
+		this.execute(new String[] {NetworkConnections.getSpecificVault(id), "GET"});
+	}
+	
+	public void updateSpecificVault(int id) {
+		this.execute(new String[] {NetworkConnections.updateSpecificVault(id), "GET"});
+	}
+	
+	/*********************
+	 *    Vault number   *
+	 *********************/
+	
+	public void getAllVaultnumber() {
+		this.execute(new String[] {NetworkConnections.getAllVaultnumber(), "GET"});
+	}
+	
+	public void getSpecificVaultnumber(int id) {
+		this.execute(new String[] {NetworkConnections.getSpecificVaultnumber(id), "GET"});
 	}
 	
 	public ArrayList<String> getAllUserInfo() {
@@ -36,8 +97,7 @@ public class Networking extends AbstractNetworking {
 	public void setAllInfo(ArrayList<String> allInfo) {
 		this.allInfo = allInfo;
 	}
-	
-	
+
 	@Override
 	protected void onPostExecute(String result) {
 		super.onPostExecute(result);
