@@ -119,7 +119,7 @@ public class VaultFragment extends Fragment implements View.OnClickListener {
 		durationContainer.setText("" + vault.getDuration() + " sec");
 		dScoreContainer.setText("" + vault.getDScore());
 		eScoreContainer.setText("" + vault.getEScore());
-		vaultTypeContainer.setText(vault.getType());
+		vaultTypeContainer.setText(vault.getName());
 		vaultLocationContainer.setText(vault.getLocation());
 	}
 

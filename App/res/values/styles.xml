@@ -65,4 +65,17 @@
         <item name="android:textColor">@color/dark_gray</item>
     </style>
 
+    <!-- Filter styles -->
+    <style name="table_row_input_style_button" parent="@android:style/Widget.Button">
+        <item name="android:layout_weight">1</item>
+        <item name="android:drawableEnd">@drawable/icon_right</item>
+        <item name="android:gravity">start|center_vertical</item>
+        <item name="android:paddingRight">@dimen/small_padding</item>
+        <item name="android:paddingTop">@dimen/small_padding</item>
+        <item name="android:paddingBottom">@dimen/small_padding</item>
+        <item name="android:textSize">@dimen/medium_font</item>
+        <item name="android:textColor">@color/dark_gray</item>
+        <item name="android:background">@drawable/filter_button_background</item>
+    </style>
+    
 </resources>

@@ -37,7 +37,7 @@ public class DatabaseNodes {
 	static final String CREATE_VAULT_TABLE = 
 	"CREATE TABLE IF NOT EXISTS " + VAULT_TABLE + " (" + COL_ID + " INTEGER PRIMARY KEY, " + COL_VAULT_ID + " INTEGER, " 
 								  + COL_GYMNAST_ID + " INTEGER, "  + COL_VAULT_NAME + " TEXT, " + COL_D_SCORE + " DECIMAL, " 
-								  + COL_E_SCORE + " DECIMAL, " + COL_DATE + " LONG)";
+								  + COL_E_SCORE + " DECIMAL, " + COL_LOCATION + " TEXT, " + COL_DATE + " LONG)";
 	
 	static final String CREATE_GYMNAST_TABLE = 
 	"CREATE TABLE IF NOT EXISTS " + GYMNAST_TABLE + " (" + COL_ID + " TEXT, " 

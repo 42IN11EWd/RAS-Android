@@ -35,12 +35,18 @@ public class ListViewFragment extends Fragment implements OnItemClickListener {
 	// Fields
 	private CustomCursorAdapter customAdapter;
 	private AdapterKind kind;
+	private Cursor cursor;
 	private ListView list;
 	
 	// Setters
 	public void setAdapterKind(AdapterKind kind) {
 		if (kind != null) {
 			this.kind = kind;
+		}
+	}
+	public void setCursor(Cursor cursor) {
+		if (cursor != null) {
+			this.cursor = cursor;
 		}
 	}
 	
@@ -99,7 +105,11 @@ public class ListViewFragment extends Fragment implements OnItemClickListener {
 		case VAULTS:
 			if (getActivity() instanceof VaultActivity) {
 				VaultActivity mActivity = (VaultActivity) getActivity();
-				customAdapter = new CustomCursorAdapter(mActivity, new DatabaseHelper(mActivity).getAllVaultsFromGymnast(mActivity.getGymnastId(), new Date()), kind);
+				if (cursor != null) {
+					customAdapter = new CustomCursorAdapter(mActivity, cursor, kind);
+				} else {
+					customAdapter = new CustomCursorAdapter(mActivity, new DatabaseHelper(mActivity).getAllVaultsFromGymnast(mActivity.getGymnastId(), new Date()), kind);
+				}				
 			}
 			break;
 		case DATES:

@@ -67,7 +67,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public void insertVaultCollection(ArrayList<Vault> vaultCollection) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		// Insert the data
-		String sql = "INSERT INTO "+ VAULT_TABLE +" VALUES (?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO "+ VAULT_TABLE +" VALUES (?,?,?,?,?,?,?,?)";
         SQLiteStatement statement = db.compileStatement(sql);
         db.beginTransaction();
         for (Vault vault: vaultCollection) {
@@ -77,7 +77,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                   statement.bindString(4, vault.getName());
                   statement.bindDouble(5, vault.getDScore());
                   statement.bindDouble(6, vault.getEScore());
-                  statement.bindLong(7, vault.getDate().getTime());
+                  statement.bindString(7, vault.getLocation());
+                  statement.bindLong(8, vault.getDate().getTime());
                   statement.execute();
         }
         db.setTransactionSuccessful();	
@@ -165,8 +166,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			String name = cursor.getString(cursor.getColumnIndex(COL_VAULT_NAME));
 			double dScore = cursor.getDouble(cursor.getColumnIndex(COL_D_SCORE));
 			double eScore = cursor.getDouble(cursor.getColumnIndex(COL_E_SCORE));
+			String type = cursor.getString(cursor.getColumnIndex(COL_VAULT_NAME));
+			String location = cursor.getString(cursor.getColumnIndex(COL_LOCATION));
 			Date date = new Date(cursor.getLong(cursor.getColumnIndex(COL_DATE)));
-			mVault = new Vault(vaultId, gymnastId, name, dScore, eScore, date);
+			mVault = new Vault(vaultId, gymnastId, name, dScore, eScore, location, date);
 		}
 		cursor.close();
 		// Return the news item
@@ -209,6 +212,42 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public Cursor getAllVaultsFromGymnast(int id, Date date) {
 		// Define the select query
 		String selectQuery = "SELECT * FROM " + VAULT_TABLE + " WHERE " + COL_GYMNAST_ID + " = '" + id + "'";
+		// Create the database
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(selectQuery, null);
+		// Return the cursor
+		return cursor;
+	}
+	
+	public Cursor getAllVaultsFromGymnastFilter(int id, Date date, String vaultType, String location) {
+		// Define the select query
+		String selectQuery = "SELECT * FROM " + VAULT_TABLE + " WHERE " + COL_GYMNAST_ID + " = '" + id + "'";
+		if (vaultType != null && !vaultType.isEmpty()) {
+			selectQuery += " AND " + COL_VAULT_NAME + " = '" + vaultType + "'";
+		}
+		if (location != null && !location.isEmpty()) {
+			selectQuery += " AND " + COL_LOCATION + " = '" + location + "'";
+		}
+		// Create the database
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(selectQuery, null);
+		// Return the cursor
+		return cursor;
+	}
+	
+	public Cursor getAllLocations() {
+		// Define the select query
+		String selectQuery = "SELECT DISTINCT " + COL_ID + ", " + COL_LOCATION + " FROM " + VAULT_TABLE + " GROUP BY " + COL_LOCATION;
+		// Create the database
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(selectQuery, null);
+		// Return the cursor
+		return cursor;
+	}
+	
+	public Cursor getAllVaultTypes() {
+		// Define the select query
+		String selectQuery = "SELECT DISTINCT " + COL_ID + ", " + COL_VAULT_NAME + " FROM " + VAULT_TABLE + " GROUP BY " + COL_VAULT_NAME;
 		// Create the database
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor = db.rawQuery(selectQuery, null);

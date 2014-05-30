@@ -387,84 +387,92 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int button_background=0x7f020001;
         public static final int edit_text_background=0x7f020002;
         public static final int epke=0x7f020003;
-        public static final int ic_drawer=0x7f020004;
-        public static final int ic_launcher=0x7f020005;
-        public static final int innosportlab_logo=0x7f020006;
-        public static final int orange_circle=0x7f020007;
-        public static final int test=0x7f020008;
-        public static final int title_dialog=0x7f020009;
-        public static final int vpi__tab_indicator=0x7f02000a;
-        public static final int vpi__tab_selected_focused_holo=0x7f02000b;
-        public static final int vpi__tab_selected_holo=0x7f02000c;
-        public static final int vpi__tab_selected_pressed_holo=0x7f02000d;
-        public static final int vpi__tab_unselected_focused_holo=0x7f02000e;
-        public static final int vpi__tab_unselected_holo=0x7f02000f;
-        public static final int vpi__tab_unselected_pressed_holo=0x7f020010;
+        public static final int filter_button_background=0x7f020004;
+        public static final int ic_drawer=0x7f020005;
+        public static final int ic_launcher=0x7f020006;
+        public static final int icon_right=0x7f020007;
+        public static final int innosportlab_logo=0x7f020008;
+        public static final int orange_circle=0x7f020009;
+        public static final int splashscreen_image=0x7f02000a;
+        public static final int test=0x7f02000b;
+        public static final int title_dialog=0x7f02000c;
+        public static final int vpi__tab_indicator=0x7f02000d;
+        public static final int vpi__tab_selected_focused_holo=0x7f02000e;
+        public static final int vpi__tab_selected_holo=0x7f02000f;
+        public static final int vpi__tab_selected_pressed_holo=0x7f020010;
+        public static final int vpi__tab_unselected_focused_holo=0x7f020011;
+        public static final int vpi__tab_unselected_holo=0x7f020012;
+        public static final int vpi__tab_unselected_pressed_holo=0x7f020013;
     }
     public static final class id {
-        public static final int action_settings=0x7f06003e;
+        public static final int action_settings=0x7f060043;
         public static final int bottom=0x7f060003;
         public static final int cell_profile_imageview=0x7f06000c;
         public static final int cell_profile_username=0x7f06000d;
         public static final int cell_subtitle=0x7f06000a;
         public static final int cell_title=0x7f060009;
-        public static final int change_password_button=0x7f06002a;
-        public static final int chart_info_button=0x7f060037;
-        public static final int compare_button=0x7f060036;
+        public static final int change_password_button=0x7f06002f;
+        public static final int chart_info_button=0x7f06003c;
+        public static final int clear_button=0x7f060018;
+        public static final int compare_button=0x7f06003b;
         public static final int compare_checkbox=0x7f06000b;
-        public static final int compare_menu_item=0x7f06003c;
-        public static final int confirm_new_password_textfield=0x7f060028;
-        public static final int date_container=0x7f06002b;
+        public static final int compare_menu_item=0x7f060041;
+        public static final int confirm_new_password_textfield=0x7f06002d;
+        public static final int date_container=0x7f060030;
+        public static final int dialog_list=0x7f06001a;
         public static final int divider=0x7f060010;
         public static final int drawer_layout=0x7f060008;
         public static final int filter_dialog_title=0x7f06000f;
-        public static final int filter_menu_item=0x7f06003d;
+        public static final int filter_menu_item=0x7f060042;
         public static final int fragment_container=0x7f060007;
         public static final int graph_container=0x7f06000e;
         public static final int indicator=0x7f060006;
-        public static final int left_drawer=0x7f060038;
-        public static final int listview=0x7f060013;
-        public static final int location_title=0x7f060012;
-        public static final int login_button=0x7f060016;
-        public static final int logout_button=0x7f060039;
-        public static final int new_password_textfield=0x7f060027;
+        public static final int left_drawer=0x7f06003d;
+        public static final int listview=0x7f060019;
+        public static final int location_filter_button=0x7f060017;
+        public static final int location_title=0x7f060016;
+        public static final int login_button=0x7f06001d;
+        public static final int logout_button=0x7f06003e;
+        public static final int new_password_textfield=0x7f06002c;
         public static final int none=0x7f060000;
-        public static final int old_password_textfield=0x7f060026;
+        public static final int old_password_textfield=0x7f06002b;
         public static final int pager=0x7f060005;
-        public static final int password_textfield=0x7f060015;
-        public static final int profile_age_container=0x7f06001c;
-        public static final int profile_age_title=0x7f06001b;
-        public static final int profile_gender_container=0x7f060022;
-        public static final int profile_gender_title=0x7f060021;
-        public static final int profile_image=0x7f060017;
-        public static final int profile_length_container=0x7f06001e;
-        public static final int profile_length_title=0x7f06001d;
-        public static final int profile_name_container=0x7f060018;
-        public static final int profile_training_location_container=0x7f060024;
-        public static final int profile_training_location_title=0x7f060023;
-        public static final int profile_weight_container=0x7f060020;
-        public static final int profile_weight_title=0x7f06001f;
-        public static final int save_new_password_button=0x7f060029;
-        public static final int settings_button=0x7f06003a;
-        public static final int splashscreen=0x7f06003b;
-        public static final int tableRow1=0x7f06001a;
+        public static final int password_textfield=0x7f06001c;
+        public static final int profile_age_container=0x7f060021;
+        public static final int profile_age_title=0x7f060020;
+        public static final int profile_gender_container=0x7f060027;
+        public static final int profile_gender_title=0x7f060026;
+        public static final int profile_image=0x7f06001e;
+        public static final int profile_length_container=0x7f060023;
+        public static final int profile_length_title=0x7f060022;
+        public static final int profile_name_container=0x7f06001f;
+        public static final int profile_training_location_container=0x7f060029;
+        public static final int profile_training_location_title=0x7f060028;
+        public static final int profile_weight_container=0x7f060025;
+        public static final int profile_weight_title=0x7f060024;
+        public static final int save_new_password_button=0x7f06002e;
+        public static final int settings_button=0x7f06003f;
+        public static final int splashscreen=0x7f060040;
+        public static final int tableRow1=0x7f060012;
+        public static final int tableRow2=0x7f060015;
         public static final int top=0x7f060004;
         public static final int triangle=0x7f060001;
         public static final int underline=0x7f060002;
-        public static final int user_information_table=0x7f060019;
-        public static final int username_textfield=0x7f060014;
-        public static final int vault_button=0x7f060025;
-        public static final int vault_d_score_container=0x7f06002f;
-        public static final int vault_d_score_title=0x7f06002e;
-        public static final int vault_duration_container=0x7f06002d;
-        public static final int vault_duration_title=0x7f06002c;
-        public static final int vault_e_score_container=0x7f060031;
-        public static final int vault_e_score_title=0x7f060030;
-        public static final int vault_kind_title=0x7f060011;
-        public static final int vault_location_container=0x7f060035;
-        public static final int vault_location_title=0x7f060034;
-        public static final int vault_type_container=0x7f060033;
-        public static final int vault_type_title=0x7f060032;
+        public static final int user_information_table=0x7f060011;
+        public static final int username_textfield=0x7f06001b;
+        public static final int vault_button=0x7f06002a;
+        public static final int vault_d_score_container=0x7f060034;
+        public static final int vault_d_score_title=0x7f060033;
+        public static final int vault_duration_container=0x7f060032;
+        public static final int vault_duration_title=0x7f060031;
+        public static final int vault_e_score_container=0x7f060036;
+        public static final int vault_e_score_title=0x7f060035;
+        public static final int vault_kind_title=0x7f060013;
+        public static final int vault_location_container=0x7f06003a;
+        public static final int vault_location_title=0x7f060039;
+        public static final int vault_type_container=0x7f060038;
+        public static final int vault_type_filter_button=0x7f060014;
+        public static final int vault_type_title=0x7f060037;
     }
     public static final class integer {
         public static final int default_circle_indicator_orientation=0x7f090000;
@@ -488,12 +496,13 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int fragment_compare=0x7f03000b;
         public static final int fragment_filter=0x7f03000c;
         public static final int fragment_list=0x7f03000d;
-        public static final int fragment_login=0x7f03000e;
-        public static final int fragment_profile=0x7f03000f;
-        public static final int fragment_settings=0x7f030010;
-        public static final int fragment_vault=0x7f030011;
-        public static final int menu=0x7f030012;
-        public static final int splashscreen=0x7f030013;
+        public static final int fragment_list_dialog=0x7f03000e;
+        public static final int fragment_login=0x7f03000f;
+        public static final int fragment_profile=0x7f030010;
+        public static final int fragment_settings=0x7f030011;
+        public static final int fragment_vault=0x7f030012;
+        public static final int menu=0x7f030013;
+        public static final int splashscreen=0x7f030014;
     }
     public static final class menu {
         public static final int compare=0x7f0d0000;
@@ -510,6 +519,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         /**  Chart page 
          */
         public static final int chart_title=0x7f0c0017;
+        public static final int clear_button_title=0x7f0c0026;
         public static final int compare_button_title=0x7f0c0014;
         /**  Compare page 
          */
@@ -598,6 +608,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
          */
         public static final int profile_title_style=0x7f0b0009;
         public static final int table_row_input_style=0x7f0b000b;
+        /**  Filter styles 
+         */
+        public static final int table_row_input_style_button=0x7f0b000c;
         public static final int table_row_title_style=0x7f0b000a;
     }
     public static final class styleable {

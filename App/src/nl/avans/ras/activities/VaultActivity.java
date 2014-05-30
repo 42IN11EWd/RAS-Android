@@ -2,15 +2,13 @@ package nl.avans.ras.activities;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Random;
 
 import nl.avans.ras.R;
 import nl.avans.ras.R.animator;
 import nl.avans.ras.database.DatabaseHelper;
 import nl.avans.ras.fragments.FilterDialogFragment;
+import nl.avans.ras.fragments.ListFilterDialogFragment;
 import nl.avans.ras.fragments.ListViewFragment;
-import nl.avans.ras.fragments.ProfileFragment;
-import nl.avans.ras.fragments.ChartFragment;
 import nl.avans.ras.fragments.VaultFragment;
 import nl.avans.ras.model.Gymnast;
 import nl.avans.ras.model.Vault;
@@ -19,6 +17,7 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,13 +26,19 @@ public class VaultActivity extends Activity implements ListViewFragment.OnDateSe
 													   ListViewFragment.OnVaultSelectedListener,
 													   VaultFragment.OnCompareVaultListener,
 													   VaultFragment.OnChartVaultListener,
-													   FilterDialogFragment.OnSaveFilterListener {
+													   FilterDialogFragment.OnSaveFilterListener,
+													   FilterDialogFragment.OnCancleDialogListener,
+													   ListFilterDialogFragment.OnSaveLocationListener,
+													   ListFilterDialogFragment.OnSaveVaultTypeListener,
+													   ListFilterDialogFragment.OnCancleListDialogListener {
 
 	// Fields
 	private DatabaseHelper dbHelper = new DatabaseHelper(this);
 	private int gymnastId;
+	private Date date;
 	private MenuItem filterMenuItem;
 	private boolean filterMenuItemVisible = false;
+	private String vaultTypeFilter = "", locationFilter = "";
 	
 	// Getters
 	public int getGymnastId() {
@@ -56,7 +61,25 @@ public class VaultActivity extends Activity implements ListViewFragment.OnDateSe
 		int counter = 0;
 		for(int i = 0; i < 50; i++) {
 			for(int x = 0; x < 50; x++) {
-				tempList.add(new Vault(counter, i, "Salto", 4.123, 8.0235, new Date()));
+				String location;
+				String vaultType;
+				if (x < 10) {
+					vaultType = "Koprol";
+					location = "Flik Flak";
+				} else if (x < 20) {
+					vaultType = "Radslag";
+					location = "Eindhoven";
+				} else if (x < 30) {
+					vaultType = "Drie dubbele salto";
+					location = "Best";
+				} else if (x < 40) {
+					vaultType = "Arabier";
+					location = "Den Bosch";
+				} else {
+					vaultType = "Achterwaartse salto";
+					location = "Tilburg";
+				}
+				tempList.add(new Vault(counter, i, vaultType, 4.123, 8.0235, location, new Date()));
 				counter++;
 			}
 		}
@@ -111,8 +134,7 @@ public class VaultActivity extends Activity implements ListViewFragment.OnDateSe
 		    }
 			break;
 		case R.id.filter_menu_item:
-			FilterDialogFragment dialog = new FilterDialogFragment();
-	        dialog.show(getFragmentManager(), "NoticeDialogFragment");
+			showFilterDialog();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -120,9 +142,13 @@ public class VaultActivity extends Activity implements ListViewFragment.OnDateSe
 	
 	@Override
 	public void OnDateSelected(int position, Date date) {
+		if (date != null) {
+			this.date = date;
+		}
+		
 		// Set the menu
 		setFilterMenuItem(true);
-				
+		
 		// Create a new profile list fragment
     	ListViewFragment vaultListFragment = new ListViewFragment();
     	vaultListFragment.setAdapterKind(AdapterKind.VAULTS);
@@ -171,15 +197,86 @@ public class VaultActivity extends Activity implements ListViewFragment.OnDateSe
 		startActivity(intent);
 	}
 
+	private void showFilterDialog() {
+		FilterDialogFragment dialog = new FilterDialogFragment();
+		dialog.setVaultType(vaultTypeFilter);
+		dialog.setLocation(locationFilter);
+        dialog.show(getFragmentManager(), "NoticeDialogFragment");
+	}
+	
 	@Override
-	public void OnSaveFilter(String password) {
-		// Create a new profile list fragment
-    	ListViewFragment vaultListFragment = new ListViewFragment();
-    	vaultListFragment.setAdapterKind(AdapterKind.VAULTS);
-     	
-     	// Replace the fragment
-		FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.replace(R.id.fragment_container, vaultListFragment);
-     	transaction.commit();
+	public void OnSaveFilter(String vaultType, String location) {
+		if (location != null && !location.isEmpty() || vaultType != null && !vaultType.isEmpty()) {
+			if (vaultType != null) {
+				this.vaultTypeFilter = vaultType;
+			} else {
+				this.vaultTypeFilter = "";
+			}
+			if (location != null) {
+				this.locationFilter = location;
+			} else {
+				this.locationFilter = "";
+			}
+			
+			// Create a new cursor
+			Cursor cursor = dbHelper.getAllVaultsFromGymnastFilter(gymnastId, date, vaultTypeFilter, locationFilter);
+			
+			// Create a new profile list fragment
+	    	ListViewFragment vaultListFragment = new ListViewFragment();
+	    	vaultListFragment.setAdapterKind(AdapterKind.VAULTS);
+	    	vaultListFragment.setCursor(cursor);
+	     	
+	     	// Replace the fragment
+			FragmentTransaction transaction = getFragmentManager().beginTransaction();
+	     	transaction.replace(R.id.fragment_container, vaultListFragment);
+	     	transaction.commit();
+		} else {
+			this.locationFilter = "";
+			this.vaultTypeFilter = "";
+			
+			// Create a new profile list fragment
+	    	ListViewFragment vaultListFragment = new ListViewFragment();
+	    	vaultListFragment.setAdapterKind(AdapterKind.VAULTS);
+	     	
+	     	// Replace the fragment
+			FragmentTransaction transaction = getFragmentManager().beginTransaction();
+	     	transaction.replace(R.id.fragment_container, vaultListFragment);
+	     	transaction.commit();
+		}
+	}
+
+	@Override
+	public void OnSaveVaultType(String vaultType) {
+		if (vaultType != null) {
+			if (vaultType.equals(this.vaultTypeFilter)) {
+				this.vaultTypeFilter = "";
+			} else {
+				this.vaultTypeFilter = vaultType;
+			}
+		}
+		showFilterDialog();
+	}
+
+	@Override
+	public void OnSaveLocation(String location) {
+		if (location != null) {
+			if (location.equals(this.locationFilter)) {
+				this.locationFilter = "";
+			} else {
+				this.locationFilter = location;
+			}
+		}
+		showFilterDialog();
+	}
+
+	@Override
+	public void OnCancleListDialog() {
+		showFilterDialog();
+	}
+
+	@Override
+	public void onCancleDialog() {
+		locationFilter = "";
+		vaultTypeFilter = "";
 	}
 }

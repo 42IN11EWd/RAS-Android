@@ -14,23 +14,22 @@ public class Vault implements Parcelable {
 	
 	// Fields
 	private int id, gymnastId;
-	private String name, type, location;
+	private String name, location;
 	private double dScore, eScore, duration;
 	private Date date;
 	
 	// Constructor
-	public Vault(int id, int gymnastId, String name, double dScore, double eScore, Date date) {
+	public Vault(int id, int gymnastId, String name, double dScore, double eScore, String location, Date date) {
 		this.id = id;
 		this.gymnastId = gymnastId;
 		this.name = name;
 		this.dScore = dScore;
 		this.eScore = eScore;
+		this.location = location;
 		this.date = date;
 		
 		// Test data
 		this.duration = 13.94;
-		this.type = "Salto";
-		this.location = "Flik Flak";
 	}
 	
 	// The following methods that are required for using Parcelable
@@ -50,7 +49,6 @@ public class Vault implements Parcelable {
 	public double 	getDScore() 	{ return dScore; }
 	public double	getDuration()	{ return duration; }
 	public String 	getName() 		{ return name; }
-	public String 	getType() 		{ return type; }
 	public String 	getLocation()	{ return location; }
 	public Date		getDate()		{ return date; }
 

@@ -9,6 +9,7 @@ import java.util.Date;
 
 import nl.avans.ras.R;
 import nl.avans.ras.activities.CompareActivity;
+import nl.avans.ras.activities.VaultActivity;
 import nl.avans.ras.model.Vault;
 import nl.avans.ras.model.enums.AdapterKind;
 import android.content.Context;
@@ -86,6 +87,40 @@ public class CustomCursorAdapter extends CursorAdapter {
 			// Set the profile cell
 			setDateCell(cursor, listTitle);
 			break;
+		case VAULT_TYPES:
+			listTitle = (TextView) view.findViewById(R.id.cell_title);
+			listSubtitle = (TextView) view.findViewById(R.id.cell_subtitle);
+			listTitle.setTypeface(tfl);
+			
+			// Hide subtitle
+			listSubtitle.setVisibility(View.GONE);
+			
+			// Set the profile cell
+			setVaultTypeCell(cursor, listTitle);
+			break;
+		case LOCATIONS:
+			listTitle = (TextView) view.findViewById(R.id.cell_title);
+			listSubtitle = (TextView) view.findViewById(R.id.cell_subtitle);
+			listTitle.setTypeface(tfl);
+			
+			// Hide subtitle
+			listSubtitle.setVisibility(View.GONE);
+			
+			// Check if a location isset
+//			VaultActivity mActivity = (VaultActivity) context;
+//			mActivity.getFragmentManager().getFragment(arg0, arg1)
+//			if ( == cursor.getString(cursor.getColumnIndex(COL_LOCATION))) {
+//				listTitle.setTextColor(Color.WHITE);
+//				view.setBackgroundResource(R.color.orange);
+//				break;
+//			} else {
+//				listTitle.setTextColor(Color.BLACK);
+//				view.setBackgroundResource(android.R.color.transparent);
+//			}
+			
+			// Set the profile cell
+			setLocationCell(cursor, listTitle);
+			break;		
 		case COMPARE:
 			if (context instanceof CompareActivity) {
 				listTitle = (TextView) view.findViewById(R.id.cell_title);
@@ -147,5 +182,17 @@ public class CustomCursorAdapter extends CursorAdapter {
 		Format formatter = new SimpleDateFormat("dd-MM-yyyy");
 		String dateText = formatter.format(date);
 		title.setText(dateText);
+	}
+	
+	private void setVaultTypeCell(Cursor cursor, TextView title) {
+		// Set the title
+		String vaultType = cursor.getString(cursor.getColumnIndex(COL_VAULT_NAME));
+		title.setText(vaultType);
+	}
+	
+	private void setLocationCell(Cursor cursor, TextView title) {
+		// Set the title
+		String location = cursor.getString(cursor.getColumnIndex(COL_LOCATION));
+		title.setText(location);
 	}
 }
