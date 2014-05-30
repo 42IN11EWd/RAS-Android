@@ -34,6 +34,7 @@ public class FilterDialogFragment extends DialogFragment implements View.OnClick
 	
 	// Fields
 	private String vaultType = "", location = "";
+	private Button vaultTypeButton, locationButton;
 	
 	// Setters
 	public void setVaultType(String vaultType) {
@@ -96,8 +97,8 @@ public class FilterDialogFragment extends DialogFragment implements View.OnClick
 	
 	private View setView(View view) {
 		// Get the view items
-		Button vaultTypeButton = (Button) view.findViewById(R.id.vault_type_filter_button);
-		Button locationButton = (Button) view.findViewById(R.id.location_filter_button);
+		vaultTypeButton = (Button) view.findViewById(R.id.vault_type_filter_button);
+		locationButton = (Button) view.findViewById(R.id.location_filter_button);
 		Button clearButton = (Button) view.findViewById(R.id.clear_button);
 		TextView titleContainer = (TextView) view.findViewById(R.id.filter_dialog_title);
 	    
@@ -148,23 +149,15 @@ public class FilterDialogFragment extends DialogFragment implements View.OnClick
 			this.dismiss();
 			break;
 		case R.id.clear_button:
-			// Get the view items
-			Button vaultTypeButton = (Button) getView().findViewById(R.id.vault_type_filter_button);
-			Button locationButton = (Button) getView().findViewById(R.id.location_filter_button);
-			
 			// Clear the filter items
 			vaultType = "";
 			location = "";
 			
 			// Set text of the buttons
-		    if (vaultType != null && !vaultType.isEmpty()) {
-		    	vaultTypeButton.setText(vaultType);
-		    } else {
+		    if (vaultTypeButton != null) {
 		    	vaultTypeButton.setText("None");
 		    }
-		    if (location != null && !location.isEmpty()) {
-		    	locationButton.setText(location);
-		    } else {
+		    if (locationButton != null) {
 		    	locationButton.setText("None");
 		    }
 			break;
