@@ -1,7 +1,7 @@
 package nl.avans.ras.network;
 
 public class NetworkConnections {
-	private static final String BASE_URL = "http://145.102.84.48:3000/";
+	private static final String BASE_URL = "http://192.168.25.1:3000/";
 
 	/**************
 	 *    User    *
@@ -20,10 +20,6 @@ public class NetworkConnections {
 	}
 	
 	public static String getSpecificGymnast(int id) {
-		return BASE_URL + "gymnast/" + id;
-	}
-	
-	public static String updateSpecificGymnast(int id) {
 		return BASE_URL + "gymnast/" + id;
 	}
 	
@@ -52,10 +48,6 @@ public class NetworkConnections {
 	}
 	
 	public static String getSpecificVault(int id) {
-		return BASE_URL + "vault/" + id;
-	}
-	
-	public static String updateSpecificVault(int id) {
 		return BASE_URL + "vault/" + id;
 	}
 	

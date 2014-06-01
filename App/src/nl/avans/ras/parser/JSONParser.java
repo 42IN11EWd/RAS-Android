@@ -1,8 +1,12 @@
 package nl.avans.ras.parser;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 
+import nl.avans.ras.model.Gymnast;
+import nl.avans.ras.model.Location;
+import nl.avans.ras.model.Vault;
+import nl.avans.ras.model.VaultNumber;
 import static nl.avans.ras.parser.JSONNodes.*;
 
 import org.json.JSONArray;
@@ -12,92 +16,245 @@ import org.json.JSONObject;
 import android.util.Log;
 
 public class JSONParser {
-
-	// Fields
-	private JSONObject jsonObj = null;
-	private JSONArray objects = null;
 	
-	public JSONParser() {
+	/******************
+	 *    Gymnasts    *
+	 ******************/
+	
+	public static ArrayList<Gymnast> parseAllGymnasts(String json) {
+		ArrayList<Gymnast> list = new ArrayList<Gymnast>();
 		
-	}
-
-	/*
-	public ArrayList<Game> parseGames(String json) {
-		ArrayList<Game> gameList = new ArrayList<Game>();
 		try {
-			jsonObj = new JSONObject(json);
-			jsonObj = jsonObj.getJSONObject(NODE_APPS);
-			objects = jsonObj.getJSONArray(NODE_APP_LIST);
+			JSONArray content = new JSONArray(json);
 			
-			for (int i = 0; i < objects.length(); i++) {
-				JSONObject obj = objects.getJSONObject(i);
-				int id = obj.getInt(NODE_APP_ID);
-				String name = obj.getString(NODE_APP_NAME);
+			for(int i = 0; i < content.length(); i++) {
+				JSONObject element = content.getJSONObject(i);
 				
-				// Log the information				
-				Log.i("game info","id: " + id + ", name: " + name);
+				Gymnast gymnast = new Gymnast(
+					element.getInt("gymnast_id"),
+					element.getString("name"),
+					element.getString("surname"),
+					(element.isNull("surname_prefix")) ? null : element.getString("surname_prefix"),
+					0,
+					element.getInt("length"),
+					element.getInt("weight"),
+					null
+				);
 				
-				// Add the game to the collection
-				gameList.add(new Game(id, name, ""));
+				list.add(gymnast);
 			}
-				
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		return gameList;
+		
+		return list;
 	}
 
-	public ArrayList<News> parseNews(String json) {
-		ArrayList<News> newsList = new ArrayList<News>();
+	public static Gymnast parseSpecificGymnast(String json) {
+		Gymnast gymnast = null;
+		
 		try {
-			jsonObj = new JSONObject(json);
-			jsonObj = jsonObj.getJSONObject(NODE_NEWS);
-			objects = jsonObj.getJSONArray(NODE_NEWS_LIST);
+			JSONArray content = new JSONArray(json);
+			JSONObject element = content.getJSONObject(0);
 			
-			for (int i = 0; i < objects.length(); i++) {
-				JSONObject obj = objects.getJSONObject(i);
-				int gameId = jsonObj.getInt(NODE_APP_ID);
-				String id = obj.getString(NODE_NEWS_ID);
-				String title = obj.getString(NODE_NEWS_TITLE);
-				String text = obj.getString(NODE_NEWS_CONTENT);
-				String writer = obj.getString(NODE_NEWS_AUTHOR);
-				Date publishDate = new Date(obj.getLong(NODE_NEWS_DATE) * 1000);
-				
-				// Log the information				
-				Log.i("news info","id: " + id + ", title: " + title);
-				
-				// Add the game to the collection
-				newsList.add(new News(id, gameId, title, text, writer, publishDate));
-			}
-				
+			gymnast = new Gymnast(
+				element.getInt("gymnast_id"),
+				element.getString("name"),
+				element.getString("surname"),
+				(element.isNull("surname_prefix")) ? null : element.getString("surname_prefix"),
+				0,
+				element.getInt("length"),
+				element.getInt("weight"),
+				null
+			);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		return newsList;
-	}
 	
-	public User parseUserInfo(String json) {
-		User user = null;
+		return gymnast;
+	}
+
+	/*******************
+	 *    Locations    *
+	 *******************/
+	
+	public static List<Location> parseAllLocations(String json) {
+		ArrayList<Location> list = new ArrayList<Location>();
+		
 		try {
-			jsonObj = new JSONObject(json);
-			jsonObj = jsonObj.getJSONObject(NODE_USER);
-			objects = jsonObj.getJSONArray(NODE_USER_PLAYER);
-			for (int i = 0; i < objects.length(); i++) {
-				JSONObject obj = objects.getJSONObject(i);
-				String username = obj.getString(NODE_USER_USERNAME);
-				String realname = "";
-				if (obj.has(NODE_USER_REALNAME)) {
-					realname = obj.getString(NODE_USER_REALNAME);
-				}
-				String profileURL = obj.getString(NODE_USER_PROFILE_URL);
+			JSONArray content = new JSONArray(json);
+
+			for(int i = 0; i < content.length(); i++) {
+				JSONObject element = content.getJSONObject(i);
 				
-				// Create the user
-				user = new User(username, realname, profileURL);
+				Location location = new Location(
+					element.getInt("location_id"),
+					element.getString("name"),
+					(element.isNull("description")) ? null : element.getString("description")
+				);
+				
+				list.add(location);
 			}
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return user;
-	}*/
+		
+		return list;
+	}
+
+	public static Location parseSpecificLocation(String json) {
+		Location location = null;
+		
+		try {
+			JSONArray content = new JSONArray(json);
+			JSONObject element = content.getJSONObject(0);
+			
+			location = new Location(
+				element.getInt("location_id"),
+				element.getString("name"),
+				(element.isNull("description")) ? null : element.getString("description")
+			);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	
+		return location;
+	}
+
+	/****************
+	 *    Vaults    *
+	 ****************/
+	
+	public static Vault parseSpecificVault(String json) {
+		Vault vault = null;
+		
+		try {
+			JSONArray content = new JSONArray(json);
+			JSONObject element = content.getJSONObject(0);
+			
+			vault = new Vault(
+				element.getInt("vault_id"),
+				element.getInt("gymnast_id"), 
+				null,
+				(element.isNull("rating_official_D")) ? -1 : element.getDouble("rating_official_D"), 
+				(element.isNull("rating_official_E")) ? -1 : element.getDouble("rating_official_E"), 
+				null,
+				null
+			);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		return vault;
+	}
+
+	public static ArrayList<Vault> parseAllVaults(String json) {
+		ArrayList<Vault> list = new ArrayList<Vault>();
+		
+		try {
+			JSONArray content = new JSONArray(json);
+
+			for(int i = 0; i < content.length(); i++) {
+				JSONObject element = content.getJSONObject(i);
+				
+				Vault vault = new Vault(
+					element.getInt("vault_id"),
+					element.getInt("gymnast_id"), 
+					null,
+					(element.isNull("rating_official_D")) ? -1 : element.getDouble("rating_official_D"), 
+					(element.isNull("rating_official_E")) ? -1 : element.getDouble("rating_official_E"),
+					null,
+					null
+				);
+				
+				list.add(vault);
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	public static ArrayList<Vault> parseVaultsOfSpecificGymnast(String json) {
+		ArrayList<Vault> list = new ArrayList<Vault>();
+		
+		try {
+			JSONArray content = new JSONArray(json);
+
+			for(int i = 0; i < content.length(); i++) {
+				JSONObject element = content.getJSONObject(i);
+				
+				Vault vault = new Vault(
+					element.getInt("vault_id"),
+					element.getInt("gymnast_id"), 
+					null,
+					(element.isNull("rating_official_D")) ? -1 : element.getDouble("rating_official_D"), 
+					(element.isNull("rating_official_E")) ? -1 : element.getDouble("rating_official_E"), 
+					null,
+					null
+				);
+				
+				list.add(vault);
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	/**********************
+	 *    VaultNumbers    *
+	 **********************/
+	
+	public static ArrayList<VaultNumber> parseAllVaultNumber(String json) {
+		ArrayList<VaultNumber> list = new ArrayList<VaultNumber>();
+		
+		try {
+			JSONArray content = new JSONArray(json);
+			
+			for(int i = 0; i < content.length(); i++) {
+				JSONObject element = content.getJSONObject(i);
+			
+				VaultNumber vaultNumber = new VaultNumber(
+					element.getInt(NODE_VAULTNUMBER_ID),
+					element.getInt(NODE_VAULTNUMBER_CODE),
+					element.getString(NODE_VAULTNUMBER_DESCRIPTION),
+					element.getString(NODE_VAULTNUMBER_GENDER),
+					element.getInt(NODE_VAULTNUMBER_DIFFICULTY)
+				);
+				
+				Log.i("VAULTNUMBER", vaultNumber.toString());
+				list.add(vaultNumber);
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	public static VaultNumber parseSpecificVaultNumber(String json) {
+		VaultNumber vaultNumber = null;
+		
+		try {
+			JSONArray content = new JSONArray(json);
+			JSONObject element = content.getJSONObject(0);
+			
+			vaultNumber = new VaultNumber(
+				element.getInt(NODE_VAULTNUMBER_ID),
+				element.getInt(NODE_VAULTNUMBER_CODE),
+				element.getString(NODE_VAULTNUMBER_DESCRIPTION),
+				element.getString(NODE_VAULTNUMBER_GENDER),
+				element.getInt(NODE_VAULTNUMBER_DIFFICULTY)
+			);
+			
+			Log.i("VAULTNUMBER", vaultNumber.toString());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		return vaultNumber;
+	}
 }
