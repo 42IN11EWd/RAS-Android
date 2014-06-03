@@ -38,9 +38,6 @@ public class LoginActivity extends Activity implements LoginFragment.OnLoginList
 			// Create a new login fragment
 	    	LoginFragment loginFragment = new LoginFragment();
 	    	
-	    	Networking networking = new Networking();
-	    	networking.getAllGymnasts();
-	    	
 	     	// Replace the fragment
 			FragmentTransaction transaction = getFragmentManager().beginTransaction();
 	     	transaction.replace(R.id.fragment_container, loginFragment);
