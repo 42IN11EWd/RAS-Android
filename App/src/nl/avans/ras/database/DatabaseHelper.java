@@ -13,7 +13,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
-import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -30,7 +29,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -93,26 +91,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		// Insert the content
 		db.insert(REFRSH_DATE_TABLE, null, cv);
 	}
-//	
-//	/******************************************************************
-//	 * 
-//	 *                         Delete
-//	 *
-//	 ******************************************************************/
-//	
-//	public void clearCache() {
-//		SQLiteDatabase db = this.getWritableDatabase();
-//		db.delete(REFRSH_DATE_TABLE, "", null);
-//		db.delete(GAME_TABLE, "", null);
-//		db.delete(NEWS_TABLE, "", null);
-//	}
-//	
-//	/******************************************************************
-//	 * 
-//	 *                         Getters 
-//	 *
-//	 ******************************************************************/
-//	
+	
+	/******************************************************************
+	 * 
+	 *                         Delete
+	 *
+	 ******************************************************************/
+	
+	public void clearAllCache() {
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(REFRSH_DATE_TABLE, "", null);
+		db.delete(VAULT_TABLE, "", null);
+		db.delete(GYMNAST_TABLE, "", null);
+	}
+	
+	public void clearVaultCache() {
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(VAULT_TABLE, "", null);
+	}
+	
+	public void clearGymnastCache() {
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(GYMNAST_TABLE, "", null);
+	}
+	
+	/******************************************************************
+	 * 
+	 *                         Getters 
+	 *
+	 ******************************************************************/
+	
 	// Get a gymnast
 	public Gymnast getGymnast(int id) {
 		// Local variables
@@ -175,17 +183,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		// Return the news item
 		return mVault;
 	}
-//	
-//	public Cursor getNewsOfGame(int id, int count) {
-//		// Define the select query
-//		String selectQuery = "SELECT * FROM " + NEWS_TABLE + " WHERE " + COL_GAME_ID + " = '" + id + "' LIMIT " + count;
-//		// Create the database
-//		SQLiteDatabase db = this.getWritableDatabase();
-//		Cursor cursor = db.rawQuery(selectQuery, null);
-//		// Return the cursor
-//		return cursor;
-//	}
-//	
+
 	// Get all vaults
 	public Cursor getAllVaults() {
 		// Define the select query
@@ -254,54 +252,80 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		// Return the cursor
 		return cursor;
 	}
-//	
-//	// Get the input date
-//	public Date getDate() {
-//		// Local variables
-//		Date refreshDate = null;
-//		// Define the select query
-//		String selectQuery = "SELECT * FROM " + REFRSH_DATE_TABLE;
-//		// Create the database
-//		SQLiteDatabase db = this.getWritableDatabase();
-//		Cursor cursor = db.rawQuery(selectQuery, null);
-//		// Get the refresh date item
-//		if(cursor != null && cursor.moveToNext()) {
-//			refreshDate = new Date(cursor.getLong(cursor.getColumnIndex(COL_DATE)));
-//		}
-//		cursor.close();
-//		// Return the refresh date item
-//		return refreshDate;
-//	}
-//
-//	/******************************************************************
-//	 * 
-//	 *                         Checkers 
-//	 *
-//	 ******************************************************************/
-//	
-//	public boolean hasGames() {
-//		// Define the select query
-//		String selectQuery = "SELECT * FROM " + GAME_TABLE + " LIMIT 1";
-//		// Create the database
-//		SQLiteDatabase db = this.getWritableDatabase();
-//		Cursor cursor = db.rawQuery(selectQuery, null);
-//		// Return the cursor
-//		if (cursor != null && cursor.moveToNext())
-//			return true;
-//		else 
-//			return false;
-//	}
-//	
-//	public boolean hasNews(int id) {
-//		// Define the select query
-//		String selectQuery = "SELECT * FROM " + NEWS_TABLE + " WHERE " + COL_GAME_ID + " = '" + id + "'" + " LIMIT 1";
-//		// Create the database
-//		SQLiteDatabase db = this.getWritableDatabase();
-//		Cursor cursor = db.rawQuery(selectQuery, null);
-//		// Return the cursor
-//		if (cursor != null && cursor.moveToNext())
-//			return true;
-//		else 
-//			return false;
-//	}
+	
+	// Get the input date
+	public Date getDate() {
+		// Local variables
+		Date refreshDate = null;
+		// Define the select query
+		String selectQuery = "SELECT * FROM " + REFRSH_DATE_TABLE;
+		// Create the database
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(selectQuery, null);
+		// Get the refresh date item
+		if(cursor != null && cursor.moveToNext()) {
+			refreshDate = new Date(cursor.getLong(cursor.getColumnIndex(COL_DATE)));
+		}
+		cursor.close();
+		// Return the refresh date item
+		return refreshDate;
+	}
+
+	/******************************************************************
+	 * 
+	 *                         Checkers 
+	 *
+	 ******************************************************************/
+	
+	public boolean hasVaults() {
+		// Define the select query
+		String selectQuery = "SELECT * FROM " + VAULT_TABLE + " LIMIT 1";
+		// Create the database
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(selectQuery, null);
+		// Return the cursor
+		if (cursor != null && cursor.moveToNext())
+			return true;
+		else 
+			return false;
+	}
+	
+	public boolean hasVault(int vaultId, int gymnastId) {
+		// Define the select query
+		String selectQuery = "SELECT * FROM " + VAULT_TABLE + " WHERE " + COL_VAULT_ID + " = '" + vaultId + "' AND " + COL_GYMNAST_ID + " = '" + gymnastId + "'" + " LIMIT 1";
+		// Create the database
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(selectQuery, null);
+		// Return the cursor
+		if (cursor != null && cursor.moveToNext())
+			return true;
+		else 
+			return false;
+	}
+	
+	public boolean hasGymnasts() {
+		// Define the select query
+		String selectQuery = "SELECT * FROM " + GYMNAST_TABLE + " LIMIT 1";
+		// Create the database
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(selectQuery, null);
+		// Return the cursor
+		if (cursor != null && cursor.moveToNext())
+			return true;
+		else 
+			return false;
+	}
+	
+	public boolean hasGymnast(int id) {
+		// Define the select query
+		String selectQuery = "SELECT * FROM " + GYMNAST_TABLE + " WHERE " + COL_GYMNAST_ID + " = '" + id + "'" + " LIMIT 1";
+		// Create the database
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(selectQuery, null);
+		// Return the cursor
+		if (cursor != null && cursor.moveToNext())
+			return true;
+		else 
+			return false;
+	}
 }

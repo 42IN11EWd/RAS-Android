@@ -11,6 +11,7 @@ import nl.avans.ras.model.Gymnast;
 import nl.avans.ras.model.User;
 import nl.avans.ras.model.enums.AdapterKind;
 import nl.avans.ras.model.enums.UserType;
+import nl.avans.ras.network.Networking;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Fragment;
@@ -53,6 +54,10 @@ public class ProfileActivity extends Activity implements View.OnClickListener,
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_profile);
+		
+//		// Get the list of gymnasts
+//		ArrayList<Gymnast> gymnastCollection = new Networking().getAllGymnasts();
+//		dbHelper.insertGymnastCollection(gymnastCollection);
 		
 		// Create a test list of gymnasts
 		ArrayList<Gymnast> tempList = new ArrayList<Gymnast>();
