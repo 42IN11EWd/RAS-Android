@@ -22,7 +22,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		db.execSQL(CREATE_REFRSH_DATE_TABLE);
+		db.execSQL(CREATE_REFRSH_GYMNAST_DATE_TABLE);
+		db.execSQL(CREATE_REFRSH_VAULT_DATE_TABLE);
 		db.execSQL(CREATE_GYMNAST_TABLE);
 		db.execSQL(CREATE_VAULT_TABLE);
 	}
@@ -46,18 +47,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteStatement statement = db.compileStatement(sql);
         db.beginTransaction();
         for (Gymnast gymnast: gymnastCollection) {
-                  statement.clearBindings();
-                  statement.bindLong(2, gymnast.getId());
-                  statement.bindString(3, gymnast.getFirstname());
-                  statement.bindString(4, gymnast.getSurname());
-                  statement.bindString(5, gymnast.getSurnamePrefix());
-                  statement.bindLong(6, gymnast.getAge());
-                  statement.bindLong(7, gymnast.getLength());
-                  statement.bindLong(8, gymnast.getWeight());
-                  statement.bindString(9, gymnast.getLocation());
-                  statement.execute();
+        	String firstname = gymnast.getSurnamePrefix();
+        	String surname = gymnast.getSurname();
+        	String surnamePrefix = gymnast.getSurnamePrefix();
+        	
+            statement.clearBindings();
+            statement.bindLong(2, gymnast.getId());
+            statement.bindString(3, firstname != null && !firstname.isEmpty() ? firstname : "");
+            statement.bindString(4, surname != null && !surname.isEmpty() ? surname : "");
+            statement.bindString(5, surnamePrefix != null && !surnamePrefix.isEmpty() ? surnamePrefix : "");
+            statement.bindLong(6, gymnast.getAge());
+            statement.bindLong(7, gymnast.getLength());
+            statement.bindLong(8, gymnast.getWeight());
+            statement.bindString(9, gymnast.getLocation());
+            statement.execute();
         }
-        db.setTransactionSuccessful();	
+        db.setTransactionSuccessful();
         db.endTransaction();
 	}
 	
@@ -65,31 +70,44 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public void insertVaultCollection(ArrayList<Vault> vaultCollection) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		// Insert the data
-		String sql = "INSERT INTO "+ VAULT_TABLE +" VALUES (?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO " + VAULT_TABLE + " VALUES (?,?,?,?,?,?,?,?,?)";
         SQLiteStatement statement = db.compileStatement(sql);
         db.beginTransaction();
         for (Vault vault: vaultCollection) {
-                  statement.clearBindings();
-                  statement.bindLong(2, vault.getId());
-                  statement.bindLong(3, vault.getGymnastId());
-                  statement.bindString(4, vault.getName());
-                  statement.bindDouble(5, vault.getDScore());
-                  statement.bindDouble(6, vault.getEScore());
-                  statement.bindString(7, vault.getLocation());
-                  statement.bindLong(8, vault.getDate().getTime());
-                  statement.execute();
+        	String name = vault.getName();
+        	String location = vault.getLocation();
+        	
+            statement.clearBindings();
+            statement.bindLong(2, vault.getId());
+            statement.bindLong(3, vault.getGymnastId());
+            statement.bindString(4, name != null && !name.isEmpty() ? name : "");
+            statement.bindDouble(5, vault.getDScore());
+            statement.bindDouble(6, vault.getEScore());
+          	statement.bindString(7, location != null && !location.isEmpty() ? location : "");
+            statement.bindLong(8, vault.getDate() != null ? vault.getDate().getTime() : new Date().getTime());
+            statement.bindString(9, vault.getData() != null ? vault.getData() : "");
+         	statement.execute();
         }
         db.setTransactionSuccessful();	
         db.endTransaction();
 	}
 	
-	public void insertUpdateDate(Date date) {
+	public void insertUpdateGymnastDate(Date date) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues cv = new ContentValues();
 		// Add the content
-		cv.put(COL_DATE, date.getTime());
+		cv.put(COL_GYMNAST_DATE, date.getTime());
 		// Insert the content
-		db.insert(REFRSH_DATE_TABLE, null, cv);
+		db.insert(CREATE_REFRSH_GYMNAST_DATE_TABLE, null, cv);
+	}
+	
+	public void insertUpdateVaultDate(Date date) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		ContentValues cv = new ContentValues();
+		// Add the content
+		cv.put(COL_VAULT_DATE, date.getTime());
+		// Insert the content
+		db.insert(CREATE_REFRSH_VAULT_DATE_TABLE, null, cv);
 	}
 	
 	/******************************************************************
@@ -100,18 +118,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	
 	public void clearAllCache() {
 		SQLiteDatabase db = this.getWritableDatabase();
-		db.delete(REFRSH_DATE_TABLE, "", null);
+		db.delete(CREATE_REFRSH_GYMNAST_DATE_TABLE, "", null);
+		db.delete(CREATE_REFRSH_VAULT_DATE_TABLE, "", null);
 		db.delete(VAULT_TABLE, "", null);
 		db.delete(GYMNAST_TABLE, "", null);
 	}
 	
 	public void clearVaultCache() {
 		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(CREATE_REFRSH_VAULT_DATE_TABLE, "", null);
 		db.delete(VAULT_TABLE, "", null);
 	}
 	
 	public void clearGymnastCache() {
 		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(CREATE_REFRSH_GYMNAST_DATE_TABLE, "", null);
 		db.delete(GYMNAST_TABLE, "", null);
 	}
 	
@@ -176,8 +197,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			double eScore = cursor.getDouble(cursor.getColumnIndex(COL_E_SCORE));
 			String type = cursor.getString(cursor.getColumnIndex(COL_VAULT_NAME));
 			String location = cursor.getString(cursor.getColumnIndex(COL_LOCATION));
+			String data = cursor.getString(cursor.getColumnIndex(COL_DATA));
 			Date date = new Date(cursor.getLong(cursor.getColumnIndex(COL_DATE)));
-			mVault = new Vault(vaultId, gymnastId, name, dScore, eScore, location, date);
+			mVault = new Vault(vaultId, gymnastId, name, dScore, eScore, location, date, data);
 		}
 		cursor.close();
 		// Return the news item
@@ -254,17 +276,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 	
 	// Get the input date
-	public Date getDate() {
+	public Date getGymnastUpdateDate() {
 		// Local variables
 		Date refreshDate = null;
 		// Define the select query
-		String selectQuery = "SELECT * FROM " + REFRSH_DATE_TABLE;
+		String selectQuery = "SELECT * FROM " + REFRSH_GYMNAST_DATE_TABLE + " LIMIT 1";
 		// Create the database
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor = db.rawQuery(selectQuery, null);
 		// Get the refresh date item
 		if(cursor != null && cursor.moveToNext()) {
-			refreshDate = new Date(cursor.getLong(cursor.getColumnIndex(COL_DATE)));
+			refreshDate = new Date(cursor.getLong(cursor.getColumnIndex(COL_GYMNAST_DATE)));
+		}
+		cursor.close();
+		// Return the refresh date item
+		return refreshDate;
+	}
+	
+	// Get the input date
+	public Date getVaultUpdateDate() {
+		// Local variables
+		Date refreshDate = null;
+		// Define the select query
+		String selectQuery = "SELECT * FROM " + REFRSH_VAULT_DATE_TABLE + " LIMIT 1";
+		// Create the database
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(selectQuery, null);
+		// Get the refresh date item
+		if(cursor != null && cursor.moveToNext()) {
+			refreshDate = new Date(cursor.getLong(cursor.getColumnIndex(COL_VAULT_DATE)));
 		}
 		cursor.close();
 		// Return the refresh date item
@@ -280,6 +320,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public boolean hasVaults() {
 		// Define the select query
 		String selectQuery = "SELECT * FROM " + VAULT_TABLE + " LIMIT 1";
+		// Create the database
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(selectQuery, null);
+		// Return the cursor
+		if (cursor != null && cursor.moveToNext())
+			return true;
+		else 
+			return false;
+	}
+	
+	public boolean hasVaults(int gymnastId) {
+		// Define the select query
+		String selectQuery = "SELECT * FROM " + VAULT_TABLE + " WHERE " + COL_GYMNAST_ID + " = '" + gymnastId + "'" + " LIMIT 1";
 		// Create the database
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor = db.rawQuery(selectQuery, null);

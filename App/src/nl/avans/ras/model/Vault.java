@@ -1,7 +1,6 @@
 package nl.avans.ras.model;
 
-import java.text.Format;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import android.os.Parcel;
@@ -16,10 +15,12 @@ public class Vault implements Parcelable {
 	private int id, gymnastId;
 	private String name, location;
 	private double dScore, eScore, duration;
+	private String data;
+	private ArrayList<Double> speedData, distanceData;
 	private Date date;
 	
 	// Constructor
-	public Vault(int id, int gymnastId, String name, double dScore, double eScore, String location, Date date) {
+	public Vault(int id, int gymnastId, String name, double dScore, double eScore, String location, Date date, String data) {
 		this.id = id;
 		this.gymnastId = gymnastId;
 		this.name = name;
@@ -27,6 +28,10 @@ public class Vault implements Parcelable {
 		this.eScore = eScore;
 		this.location = location;
 		this.date = date;
+		this.data = data;
+		
+		// Convert the data to speedData and distanceData
+		convertDataToSpeedAndDistanceData();
 		
 		// Test data
 		this.duration = 13.94;
@@ -50,8 +55,12 @@ public class Vault implements Parcelable {
 	public double	getDuration()	{ return duration; }
 	public String 	getName() 		{ return name; }
 	public String 	getLocation()	{ return location; }
+	public String 	getData()		{ return data; }
 	public Date		getDate()		{ return date; }
-
+	
+	public ArrayList<Double> getSpeedData() 	{ return speedData; }
+	public ArrayList<Double> getDistanceData() { return distanceData; }
+	
 	@Override
 	public int describeContents() {
 		return 0;
@@ -66,6 +75,28 @@ public class Vault implements Parcelable {
 		out.writeDouble(eScore);
 		out.writeLong(date.getTime());
 	}
+	
+	private void convertDataToSpeedAndDistanceData() {
+		speedData = new ArrayList<Double>();
+		distanceData = new ArrayList<Double>();
+		
+		String[] dataCollection = data.split(" ");
+		for(String data: dataCollection) {
+			String[] speedAndDistance = data.split(",");
+			if (speedAndDistance.length > 1) {
+				// Convert the string to a double
+				Double distance = Double.valueOf(speedAndDistance[0]);
+				Double speed = Double.valueOf(speedAndDistance[1]);
+				
+				// Add the data to the collection
+				distanceData.add(distance);
+				speedData.add(speed);
+			} else {
+				Double speed = Double.valueOf(speedAndDistance[0]);
+				speedData.add(speed);
+			}
+		}
+	}
 
     public static final Parcelable.Creator<Vault> CREATOR = new Parcelable.Creator<Vault>() {
         public Vault createFromParcel(Parcel in) {
@@ -78,12 +109,18 @@ public class Vault implements Parcelable {
     };
 
 	public double[] getSpeedGraphData() {
-		double[] graphData = {0, 1, 3, 7, 10, 13, 16, 19, 21, 23, 25, 27, 30, 30.5, 31, 31, 31, 29, 27, 25, 20};
-		return graphData;		
+		double[] graphData = new double[speedData.size()];
+		for (int i = 0; i < speedData.size(); i++) {
+			graphData[i] = speedData.get(i);
+		}
+		return graphData;
 	}
 	
 	public double[] getDistanceGraphData() {
-		double[] graphData = {0, 1, 2, 3, 4, 5.5, 7, 9, 11, 12.5, 16, 20, 24, 28, 32, 36, 40, 44, 47, 49, 51};
-		return graphData;		
+		double[] graphData = new double[distanceData.size()];
+		for (int i = 0; i < distanceData.size(); i++) {
+			graphData[i] = distanceData.get(i);
+		}
+		return graphData;	
 	}
 }

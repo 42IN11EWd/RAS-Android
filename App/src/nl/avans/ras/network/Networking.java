@@ -11,6 +11,7 @@ import nl.avans.ras.model.VaultNumber;
 import nl.avans.ras.model.enums.AdapterKind;
 import nl.avans.ras.parser.JSONParser;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.util.Log;
 import nl.avans.ras.network.NetworkConnections;
 
@@ -34,7 +35,7 @@ public class Networking extends AbstractNetworking {
 	 **************/
 
 	public void getLogin(String username, String password) {
-		this.execute(new String[] {NetworkConnections.getLogin(username, password), "GET"});
+		this.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[] {NetworkConnections.getLogin(username, password), "GET"});
 	}
 	
 	/******************
@@ -45,7 +46,7 @@ public class Networking extends AbstractNetworking {
 		ArrayList<Gymnast> list = null;
 		
 		try {
-			String json = this.execute(new String[] {NetworkConnections.getAllGymnasts(), "GET"}).get();
+			String json = this.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[] {NetworkConnections.getAllGymnasts(), "GET"}).get();
 			list = JSONParser.parseAllGymnasts(json);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -60,7 +61,7 @@ public class Networking extends AbstractNetworking {
 		Gymnast gymnast = null;
 		
 		try {
-			String json = this.execute(new String[] {NetworkConnections.getSpecificGymnast(id), "GET"}).get();
+			String json = this.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[] {NetworkConnections.getSpecificGymnast(id), "GET"}).get();
 			gymnast = JSONParser.parseSpecificGymnast(json);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -79,7 +80,7 @@ public class Networking extends AbstractNetworking {
 		List<Location> list = null;
 		
 		try {
-			String json = this.execute(new String[] {NetworkConnections.getAllLocations(), "GET"}).get();
+			String json = this.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[] {NetworkConnections.getAllLocations(), "GET"}).get();
 			list = JSONParser.parseAllLocations(json);
 			
 		} catch (InterruptedException e) {
@@ -95,7 +96,7 @@ public class Networking extends AbstractNetworking {
 		Location location = null;
 		
 		try {
-			String json = this.execute(new String[] {NetworkConnections.getSpecificLocation(id), "GET"}).get();
+			String json = this.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[] {NetworkConnections.getSpecificLocation(id), "GET"}).get();
 			location = JSONParser.parseSpecificLocation(json);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -114,7 +115,7 @@ public class Networking extends AbstractNetworking {
 		ArrayList<Vault> list = null;
 		
 		try {
-			String json = this.execute(new String[] {NetworkConnections.getAllVaults(), "GET"}).get();
+			String json = this.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[] {NetworkConnections.getAllVaults(), "GET"}).get();
 			list = JSONParser.parseAllVaults(json);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -129,7 +130,7 @@ public class Networking extends AbstractNetworking {
 		ArrayList<Vault> list = null;
 		
 		try {
-			String json = this.execute(new String[] {NetworkConnections.getVaultsOfSpecificGymnast(id), "GET"}).get();
+			String json = this.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[] {NetworkConnections.getVaultsOfSpecificGymnast(id), "GET"}).get();
 			list = JSONParser.parseVaultsOfSpecificGymnast(json);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -144,7 +145,7 @@ public class Networking extends AbstractNetworking {
 		Vault vault = null;
 		
 		try {
-			String json = this.execute(new String[] {NetworkConnections.getSpecificVault(id), "GET"}).get();
+			String json = this.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[] {NetworkConnections.getSpecificVault(id), "GET"}).get();
 			vault = JSONParser.parseSpecificVault(json);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -163,7 +164,7 @@ public class Networking extends AbstractNetworking {
 		ArrayList<VaultNumber> list = null;
 		
 		try {
-			String json = this.execute(new String[] {NetworkConnections.getAllVaultnumber(), "GET"}).get();
+			String json = this.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[] {NetworkConnections.getAllVaultnumber(), "GET"}).get();
 			list = JSONParser.parseAllVaultNumber(json);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -178,7 +179,7 @@ public class Networking extends AbstractNetworking {
 		VaultNumber vaultNumber = null;
 		
 		try {
-			String json = this.execute(new String[] {NetworkConnections.getSpecificVaultnumber(id), "GET"}).get();
+			String json = this.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[] {NetworkConnections.getSpecificVaultnumber(id), "GET"}).get();
 			vaultNumber = JSONParser.parseSpecificVaultNumber(json);
 		} catch (InterruptedException e) {
 			e.printStackTrace();

@@ -1,6 +1,7 @@
 package nl.avans.ras.activities;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import nl.avans.ras.R;
 import nl.avans.ras.R.animator;
@@ -9,9 +10,11 @@ import nl.avans.ras.fragments.ListViewFragment;
 import nl.avans.ras.fragments.ProfileFragment;
 import nl.avans.ras.model.Gymnast;
 import nl.avans.ras.model.User;
+import nl.avans.ras.model.Vault;
 import nl.avans.ras.model.enums.AdapterKind;
 import nl.avans.ras.model.enums.UserType;
 import nl.avans.ras.network.Networking;
+import nl.avans.ras.services.CacheHandler;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Fragment;
@@ -55,16 +58,22 @@ public class ProfileActivity extends Activity implements View.OnClickListener,
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_profile);
 		
-//		// Get the list of gymnasts
-//		ArrayList<Gymnast> gymnastCollection = new Networking().getAllGymnasts();
-//		dbHelper.insertGymnastCollection(gymnastCollection);
-		
-		// Create a test list of gymnasts
-		ArrayList<Gymnast> tempList = new ArrayList<Gymnast>();
-		for(int i = 0; i < 50; i++) {
-			tempList.add(new Gymnast(i, "Epke", "Zonderland", "", 28, 173, 69, "Lemmer"));
+		// Get the list of gymnasts
+		if (dbHelper.hasGymnasts()) {
+//			if (CacheHandler.updateCache(dbHelper.getGymnastUpdateDate(), new Date())) {
+//				// Clear all the gymnasts
+//				dbHelper.clearGymnastCache();
+//				
+//				// Get the vaults
+//				ArrayList<Gymnast> gymnastCollection = new Networking().getAllGymnasts();
+//				dbHelper.insertGymnastCollection(gymnastCollection);
+//				dbHelper.insertUpdateGymnastDate(new Date());
+//			}
+		} else {
+			ArrayList<Gymnast> gymnastCollection = new Networking().getAllGymnasts();
+			dbHelper.insertGymnastCollection(gymnastCollection);
+			dbHelper.insertUpdateGymnastDate(new Date());
 		}
-		dbHelper.insertGymnastCollection(tempList);
 		
 		// Create a new fragment
 		Fragment fragment;

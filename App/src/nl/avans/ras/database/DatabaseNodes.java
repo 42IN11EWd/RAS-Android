@@ -8,10 +8,15 @@ public class DatabaseNodes {
 	// Tables
 	static final String VAULT_TABLE = "vault";
 	static final String GYMNAST_TABLE = "gymnast";
-	static final String REFRSH_DATE_TABLE = "refreshDate";
+	static final String REFRSH_GYMNAST_DATE_TABLE = "refreshGymnastDate";
+	static final String REFRSH_VAULT_DATE_TABLE = "refreshVaultDate";
 
 	// Common Columns
 	public static final String COL_ID = "_id";
+	
+	// Columns refresh date table
+	public static final String COL_GYMNAST_DATE = "gymnastDate";
+	public static final String COL_VAULT_DATE = "vaultDate";
 	
 	// Columns vault table
 	public static final String COL_VAULT_ID = "vaultId";
@@ -19,6 +24,7 @@ public class DatabaseNodes {
 	public static final String COL_D_SCORE = "dScore";
 	public static final String COL_E_SCORE = "eScore";
 	public static final String COL_DATE = "date";
+	public static final String COL_DATA = "data";
 	
 	// Columns gymnast table
 	public static final String COL_GYMNAST_ID = "gymnastId";
@@ -30,14 +36,18 @@ public class DatabaseNodes {
 	public static final String COL_WEIGHT = "weight";
 	public static final String COL_LOCATION = "location";
 	
+	
 	// Create table Strings
-	static final String CREATE_REFRSH_DATE_TABLE = 
-	"CREATE TABLE IF NOT EXISTS " + REFRSH_DATE_TABLE + " (" + COL_DATE + " LONG)";
+	static final String CREATE_REFRSH_GYMNAST_DATE_TABLE = 
+	"CREATE TABLE IF NOT EXISTS " + REFRSH_GYMNAST_DATE_TABLE + " (" + COL_GYMNAST_DATE + " LONG)";
+	
+	static final String CREATE_REFRSH_VAULT_DATE_TABLE = 
+	"CREATE TABLE IF NOT EXISTS " + REFRSH_VAULT_DATE_TABLE + " (" + COL_VAULT_DATE + " LONG)";
 	
 	static final String CREATE_VAULT_TABLE = 
 	"CREATE TABLE IF NOT EXISTS " + VAULT_TABLE + " (" + COL_ID + " INTEGER PRIMARY KEY, " + COL_VAULT_ID + " INTEGER, " 
 								  + COL_GYMNAST_ID + " INTEGER, "  + COL_VAULT_NAME + " TEXT, " + COL_D_SCORE + " DECIMAL, " 
-								  + COL_E_SCORE + " DECIMAL, " + COL_LOCATION + " TEXT, " + COL_DATE + " LONG)";
+								  + COL_E_SCORE + " DECIMAL, " + COL_LOCATION + " TEXT, " + COL_DATE + " LONG, " + COL_DATA + " TEXT)";
 	
 	static final String CREATE_GYMNAST_TABLE = 
 	"CREATE TABLE IF NOT EXISTS " + GYMNAST_TABLE + " (" + COL_ID + " TEXT, " 

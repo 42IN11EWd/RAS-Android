@@ -13,6 +13,8 @@ import nl.avans.ras.fragments.VaultFragment;
 import nl.avans.ras.model.Gymnast;
 import nl.avans.ras.model.Vault;
 import nl.avans.ras.model.enums.AdapterKind;
+import nl.avans.ras.network.Networking;
+import nl.avans.ras.services.CacheHandler;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -56,38 +58,26 @@ public class VaultActivity extends Activity implements ListViewFragment.OnDateSe
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_profile);
 		
-		// Create a test list of vaults
-		ArrayList<Vault> tempList = new ArrayList<Vault>();
-		int counter = 0;
-		for(int i = 0; i < 50; i++) {
-			for(int x = 0; x < 50; x++) {
-				String location;
-				String vaultType;
-				if (x < 10) {
-					vaultType = "Koprol";
-					location = "Flik Flak";
-				} else if (x < 20) {
-					vaultType = "Radslag";
-					location = "Eindhoven";
-				} else if (x < 30) {
-					vaultType = "Drie dubbele salto";
-					location = "Best";
-				} else if (x < 40) {
-					vaultType = "Arabier";
-					location = "Den Bosch";
-				} else {
-					vaultType = "Achterwaartse salto";
-					location = "Tilburg";
-				}
-				tempList.add(new Vault(counter, i, vaultType, 4.123, 8.0235, location, new Date()));
-				counter++;
-			}
-		}
-		dbHelper.insertVaultCollection(tempList);
-		
 		// Check if there is an gymnast set
 		Bundle bundle = getIntent().getExtras();
 		gymnastId = bundle.getInt(ProfileActivity.GYMNAST_ID);
+		
+		// Get the list of vaults
+		if (dbHelper.hasVaults(gymnastId)) {
+//			if (CacheHandler.updateCache(dbHelper.getVaultUpdateDate(), new Date())) {
+//				// Clear all the vaults
+//				dbHelper.clearVaultCache();
+//				
+//				// Get the vaults
+//				ArrayList<Vault> vaultCollection = new Networking().getVaultsOfSpecificGymnast(gymnastId);
+//				dbHelper.insertVaultCollection(vaultCollection);
+//				dbHelper.insertUpdateVaultDate(new Date());
+//			}
+		} else {
+			ArrayList<Vault> vaultCollection = new Networking().getVaultsOfSpecificGymnast(gymnastId);
+			dbHelper.insertVaultCollection(vaultCollection);
+			dbHelper.insertUpdateVaultDate(new Date());
+		}
 		
 		// Create a new profile list fragment
     	ListViewFragment vaultListFragment = new ListViewFragment();

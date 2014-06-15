@@ -36,9 +36,9 @@ public class JSONParser {
 					element.getString("surname"),
 					(element.isNull("surname_prefix")) ? null : element.getString("surname_prefix"),
 					0,
-					element.getInt("length"),
-					element.getInt("weight"),
-					null
+					(element.isNull("length")) ? 0 : element.getInt("length"),
+					(element.isNull("weight")) ? 0 : element.getInt("weight"),
+					""
 				);
 				
 				list.add(gymnast);
@@ -63,8 +63,8 @@ public class JSONParser {
 				element.getString("surname"),
 				(element.isNull("surname_prefix")) ? null : element.getString("surname_prefix"),
 				0,
-				element.getInt("length"),
-				element.getInt("weight"),
+				(element.isNull("length")) ? 0 : element.getInt("length"),
+				(element.isNull("weight")) ? 0 : element.getInt("weight"),
 				null
 			);
 		} catch (JSONException e) {
@@ -139,7 +139,8 @@ public class JSONParser {
 				(element.isNull("rating_official_D")) ? -1 : element.getDouble("rating_official_D"), 
 				(element.isNull("rating_official_E")) ? -1 : element.getDouble("rating_official_E"), 
 				null,
-				null
+				null,
+				(element.isNull("graphdata")) ? "" : element.getString("graphdata")
 			);
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -164,7 +165,8 @@ public class JSONParser {
 					(element.isNull("rating_official_D")) ? -1 : element.getDouble("rating_official_D"), 
 					(element.isNull("rating_official_E")) ? -1 : element.getDouble("rating_official_E"),
 					null,
-					null
+					null,
+					(element.isNull("graphdata")) ? "" : element.getString("graphdata")
 				);
 				
 				list.add(vault);
@@ -192,7 +194,8 @@ public class JSONParser {
 					(element.isNull("rating_official_D")) ? -1 : element.getDouble("rating_official_D"), 
 					(element.isNull("rating_official_E")) ? -1 : element.getDouble("rating_official_E"), 
 					null,
-					null
+					null,
+					(element.isNull("graphdata")) ? "" : element.getString("graphdata")
 				);
 				
 				list.add(vault);
