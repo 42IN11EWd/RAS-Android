@@ -6,6 +6,7 @@ import java.util.concurrent.ExecutionException;
 
 import nl.avans.ras.model.Gymnast;
 import nl.avans.ras.model.Location;
+import nl.avans.ras.model.User;
 import nl.avans.ras.model.Vault;
 import nl.avans.ras.model.VaultNumber;
 import nl.avans.ras.model.enums.AdapterKind;
@@ -17,25 +18,21 @@ import nl.avans.ras.network.NetworkConnections;
 
 public class Networking extends AbstractNetworking {
 
-	// Fields
-	private Context context;
-	private AdapterKind kind;
-	private ArrayList<String> allInfo;
-	
-	// Constructor
-	public Networking(Context context, AdapterKind kind) {
-		this.context = context;
-		this.kind = kind;
-	}
-	
-	public Networking() {}
-
 	/**************
 	 *    User    *
 	 **************/
 
-	public void getLogin(String username, String password) {
-		this.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[] {NetworkConnections.getLogin(username, password), "GET"});
+	public User getLogin(String username, String password) {
+		User user = null;
+		try {
+			String json = this.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[] {NetworkConnections.getLogin(username, password), "GET"}).get();
+			user = JSONParser.parseUser(json);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
+		return user;
 	}
 	
 	/******************
@@ -188,30 +185,5 @@ public class Networking extends AbstractNetworking {
 		}
 		
 		return vaultNumber;
-	}
-
-	@Override
-	protected void onPostExecute(String result) {
-		super.onPostExecute(result);
-		//JSONParser parser = new JSONParser();
-		// Check if the context is from the MainActivity
-//		if (context instanceof MainActivity) {
-//			MainActivity mActivity = (MainActivity) context;
-//			
-//			// Check which kind of data you have
-//			switch (kind) {
-//			case GAMES:
-//				mActivity.insertGamesIntoDatabase(parser.parseGames(result));
-//				break;
-//			case NEWS:
-//				mActivity.insertNewsIntoDatabase(parser.parseNews(result));
-//				break;
-//			default:
-//				break;
-//			}
-//		} else if(context instanceof UserActivity) {
-//			UserActivity mActivity = (UserActivity) context;
-//			mActivity.saveUserInfo(parser.parseUserInfo(result));
-//		}
 	}
 }

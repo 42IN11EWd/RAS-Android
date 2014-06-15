@@ -9,6 +9,7 @@ import nl.avans.ras.model.enums.UserType;
 import nl.avans.ras.network.Networking;
 import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -21,9 +22,9 @@ import android.widget.Toast;
 public class LoginActivity extends Activity implements LoginFragment.OnLoginListener {
 
 	// Fields
-	private DatabaseHelper dbHelper = new DatabaseHelper(this);
 	public static final String ACTIVE_USER = "active_user";
 	public static final String IS_LOGGED_IN	= "is_logged_in";
+	protected static ProgressDialog mProgressDialog;
 	private boolean doubleBackToExitPressedOnce = false;
 	
 	@Override
@@ -98,25 +99,27 @@ public class LoginActivity extends Activity implements LoginFragment.OnLoginList
 	@Override
 	public void OnLogin(String username, String password) {
 		// TODO: Check if the login credentials are correct
-		User user;
-		if (username.equals("gymnast")) {
-			user = new User(UserType.GYMNAST);
+//		mProgressDialog = ProgressDialog.show(LoginActivity.this, null, "Logging in...", false);
+//		User user = new Networking().getLogin(username, password);
+//		mProgressDialog.dismiss();
+		User user = new User(1, UserType.TRAINER, 10);
+		
+		if (user != null) {
+			// Set shared preferences for user name and profile url
+			SharedPreferences sharedPreferences =  this.getSharedPreferences(ACTIVE_USER, 0);
+							
+			// Save user data in model
+			SharedPreferences.Editor mEditor = sharedPreferences.edit();
+			mEditor.putInt(User.USER_TYPE, user.getType() == UserType.TRAINER ? 0 : 1);
+			mEditor.putInt(Gymnast.GYMNAST_ID, user.getGymnastId());
+			mEditor.putBoolean(IS_LOGGED_IN, true);
+			mEditor.commit();
+			
+			// Start the profile activity
+			startActivity(new Intent(this, ProfileActivity.class));
+			this.finish();
 		} else {
-			user = new User(UserType.TRAINER);
-		}
-		
-		// Set shared preferences for user name and profile url
-		SharedPreferences sharedPreferences =  this.getSharedPreferences(ACTIVE_USER, 0);
-						
-		// Save user data in model
-		SharedPreferences.Editor mEditor = sharedPreferences.edit();
-		mEditor.putInt(User.USER_TYPE, user.getType() == UserType.TRAINER ? 0 : 1);
-		mEditor.putInt(Gymnast.GYMNAST_ID, user.getGymnastId());
-		mEditor.putBoolean(IS_LOGGED_IN, true);
-		mEditor.commit();
-		
-		// Start the profile activity
-		startActivity(new Intent(this, ProfileActivity.class));
-		this.finish();
+			Toast.makeText(this, "Login failed...", Toast.LENGTH_SHORT).show();
+		}		
 	}
 }
