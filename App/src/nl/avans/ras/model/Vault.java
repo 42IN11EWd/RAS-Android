@@ -45,6 +45,9 @@ public class Vault implements Parcelable {
     	dScore = in.readDouble();
     	eScore = in.readDouble();
     	date = new Date(in.readLong());
+    	data = in.readString();
+    	
+    	convertDataToSpeedAndDistanceData();
     }
 	
 	// Getters
@@ -74,6 +77,7 @@ public class Vault implements Parcelable {
 		out.writeDouble(dScore);
 		out.writeDouble(eScore);
 		out.writeLong(date.getTime());
+		out.writeString(data);
 	}
 	
 	private void convertDataToSpeedAndDistanceData() {

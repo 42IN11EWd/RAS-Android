@@ -7,7 +7,7 @@ import nl.avans.ras.R;
 import nl.avans.ras.R.animator;
 import nl.avans.ras.database.DatabaseHelper;
 import nl.avans.ras.fragments.ListViewFragment;
-import nl.avans.ras.model.User;
+ import nl.avans.ras.model.User;
 import nl.avans.ras.model.Vault;
 import nl.avans.ras.model.enums.AdapterKind;
 import nl.avans.ras.model.enums.UserType;
