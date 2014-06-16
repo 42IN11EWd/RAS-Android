@@ -14,10 +14,10 @@ import nl.avans.ras.model.Gymnast;
 import nl.avans.ras.model.Vault;
 import nl.avans.ras.model.enums.AdapterKind;
 import nl.avans.ras.network.Networking;
-import nl.avans.ras.services.CacheHandler;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -41,6 +41,7 @@ public class VaultActivity extends Activity implements ListViewFragment.OnDateSe
 	private MenuItem filterMenuItem;
 	private boolean filterMenuItemVisible = false;
 	private String vaultTypeFilter = "", locationFilter = "";
+	protected static ProgressDialog mProgressDialog;
 	
 	// Getters
 	public int getGymnastId() {
@@ -69,24 +70,14 @@ public class VaultActivity extends Activity implements ListViewFragment.OnDateSe
 //				dbHelper.clearVaultCache();
 //				
 //				// Get the vaults
-//				ArrayList<Vault> vaultCollection = new Networking().getVaultsOfSpecificGymnast(gymnastId);
-//				dbHelper.insertVaultCollection(vaultCollection);
-//				dbHelper.insertUpdateVaultDate(new Date());
+//				new Networking().getVaultsOfSpecificGymnast(gymnastId);
+//			} else {
+			insertFragment();
 //			}
 		} else {
-			ArrayList<Vault> vaultCollection = new Networking().getVaultsOfSpecificGymnast(gymnastId);
-			dbHelper.insertVaultCollection(vaultCollection);
-			dbHelper.insertUpdateVaultDate(new Date());
+			mProgressDialog = ProgressDialog.show(this, null, "Loading Vaults...", false);
+			new Networking(this).getVaultsOfSpecificGymnast(gymnastId);
 		}
-		
-		// Create a new profile list fragment
-    	ListViewFragment vaultListFragment = new ListViewFragment();
-    	vaultListFragment.setAdapterKind(AdapterKind.DATES);
-     	
-     	// Replace the fragment
-		FragmentTransaction transaction = getFragmentManager().beginTransaction();
-     	transaction.replace(R.id.fragment_container, vaultListFragment);
-     	transaction.commit();
      	
      	// Set the back button in the actionbar
      	getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -128,6 +119,26 @@ public class VaultActivity extends Activity implements ListViewFragment.OnDateSe
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	public void insertVaults(ArrayList<Vault> vaultCollection) {
+		mProgressDialog.dismiss();
+		
+		dbHelper.insertVaultCollection(vaultCollection);
+		dbHelper.insertUpdateVaultDate(new Date());
+		
+		insertFragment();
+	}
+	
+	private void insertFragment() {
+		// Create a new profile list fragment
+    	ListViewFragment vaultListFragment = new ListViewFragment();
+    	vaultListFragment.setAdapterKind(AdapterKind.DATES);
+     	
+     	// Replace the fragment
+		FragmentTransaction transaction = getFragmentManager().beginTransaction();
+     	transaction.replace(R.id.fragment_container, vaultListFragment);
+     	transaction.commit();
 	}
 	
 	@Override

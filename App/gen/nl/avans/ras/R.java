@@ -390,19 +390,20 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int filter_button_background=0x7f020004;
         public static final int ic_drawer=0x7f020005;
         public static final int ic_launcher=0x7f020006;
-        public static final int icon_right=0x7f020007;
-        public static final int innosportlab_logo=0x7f020008;
-        public static final int orange_circle=0x7f020009;
-        public static final int splashscreen_image=0x7f02000a;
-        public static final int test=0x7f02000b;
-        public static final int title_dialog=0x7f02000c;
-        public static final int vpi__tab_indicator=0x7f02000d;
-        public static final int vpi__tab_selected_focused_holo=0x7f02000e;
-        public static final int vpi__tab_selected_holo=0x7f02000f;
-        public static final int vpi__tab_selected_pressed_holo=0x7f020010;
-        public static final int vpi__tab_unselected_focused_holo=0x7f020011;
-        public static final int vpi__tab_unselected_holo=0x7f020012;
-        public static final int vpi__tab_unselected_pressed_holo=0x7f020013;
+        public static final int icon=0x7f020007;
+        public static final int icon_right=0x7f020008;
+        public static final int innosportlab_logo=0x7f020009;
+        public static final int orange_circle=0x7f02000a;
+        public static final int splashscreen_image=0x7f02000b;
+        public static final int test=0x7f02000c;
+        public static final int title_dialog=0x7f02000d;
+        public static final int vpi__tab_indicator=0x7f02000e;
+        public static final int vpi__tab_selected_focused_holo=0x7f02000f;
+        public static final int vpi__tab_selected_holo=0x7f020010;
+        public static final int vpi__tab_selected_pressed_holo=0x7f020011;
+        public static final int vpi__tab_unselected_focused_holo=0x7f020012;
+        public static final int vpi__tab_unselected_holo=0x7f020013;
+        public static final int vpi__tab_unselected_pressed_holo=0x7f020014;
     }
     public static final class id {
         public static final int action_settings=0x7f060043;
@@ -592,7 +593,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
          */
         public static final int AppBaseTheme=0x7f0b0005;
         /**  Application theme. 
- All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f0b0006;
         public static final int TextAppearance_TabPageIndicator=0x7f0b0003;

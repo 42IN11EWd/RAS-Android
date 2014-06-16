@@ -15,7 +15,9 @@ public class User {
 	}
 	
 	public User(int id, UserType type, int gymnastId) {
+		this.id = id;
 		this.type = type;
+		this.gymnastId = gymnastId;
 	}
 	
 	// Getters

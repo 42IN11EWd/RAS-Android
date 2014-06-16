@@ -99,11 +99,12 @@ public class LoginActivity extends Activity implements LoginFragment.OnLoginList
 	@Override
 	public void OnLogin(String username, String password) {
 		// TODO: Check if the login credentials are correct
-//		mProgressDialog = ProgressDialog.show(LoginActivity.this, null, "Logging in...", false);
-//		User user = new Networking().getLogin(username, password);
-//		mProgressDialog.dismiss();
-		User user = new User(1, UserType.TRAINER, 10);
-		
+		mProgressDialog = ProgressDialog.show(this, null, "Logging in...", false);
+		new Networking(this).getLogin(username, password);
+	}
+	
+	public void Login(User user) {
+		mProgressDialog.dismiss();
 		if (user != null) {
 			// Set shared preferences for user name and profile url
 			SharedPreferences sharedPreferences =  this.getSharedPreferences(ACTIVE_USER, 0);
@@ -120,6 +121,6 @@ public class LoginActivity extends Activity implements LoginFragment.OnLoginList
 			this.finish();
 		} else {
 			Toast.makeText(this, "Login failed...", Toast.LENGTH_SHORT).show();
-		}		
+		}
 	}
 }

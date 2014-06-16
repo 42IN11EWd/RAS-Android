@@ -1,7 +1,7 @@
 package nl.avans.ras.network;
 
 public class NetworkConnections {
-	private static final String BASE_URL = "http://192.168.1.113:3000/";
+	private static final String BASE_URL = "http://145.102.84.78:3000/";
 
 	/**************
 	 *    User    *

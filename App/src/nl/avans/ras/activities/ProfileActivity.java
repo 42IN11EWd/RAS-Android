@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -43,6 +44,7 @@ public class ProfileActivity extends Activity implements View.OnClickListener,
 	private boolean doubleBackToExitPressedOnce = false;
 	private UserType type;
 	public static final String GYMNAST_ID = "gymnast_id";
+	protected static ProgressDialog mProgressDialog;
 	
 	// Navigation drawer
 	private DrawerLayout mDrawerLayout;
@@ -66,39 +68,13 @@ public class ProfileActivity extends Activity implements View.OnClickListener,
 //				
 //				// Get the vaults
 //				ArrayList<Gymnast> gymnastCollection = new Networking().getAllGymnasts();
-//				dbHelper.insertGymnastCollection(gymnastCollection);
-//				dbHelper.insertUpdateGymnastDate(new Date());
+//			} else {
+			insertFragment();
 //			}
 		} else {
-			ArrayList<Gymnast> gymnastCollection = new Networking().getAllGymnasts();
-			dbHelper.insertGymnastCollection(gymnastCollection);
-			dbHelper.insertUpdateGymnastDate(new Date());
+			mProgressDialog = ProgressDialog.show(this, null, "Loading Gymnasts...", false);
+			new Networking(this).getAllGymnasts();
 		}
-		
-		// Create a new fragment
-		Fragment fragment;
-		
-		// Check if the user is a gymnast or a trainer
-		SharedPreferences sharedPreferences =  this.getSharedPreferences(LoginActivity.ACTIVE_USER, 0);
-		type = sharedPreferences.getInt(User.USER_TYPE, 1) == 0 ? UserType.TRAINER : UserType.GYMNAST;
-		
-		if (type == UserType.GYMNAST) {
-			// Create a new profile list fragment
-	    	ProfileFragment profileFragment = new ProfileFragment();
-	    	Gymnast gymnast = dbHelper.getGymnast(sharedPreferences.getInt(Gymnast.GYMNAST_ID, 0));
-	    	profileFragment.setGymnast(gymnast);
-	    	fragment = profileFragment;
-		} else {
-			// Create a new profile list fragment
-	    	ListViewFragment profileListFragment = new ListViewFragment();
-	    	profileListFragment.setAdapterKind(AdapterKind.PROFILES);
-	     	fragment = profileListFragment;
-		}
-     	
-     	// Replace the fragment
-		FragmentTransaction transaction = getFragmentManager().beginTransaction();
-     	transaction.replace(R.id.fragment_container, fragment);
-     	transaction.commit();
      	
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
@@ -127,6 +103,9 @@ public class ProfileActivity extends Activity implements View.OnClickListener,
         // Set the drawer toggle as the DrawerListener
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         setMenu();
+        
+        if (mProgressDialog != null && mProgressDialog.isShowing())
+        	mProgressDialog.dismiss();
 	}
 	
 	@Override
@@ -221,6 +200,43 @@ public class ProfileActivity extends Activity implements View.OnClickListener,
 		sharedPreferences.edit().clear().commit();
 		startActivity(new Intent(this, LoginActivity.class));
 		this.finish();
+	}
+	
+	public void insertUsers(ArrayList<Gymnast> gymnastCollection) {
+		if (mProgressDialog != null && mProgressDialog.isShowing())
+        	mProgressDialog.dismiss();
+		
+		dbHelper.insertGymnastCollection(gymnastCollection);
+		dbHelper.insertUpdateGymnastDate(new Date());
+		
+		insertFragment();
+	}
+	
+	private void insertFragment() {
+		// Create a new fragment
+		Fragment fragment;
+		
+		// Check if the user is a gymnast or a trainer
+		SharedPreferences sharedPreferences =  this.getSharedPreferences(LoginActivity.ACTIVE_USER, 0);
+		type = sharedPreferences.getInt(User.USER_TYPE, 1) == 0 ? UserType.TRAINER : UserType.GYMNAST;
+				
+		if (type == UserType.GYMNAST) {
+			// Create a new profile list fragment
+		   	ProfileFragment profileFragment = new ProfileFragment();
+		   	Gymnast gymnast = dbHelper.getGymnast(sharedPreferences.getInt(Gymnast.GYMNAST_ID, 0));
+		   	profileFragment.setGymnast(gymnast);
+		   	fragment = profileFragment;
+		} else {
+			// Create a new profile list fragment
+		   	ListViewFragment profileListFragment = new ListViewFragment();
+		   	profileListFragment.setAdapterKind(AdapterKind.PROFILES);
+		   	fragment = profileListFragment;
+		}
+		     	
+		// Replace the fragment
+		FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.replace(R.id.fragment_container, fragment);
+		transaction.commit();
 	}
 	
 	@Override

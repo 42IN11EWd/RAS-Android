@@ -109,16 +109,16 @@ public class Vault implements Parcelable {
     };
 
 	public double[] getSpeedGraphData() {
-		double[] graphData = new double[speedData.size()];
-		for (int i = 0; i < speedData.size(); i++) {
+		double[] graphData = new double[speedData != null ? speedData.size() : 0];
+		for (int i = 0; i < graphData.length; i++) {
 			graphData[i] = speedData.get(i);
 		}
 		return graphData;
 	}
 	
 	public double[] getDistanceGraphData() {
-		double[] graphData = new double[distanceData.size()];
-		for (int i = 0; i < distanceData.size(); i++) {
+		double[] graphData = new double[distanceData != null ? distanceData.size() : 0];
+		for (int i = 0; i < graphData.length; i++) {
 			graphData[i] = distanceData.get(i);
 		}
 		return graphData;	
