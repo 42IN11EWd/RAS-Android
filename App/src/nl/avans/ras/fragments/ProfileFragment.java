@@ -89,7 +89,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 		
 		// Set the content of the containers
 		nameContainer.setText(gymnast.getName());
-		ageContainer.setText("" + gymnast.getAge());
+		ageContainer.setText("" + gymnast.getBirthday());
 		lengthContainer.setText(gymnast.getLength() + " cm");
 		weightContainer.setText(gymnast.getWeight() + " kg");
 		genderContainer.setText("Man");

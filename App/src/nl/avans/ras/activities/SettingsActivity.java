@@ -2,12 +2,16 @@ package nl.avans.ras.activities;
 
 import nl.avans.ras.R;
 import nl.avans.ras.fragments.SettingsFragment;
+import nl.avans.ras.model.Gymnast;
+import nl.avans.ras.network.Networking;
 import nl.avans.ras.services.MD5;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class SettingsActivity extends Activity implements SettingsFragment.OnSavePasswordListener {
 
@@ -46,10 +50,12 @@ public class SettingsActivity extends Activity implements SettingsFragment.OnSav
 
 	@Override
 	public void OnSavePassword(String password) {
-		// Hash the password with a salt
-		String salt = MD5.hashString("rasavans"); // add a user id?
-		String hashedPassword = MD5.hashString(password + salt);
+		SharedPreferences sharedPreferences =  this.getSharedPreferences(LoginActivity.ACTIVE_USER, 0);
 		
-		// TODO: save the password through the rest API.
+		// Hash the password with a salt
+		String hashedPassword = MD5.hashString(MD5.SALT + password);
+		
+		new Networking(this).changePassword(sharedPreferences.getInt(Gymnast.GYMNAST_ID, 0), hashedPassword);
+		Toast.makeText(this, "The password has been changed.", Toast.LENGTH_SHORT).show();
 	}
 }

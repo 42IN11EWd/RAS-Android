@@ -34,6 +34,10 @@ public class Networking extends AbstractNetworking {
 		this.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[] {NetworkConnections.getLogin(username, password), "GET"});
 	}
 	
+	public void changePassword(int gymnast_id, String password) {
+		this.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[] {NetworkConnections.changePassword(gymnast_id, password), "PUT"});
+	}
+	
 	/******************
 	 *    Gymnasts    *
 	 ******************/

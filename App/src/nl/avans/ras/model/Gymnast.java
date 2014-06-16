@@ -1,5 +1,7 @@
 package nl.avans.ras.model;
 
+import java.util.Date;
+
 public class Gymnast {
 
 	// Fields
@@ -7,16 +9,17 @@ public class Gymnast {
 	private int id;
 	private String firstname, surname, surnamePrefix, name;
 	private String location;
-	private int age, length, weight;
+	private Date birthday;
+	private int length, weight;
 	
 	// Constructor
 	public Gymnast(int id, String firstname, String surname, String surnamePrefix, 
-				   int age, int length, int weight, String location) {
+				   Date birthday, int length, int weight, String location) {
 		this.id = id;
 		this.firstname = firstname;
 		this.surname = surname;
 		this.surnamePrefix = surnamePrefix;
-		this.age = age;
+		this.birthday = birthday;
 		this.length = length;
 		this.weight = weight;
 		this.location = location;
@@ -30,7 +33,7 @@ public class Gymnast {
 	
 	// Getters
 	public int 		getId() 			{ return id; }
-	public int 		getAge() 			{ return age; }
+	public Date		getBirthday() 		{ return birthday; }
 	public int 		getLength() 		{ return length; }
 	public int 		getWeight() 		{ return weight; }
 	public String 	getFirstname() 		{ return firstname; }

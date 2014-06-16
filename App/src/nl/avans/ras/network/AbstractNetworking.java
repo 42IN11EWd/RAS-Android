@@ -32,6 +32,8 @@ public abstract class AbstractNetworking extends AsyncTask<String, String, Strin
 				response = httpclient.execute(new HttpGet(url));
 			} else if (httpType.equals("GET")) {
 				response = httpclient.execute(new HttpGet(url));
+			} else if (httpType.equals("POST")) {
+				response = httpclient.execute(new HttpGet(url));
 			}
 			
 			if(response != null) {

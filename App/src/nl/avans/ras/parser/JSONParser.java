@@ -37,7 +37,7 @@ public class JSONParser {
 					element.getString(NODE_NAME),
 					element.getString(NODE_SURNAME),
 					(element.isNull(NODE_SURNAME_PREFIX)) ? null : element.getString(NODE_SURNAME_PREFIX),
-					0,
+					null,
 					(element.isNull(NODE_LENGTH)) ? 0 : element.getInt(NODE_LENGTH),
 					(element.isNull(NODE_WEIGHT)) ? 0 : element.getInt(NODE_WEIGHT),
 					""

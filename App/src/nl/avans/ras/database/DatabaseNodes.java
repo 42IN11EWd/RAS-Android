@@ -31,7 +31,7 @@ public class DatabaseNodes {
 	public static final String COL_FIRSTNAME = "firstname";
 	public static final String COL_SURNAME = "surname";
 	public static final String COL_SURNAME_PREFIX = "surnamePrefix";
-	public static final String COL_AGE = "age";
+	public static final String COL_BIRTHDAY = "birthday";
 	public static final String COL_LENGTH = "length";
 	public static final String COL_WEIGHT = "weight";
 	public static final String COL_LOCATION = "location";
@@ -52,6 +52,6 @@ public class DatabaseNodes {
 	static final String CREATE_GYMNAST_TABLE = 
 	"CREATE TABLE IF NOT EXISTS " + GYMNAST_TABLE + " (" + COL_ID + " TEXT, " 
 					    		  + COL_GYMNAST_ID + " INTEGER, " + COL_FIRSTNAME + " TEXT, " + COL_SURNAME + " TEXT, " 
-					    		  + COL_SURNAME_PREFIX + " TEXT, " + COL_AGE + " LONG, " + COL_LENGTH + " LONG, " + COL_WEIGHT + " LONG, "
+					    		  + COL_SURNAME_PREFIX + " TEXT, " + COL_BIRTHDAY + " LONG, " + COL_LENGTH + " LONG, " + COL_WEIGHT + " LONG, "
 					    		  + COL_LOCATION + " TEXT)";
 }

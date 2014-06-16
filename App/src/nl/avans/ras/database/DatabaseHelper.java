@@ -56,7 +56,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             statement.bindString(3, firstname != null && !firstname.isEmpty() ? firstname : "");
             statement.bindString(4, surname != null && !surname.isEmpty() ? surname : "");
             statement.bindString(5, surnamePrefix != null && !surnamePrefix.isEmpty() ? surnamePrefix : "");
-            statement.bindLong(6, gymnast.getAge());
+            statement.bindLong(6, gymnast.getBirthday()!= null ? gymnast.getBirthday().getTime() : new Date().getTime());
             statement.bindLong(7, gymnast.getLength());
             statement.bindLong(8, gymnast.getWeight());
             statement.bindString(9, gymnast.getLocation());
@@ -157,11 +157,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			String firstname = cursor.getString(cursor.getColumnIndex(COL_FIRSTNAME));
 			String surname = cursor.getString(cursor.getColumnIndex(COL_SURNAME));
 			String surnamePrefix = cursor.getString(cursor.getColumnIndex(COL_SURNAME_PREFIX));
-			int age = cursor.getInt(cursor.getColumnIndex(COL_AGE));
+			Date birthday = new Date(cursor.getLong(cursor.getColumnIndex(COL_BIRTHDAY)));
 			int length = cursor.getInt(cursor.getColumnIndex(COL_LENGTH));
 			int weight = cursor.getInt(cursor.getColumnIndex(COL_WEIGHT));
 			String location = cursor.getString(cursor.getColumnIndex(COL_LOCATION));
-			mGymnast = new Gymnast(gymnastId, firstname, surname, surnamePrefix, age, length, weight, location);
+			mGymnast = new Gymnast(gymnastId, firstname, surname, surnamePrefix, birthday, length, weight, location);
 		}
 		cursor.close();
 		// Return the game
