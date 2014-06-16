@@ -206,7 +206,7 @@ public class JSONParser {
 				user = new User(
 					element.getInt(NODE_USER_ID),
 					userType,
-					element.getInt(NODE_GYMNAST_ID)
+					(element.isNull(NODE_GYMNAST_ID)) ? -1 : element.getInt(NODE_GYMNAST_ID)
 				);
 				
 				Log.i("USER", user.toString());

@@ -159,8 +159,6 @@ public class CompareActivity extends Activity implements ListViewFragment.OnProf
      	transaction.replace(R.id.fragment_container, vaultListFragment);
      	transaction.addToBackStack(null);
      	transaction.commit();
-     	
-     	// TODO: Add compare menu item
 	}
 
 	@Override

@@ -11,14 +11,17 @@ import nl.avans.ras.fragments.ListFilterDialogFragment;
 import nl.avans.ras.fragments.ListViewFragment;
 import nl.avans.ras.fragments.VaultFragment;
 import nl.avans.ras.model.Gymnast;
+import nl.avans.ras.model.User;
 import nl.avans.ras.model.Vault;
 import nl.avans.ras.model.enums.AdapterKind;
+import nl.avans.ras.model.enums.UserType;
 import nl.avans.ras.network.Networking;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
@@ -63,6 +66,10 @@ public class VaultActivity extends Activity implements ListViewFragment.OnDateSe
 		Bundle bundle = getIntent().getExtras();
 		gymnastId = bundle.getInt(ProfileActivity.GYMNAST_ID);
 		
+		// Check if the user is a gymnast or a trainer
+		SharedPreferences sharedPreferences =  this.getSharedPreferences(LoginActivity.ACTIVE_USER, 0);
+		UserType type = sharedPreferences.getInt(User.USER_TYPE, 1) == 0 ? UserType.TRAINER : UserType.GYMNAST;
+		
 		// Get the list of vaults
 		if (dbHelper.hasVaults(gymnastId)) {
 //			if (CacheHandler.updateCache(dbHelper.getVaultUpdateDate(), new Date())) {
@@ -70,13 +77,21 @@ public class VaultActivity extends Activity implements ListViewFragment.OnDateSe
 //				dbHelper.clearVaultCache();
 //				
 //				// Get the vaults
-//				new Networking().getVaultsOfSpecificGymnast(gymnastId);
+//				if (type == UserType.GYMNAST) {
+//					new Networking(this).getVaultsOfSpecificGymnast(gymnastId);
+//				} else if (type == UserType.TRAINER) {
+//					new Networking(this).getVaultsOfSpecificGymnast(gymnastId);
+//				}
 //			} else {
 			insertFragment();
 //			}
 		} else {
 			mProgressDialog = ProgressDialog.show(this, null, "Loading Vaults...", false);
-			new Networking(this).getVaultsOfSpecificGymnast(gymnastId);
+			if (type == UserType.GYMNAST) {
+				new Networking(this).getVaultsOfSpecificGymnast(gymnastId);
+			} else if (type == UserType.TRAINER) {
+				new Networking(this).getVaultsOfSpecificGymnast(gymnastId);
+			}
 		}
      	
      	// Set the back button in the actionbar
