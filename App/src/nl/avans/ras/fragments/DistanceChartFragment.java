@@ -1,6 +1,8 @@
 package nl.avans.ras.fragments;
 
 import nl.avans.ras.R;
+import nl.avans.ras.database.DatabaseHelper;
+import nl.avans.ras.model.Gymnast;
 import nl.avans.ras.model.Vault;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -30,7 +32,8 @@ public class DistanceChartFragment extends ChartFragment {
 			for (int y = 0; y < graphData.length; y++) {
 				dataContainer[y] = new GraphViewData(y, graphData[y] + (x * 5));
 			}
-			GraphViewSeries serie = new GraphViewSeries(dataContainer);
+			Gymnast gymnast = new DatabaseHelper(getActivity()).getGymnast(vaultCollection.get(x).getGymnastId());
+			GraphViewSeries serie = new GraphViewSeries(gymnast.getName() + ", " + vaultCollection.get(x).getName(), null, dataContainer);
 			serie.getStyle().color = getColor(x) != -1 ? getColor(x) : Color.BLUE;
 			graphView.addSeries(serie);
 		}
@@ -39,14 +42,14 @@ public class DistanceChartFragment extends ChartFragment {
 	  	graphView.getGraphViewStyle().setGridColor(Color.BLACK);
 	  	graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.BLACK);
 	  	graphView.getGraphViewStyle().setVerticalLabelsColor(Color.BLACK);
-	  	graphView.getGraphViewStyle().setTextSize(getResources().getDimension(R.dimen.medium_font));
+	  	graphView.getGraphViewStyle().setTextSize(getResources().getDimension(R.dimen.small_font));
 	  	graphView.getGraphViewStyle().setNumHorizontalLabels(5);
 	  	graphView.getGraphViewStyle().setNumVerticalLabels(10);
 	  	  
 	  	if (vaultCollection != null && vaultCollection.size() > 1) {
     		graphView.setShowLegend(true);
     		graphView.setLegendAlign(LegendAlign.BOTTOM);
-        	graphView.setLegendWidth(200);
+        	graphView.setLegendWidth(300);
     	}
 	  	
 	  	RelativeLayout layout = (RelativeLayout) getView().findViewById(R.id.graph_container);  

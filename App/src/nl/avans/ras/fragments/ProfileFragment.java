@@ -96,13 +96,14 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 		lengthContainer.setText(gymnast.getLength() + " cm");
 		weightContainer.setText(gymnast.getWeight() + " kg");
 		genderContainer.setText("Man");
-		traingLocationContainer.setText(gymnast.getLocation());
+		traingLocationContainer.setText(gymnast.getTurnbondId());
 		
 		// Set the profile image
 		ImageView profileImageContainer = (ImageView) getActivity().findViewById(R.id.profile_image);
-		byte[] blob = gymnast.getProfileImage();
-		Bitmap profileImage = BitmapFactory.decodeByteArray(blob, 0, blob.length);
-		profileImageContainer.setImageBitmap(profileImage);
+		profileImageContainer.setVisibility(View.GONE);
+//		byte[] blob = gymnast.getProfileImage();
+//		Bitmap profileImage = BitmapFactory.decodeByteArray(blob, 0, blob.length);
+//		profileImageContainer.setImageBitmap(profileImage);
 	}
 
 	@Override

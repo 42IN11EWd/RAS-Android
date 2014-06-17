@@ -108,7 +108,7 @@
 			 
 			        <TextView
 			            android:id="@+id/profile_training_location_title"
-			            android:text="@string/location_title"
+			            android:text="@string/turnbond_id_title"
 			            style="@style/table_row_title_style" />
 			 
 			        <TextView

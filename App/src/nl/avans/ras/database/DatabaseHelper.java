@@ -47,7 +47,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteStatement statement = db.compileStatement(sql);
         db.beginTransaction();
         for (Gymnast gymnast: gymnastCollection) {
-        	String firstname = gymnast.getSurnamePrefix();
+        	String firstname = gymnast.getFirstname();
         	String surname = gymnast.getSurname();
         	String surnamePrefix = gymnast.getSurnamePrefix();
         	
@@ -59,9 +59,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             statement.bindLong(6, gymnast.getBirthday()!= null ? gymnast.getBirthday().getTime() : new Date().getTime());
             statement.bindLong(7, gymnast.getLength());
             statement.bindLong(8, gymnast.getWeight());
-            statement.bindString(9, gymnast.getLocation());
-            statement.bindBlob(10, gymnast.getProfileImage());
-            statement.bindBlob(11, gymnast.getThumbnail());
+            statement.bindString(9, gymnast.getTurnbondId());
+//            statement.bindBlob(10, gymnast.getProfileImage());
+//            statement.bindBlob(11, gymnast.getThumbnail());
             statement.execute();
         }
         db.setTransactionSuccessful();
@@ -163,9 +163,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			int length = cursor.getInt(cursor.getColumnIndex(COL_LENGTH));
 			int weight = cursor.getInt(cursor.getColumnIndex(COL_WEIGHT));
 			String location = cursor.getString(cursor.getColumnIndex(COL_LOCATION));
-			byte[] profileImage = null;
-			byte[] thumbnail = null;
-			mGymnast = new Gymnast(gymnastId, firstname, surname, surnamePrefix, birthday, length, weight, location, profileImage, thumbnail);
+			byte[] profileImage = cursor.getBlob(cursor.getColumnIndex(COL_PROFILE_IMAGE));
+//			byte[] thumbnail = cursor.getBlob(cursor.getColumnIndex(COL_THUMBNAIL));
+			mGymnast = new Gymnast(gymnastId, firstname, surname, surnamePrefix, birthday, length, weight, location, profileImage, new byte[0]);
 		}
 		cursor.close();
 		// Return the game

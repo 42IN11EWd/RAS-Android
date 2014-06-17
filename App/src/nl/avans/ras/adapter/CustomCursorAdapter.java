@@ -154,7 +154,7 @@ public class CustomCursorAdapter extends CursorAdapter {
 		String firstname = cursor.getString(cursor.getColumnIndex(COL_FIRSTNAME));
 		String surname = cursor.getString(cursor.getColumnIndex(COL_SURNAME));
 		String surnamePrefix = cursor.getString(cursor.getColumnIndex(COL_SURNAME_PREFIX));
-		byte[] blob = cursor.getBlob(cursor.getColumnIndex(COL_THUMBNAIL));
+//		byte[] blob = cursor.getBlob(cursor.getColumnIndex(COL_THUMBNAIL));
 		
 		if (surnamePrefix != null && !surnamePrefix.isEmpty()) {
 			title.setText(firstname + " " + surnamePrefix + " " + surname);
@@ -162,11 +162,11 @@ public class CustomCursorAdapter extends CursorAdapter {
 			title.setText(firstname + " " + surname);
 		}
 		
-		if (blob != null) {
-			image.setImageBitmap(BitmapFactory.decodeByteArray(blob , 0, blob.length));
-		} else {
+//		if (blob != null) {
+//			image.setImageBitmap(BitmapFactory.decodeByteArray(blob , 0, blob.length));
+//		} else {
 			image.setImageResource(R.drawable.no_image_small);
-		}
+//		}
 	}
 	
 	private void setVaultCell(Cursor cursor, TextView title, TextView subtitle) {

@@ -21,6 +21,7 @@
     <string name="weight_title">Weight</string>
     <string name="gender_title">Gender</string>
     <string name="location_title">Location</string>
+    <string name="turnbond_id_title">Turnbond ID</string>
     <string name="vault_button_title">See vaults</string>
     
     <!-- Vault page -->

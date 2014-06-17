@@ -8,14 +8,14 @@ public class Gymnast {
 	public static final String GYMNAST_ID = "gymnast_id";
 	private int id;
 	private String firstname, surname, surnamePrefix, name;
-	private String location;
+	private String turnbondId;
 	private Date birthday;
 	private int length, weight;
 	private byte[] profileImage, thumbnail;
 	
 	// Constructor
 	public Gymnast(int id, String firstname, String surname, String surnamePrefix, 
-				   Date birthday, int length, int weight, String location, byte[] profileImage, byte[] thumbnail) {
+				   Date birthday, int length, int weight, String turnbondId, byte[] profileImage, byte[] thumbnail) {
 		this.id = id;
 		this.firstname = firstname;
 		this.surname = surname;
@@ -23,7 +23,7 @@ public class Gymnast {
 		this.birthday = birthday;
 		this.length = length;
 		this.weight = weight;
-		this.location = location;
+		this.turnbondId = turnbondId;
 		this.profileImage = profileImage;
 		this.thumbnail = thumbnail;
 		
@@ -43,7 +43,7 @@ public class Gymnast {
 	public String 	getSurname() 		{ return surname; }
 	public String 	getSurnamePrefix()	{ return surnamePrefix; }
 	public String 	getName() 			{ return name; }
-	public String 	getLocation() 		{ return location; }
+	public String 	getTurnbondId()		{ return turnbondId; }
 	public byte[] 	getProfileImage() 	{ return profileImage; }
 	public byte[] 	getThumbnail() 		{ return thumbnail; }
 }

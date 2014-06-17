@@ -513,29 +513,29 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int action_settings=0x7f0c0002;
         public static final int age_title=0x7f0c0009;
         public static final int app_name=0x7f0c0000;
-        public static final int cancel=0x7f0c0024;
-        public static final int change_password_title=0x7f0c001f;
-        public static final int chart_button_title=0x7f0c0015;
+        public static final int cancel=0x7f0c0025;
+        public static final int change_password_title=0x7f0c0020;
+        public static final int chart_button_title=0x7f0c0016;
         /**  Chart page 
          */
-        public static final int chart_title=0x7f0c0017;
-        public static final int clear_button_title=0x7f0c0026;
-        public static final int compare_button_title=0x7f0c0014;
+        public static final int chart_title=0x7f0c0018;
+        public static final int clear_button_title=0x7f0c0027;
+        public static final int compare_button_title=0x7f0c0015;
         /**  Compare page 
          */
-        public static final int compare_title=0x7f0c0016;
-        public static final int confirm_new_password=0x7f0c001d;
-        public static final int d_score_title=0x7f0c0012;
-        public static final int divider=0x7f0c0025;
+        public static final int compare_title=0x7f0c0017;
+        public static final int confirm_new_password=0x7f0c001e;
+        public static final int d_score_title=0x7f0c0013;
+        public static final int divider=0x7f0c0026;
         public static final int drawer_close=0x7f0c0004;
         /**  Drawer layout 
          */
         public static final int drawer_open=0x7f0c0003;
-        public static final int duration_title=0x7f0c0010;
-        public static final int e_score_title=0x7f0c0011;
+        public static final int duration_title=0x7f0c0011;
+        public static final int e_score_title=0x7f0c0012;
         /**  Filter dialog page 
          */
-        public static final int filter_title=0x7f0c0022;
+        public static final int filter_title=0x7f0c0023;
         public static final int gender_title=0x7f0c000c;
         public static final int hello_world=0x7f0c0001;
         public static final int length_title=0x7f0c000a;
@@ -547,25 +547,26 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int login_username=0x7f0c0006;
         /**  Menu page 
          */
-        public static final int menu_logout_title=0x7f0c0020;
-        public static final int menu_settings_title=0x7f0c0021;
-        public static final int new_password=0x7f0c001c;
-        public static final int new_password_title=0x7f0c001b;
-        public static final int ok=0x7f0c0023;
-        public static final int old_password=0x7f0c001a;
-        public static final int old_password_title=0x7f0c0019;
+        public static final int menu_logout_title=0x7f0c0021;
+        public static final int menu_settings_title=0x7f0c0022;
+        public static final int new_password=0x7f0c001d;
+        public static final int new_password_title=0x7f0c001c;
+        public static final int ok=0x7f0c0024;
+        public static final int old_password=0x7f0c001b;
+        public static final int old_password_title=0x7f0c001a;
         /**  Profile page 
          */
         public static final int profile_title=0x7f0c0008;
-        public static final int save_new_password_title=0x7f0c001e;
+        public static final int save_new_password_title=0x7f0c001f;
         /**  Settings page 
          */
-        public static final int settings_title=0x7f0c0018;
-        public static final int vault_button_title=0x7f0c000e;
+        public static final int settings_title=0x7f0c0019;
+        public static final int turnbond_id_title=0x7f0c000e;
+        public static final int vault_button_title=0x7f0c000f;
         /**  Vault page 
          */
-        public static final int vault_title=0x7f0c000f;
-        public static final int vault_type_title=0x7f0c0013;
+        public static final int vault_title=0x7f0c0010;
+        public static final int vault_type_title=0x7f0c0014;
         public static final int weight_title=0x7f0c000b;
     }
     public static final class style {
