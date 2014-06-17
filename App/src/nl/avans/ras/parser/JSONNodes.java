@@ -30,4 +30,7 @@ public class JSONNodes {
 	static final String NODE_LOCATION_ID = "location_id";
 	static final String NODE_DESCRIPTION = "description";
 	
+	// Password change nodes
+	static final String NODE_PASSWORD_CHANGED = "password_changed";
+	
 }

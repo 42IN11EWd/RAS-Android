@@ -3,18 +3,18 @@ package nl.avans.ras.network;
 import nl.avans.ras.services.MD5;
 
 public class NetworkConnections {
-	private static final String BASE_URL = "http://145.102.84.78:3000/";
+	private static final String BASE_URL = "http://ras-rest.herokuapp.com/";
 
 	/**************
 	 *    User    *
 	 **************/
 	
 	public static String getLogin(String username, String password) {
-		return BASE_URL + "login/" + username + "/" + MD5.hashString(MD5.SALT + password);
+		return BASE_URL + "login/" + username + "/" + MD5.hashString(password + MD5.SALT);
 	}
 	
-	public static String changePassword(int gymnast_id, String password) {
-		return BASE_URL + "user/" + gymnast_id + "/" + password;
+	public static String changePassword(int gymnast_id, String oldPassword, String newPassword) {
+		return BASE_URL + "user/" + gymnast_id + "/" + oldPassword + "/" + newPassword;
 	}
 	
 	/******************

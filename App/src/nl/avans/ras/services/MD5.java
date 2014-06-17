@@ -3,7 +3,7 @@ package nl.avans.ras.services;
 import java.security.MessageDigest;
 
 public class MD5 {
-	public static String SALT = "23kl4h0dfb;l2m4podgulrm23por0dvucg";
+	public static final String SALT = "23kl4h0dfb;l2m4podgulrm23por0dvucg";
 	
 	public static String hashString(String string) {
 		try {

@@ -34,8 +34,8 @@ public class Networking extends AbstractNetworking {
 		this.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[] {NetworkConnections.getLogin(username, password), "GET"});
 	}
 	
-	public void changePassword(int gymnast_id, String password) {
-		this.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[] {NetworkConnections.changePassword(gymnast_id, password), "PUT"});
+	public void changePassword(int user_id, String old_password, String new_password) {
+		this.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[] {NetworkConnections.changePassword(user_id, old_password, new_password), "GET"});
 	}
 	
 	/******************
@@ -163,6 +163,9 @@ public class Networking extends AbstractNetworking {
 		} else if(context instanceof SettingsActivity) {
 			SettingsActivity mActivity = (SettingsActivity) context;
 			
+			// Check if password is changed
+			boolean succes = JSONParser.parseSuccesChangePassword(json);
+			mActivity.SuccesSavePassword(succes);
 		}
 	}
 }

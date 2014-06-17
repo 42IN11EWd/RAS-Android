@@ -185,6 +185,10 @@ public class JSONParser {
 		
 		return vaultNumber;
 	}
+	
+	/***************
+	 *    Login    *
+	 ***************/
 
 	public static User parseUser(String json) {
 		User user = null;
@@ -216,5 +220,27 @@ public class JSONParser {
 		}
 		
 		return user;
+	}
+
+	/*************************
+	 *    Change password    *
+	 *************************/
+	
+	public static boolean parseSuccesChangePassword(String json) {
+		boolean succes = false;
+		
+		try {
+			JSONArray content = new JSONArray(json);
+			
+			if (content.length() >= 1) {
+				succes = true;
+			}
+			
+			Log.i("PASSWORD CHANGE", "" + succes);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		return succes;
 	}
 }

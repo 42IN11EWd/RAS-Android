@@ -5,7 +5,8 @@ import nl.avans.ras.model.enums.UserType;
 public class User {
 
 	// Fields
-	public static final String USER_TYPE = "user_type";	
+	public static final String USER_TYPE = "user_type";
+	public static final String USER_ID = "user_id";	
 	private UserType type;
 	private int id, gymnastId;
 	

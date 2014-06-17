@@ -21,7 +21,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
 	
 	// Interfaces
 	public interface OnSavePasswordListener {
-		public void OnSavePassword(String password);
+		public void OnSavePassword(String oldPassword, String newPassword);
 	}	
 	
 	@Override
@@ -94,13 +94,13 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
 		// Check if the old password is right
 		String oldPassword = oldPasswordContainer.getText().toString();
 		// TODO: Send API request to check if the old password is matching the current password
-		if (oldPassword.equals("")) {
+		if (!oldPassword.equals("")) {
 			// Check if the new password is the same as the confirm new password
 			String newPassword = newPasswordContainer.getText().toString();
 			String confirmNewPassword = confirmNewPasswordContainer.getText().toString();
 			if (newPassword.length() > 5) {
 				if (newPassword.equals(confirmNewPassword)) {
-					mOnSavePasswordListener.OnSavePassword(newPassword);
+					mOnSavePasswordListener.OnSavePassword(oldPassword, newPassword);
 					
 					// Empty the containers
 					oldPasswordContainer.setText("");
@@ -120,7 +120,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
 				buildDialog("The password needs to be 6  characters or longer");
 			}
 		} else {
-			buildDialog("The old password is not matching the current password");
+			buildDialog("The old password is empty");
 		}
 	}
 	

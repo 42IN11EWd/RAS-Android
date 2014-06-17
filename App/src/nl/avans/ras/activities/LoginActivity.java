@@ -112,6 +112,7 @@ public class LoginActivity extends Activity implements LoginFragment.OnLoginList
 			// Save user data in model
 			SharedPreferences.Editor mEditor = sharedPreferences.edit();
 			mEditor.putInt(User.USER_TYPE, user.getType() == UserType.TRAINER ? 0 : 1);
+			mEditor.putInt(User.USER_ID, user.getId());
 			mEditor.putInt(Gymnast.GYMNAST_ID, user.getGymnastId());
 			mEditor.putBoolean(IS_LOGGED_IN, true);
 			mEditor.commit();

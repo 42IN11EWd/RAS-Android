@@ -3,11 +3,14 @@ package nl.avans.ras.activities;
 import nl.avans.ras.R;
 import nl.avans.ras.fragments.SettingsFragment;
 import nl.avans.ras.model.Gymnast;
+import nl.avans.ras.model.User;
 import nl.avans.ras.network.Networking;
 import nl.avans.ras.services.MD5;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -49,13 +52,21 @@ public class SettingsActivity extends Activity implements SettingsFragment.OnSav
 	}
 
 	@Override
-	public void OnSavePassword(String password) {
+	public void OnSavePassword(String oldPassword, String newPassword) {
 		SharedPreferences sharedPreferences =  this.getSharedPreferences(LoginActivity.ACTIVE_USER, 0);
 		
 		// Hash the password with a salt
-		String hashedPassword = MD5.hashString(MD5.SALT + password);
+		oldPassword = MD5.hashString(oldPassword + MD5.SALT);
+		newPassword = MD5.hashString(newPassword + MD5.SALT);
 		
-		new Networking(this).changePassword(sharedPreferences.getInt(Gymnast.GYMNAST_ID, 0), hashedPassword);
-		Toast.makeText(this, "The password has been changed.", Toast.LENGTH_SHORT).show();
+		new Networking(this).changePassword(sharedPreferences.getInt(User.USER_ID, 0), oldPassword, newPassword);
+	}
+	
+	public void SuccesSavePassword(boolean succes) {
+		if (succes) {
+			Toast.makeText(this, "The password is succesfully changed.", Toast.LENGTH_SHORT).show();
+		} else {
+			Toast.makeText(this, "The old password was not correct...", Toast.LENGTH_SHORT).show();
+		}
 	}
 }
