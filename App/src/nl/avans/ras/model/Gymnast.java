@@ -11,10 +11,11 @@ public class Gymnast {
 	private String location;
 	private Date birthday;
 	private int length, weight;
+	private byte[] profileImage, thumbnail;
 	
 	// Constructor
 	public Gymnast(int id, String firstname, String surname, String surnamePrefix, 
-				   Date birthday, int length, int weight, String location) {
+				   Date birthday, int length, int weight, String location, byte[] profileImage, byte[] thumbnail) {
 		this.id = id;
 		this.firstname = firstname;
 		this.surname = surname;
@@ -23,6 +24,8 @@ public class Gymnast {
 		this.length = length;
 		this.weight = weight;
 		this.location = location;
+		this.profileImage = profileImage;
+		this.thumbnail = thumbnail;
 		
 		// Set the name
 		if (surnamePrefix != null && !surnamePrefix.isEmpty())
@@ -41,4 +44,6 @@ public class Gymnast {
 	public String 	getSurnamePrefix()	{ return surnamePrefix; }
 	public String 	getName() 			{ return name; }
 	public String 	getLocation() 		{ return location; }
+	public byte[] 	getProfileImage() 	{ return profileImage; }
+	public byte[] 	getThumbnail() 		{ return thumbnail; }
 }

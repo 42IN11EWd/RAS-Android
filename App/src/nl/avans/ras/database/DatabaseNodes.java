@@ -35,7 +35,8 @@ public class DatabaseNodes {
 	public static final String COL_LENGTH = "length";
 	public static final String COL_WEIGHT = "weight";
 	public static final String COL_LOCATION = "location";
-	
+	public static final String COL_PROFILE_IMAGE = "profile_image";
+	public static final String COL_THUMBNAIL = "thumbnail";
 	
 	// Create table Strings
 	static final String CREATE_REFRSH_GYMNAST_DATE_TABLE = 
@@ -53,5 +54,5 @@ public class DatabaseNodes {
 	"CREATE TABLE IF NOT EXISTS " + GYMNAST_TABLE + " (" + COL_ID + " TEXT, " 
 					    		  + COL_GYMNAST_ID + " INTEGER, " + COL_FIRSTNAME + " TEXT, " + COL_SURNAME + " TEXT, " 
 					    		  + COL_SURNAME_PREFIX + " TEXT, " + COL_BIRTHDAY + " LONG, " + COL_LENGTH + " LONG, " + COL_WEIGHT + " LONG, "
-					    		  + COL_LOCATION + " TEXT)";
+					    		  + COL_LOCATION + " TEXT, " + COL_PROFILE_IMAGE + " BLOB, " + COL_THUMBNAIL + "BLOB)";
 }

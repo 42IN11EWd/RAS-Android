@@ -8,6 +8,8 @@ public class JSONNodes {
 	static final String NODE_SURNAME_PREFIX = "surname_prefix";
 	static final String NODE_WEIGHT = "weight";
 	static final String NODE_LENGTH = "length";
+	static final String NODE_PROFILE_IMAGE = "profile_image";
+	static final String NODE_THUMBNAIL = "thumbnail";
 	
 	// Vault nodes
 	static final String NODE_VAULT_ID = "vault_id";

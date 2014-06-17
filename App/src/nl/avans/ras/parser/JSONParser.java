@@ -40,7 +40,9 @@ public class JSONParser {
 					null,
 					(element.isNull(NODE_LENGTH)) ? 0 : element.getInt(NODE_LENGTH),
 					(element.isNull(NODE_WEIGHT)) ? 0 : element.getInt(NODE_WEIGHT),
-					""
+					"",
+					(element.isNull(NODE_PROFILE_IMAGE)) ? new byte[0] : element.getString(NODE_PROFILE_IMAGE).getBytes(),
+					(element.isNull(NODE_THUMBNAIL)) ? new byte[0] : element.getString(NODE_THUMBNAIL).getBytes()
 				);
 				
 				list.add(gymnast);

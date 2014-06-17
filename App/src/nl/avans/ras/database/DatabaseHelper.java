@@ -43,7 +43,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public void insertGymnastCollection(ArrayList<Gymnast> gymnastCollection) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		// Insert the data
-		String sql = "INSERT INTO "+ GYMNAST_TABLE +" VALUES (?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO "+ GYMNAST_TABLE +" VALUES (?,?,?,?,?,?,?,?,?,?,?)";
         SQLiteStatement statement = db.compileStatement(sql);
         db.beginTransaction();
         for (Gymnast gymnast: gymnastCollection) {
@@ -60,6 +60,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             statement.bindLong(7, gymnast.getLength());
             statement.bindLong(8, gymnast.getWeight());
             statement.bindString(9, gymnast.getLocation());
+            statement.bindBlob(10, gymnast.getProfileImage());
+            statement.bindBlob(11, gymnast.getThumbnail());
             statement.execute();
         }
         db.setTransactionSuccessful();
@@ -161,7 +163,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			int length = cursor.getInt(cursor.getColumnIndex(COL_LENGTH));
 			int weight = cursor.getInt(cursor.getColumnIndex(COL_WEIGHT));
 			String location = cursor.getString(cursor.getColumnIndex(COL_LOCATION));
-			mGymnast = new Gymnast(gymnastId, firstname, surname, surnamePrefix, birthday, length, weight, location);
+			byte[] profileImage = null;
+			byte[] thumbnail = null;
+			mGymnast = new Gymnast(gymnastId, firstname, surname, surnamePrefix, birthday, length, weight, location, profileImage, thumbnail);
 		}
 		cursor.close();
 		// Return the game

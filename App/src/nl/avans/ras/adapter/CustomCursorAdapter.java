@@ -14,6 +14,7 @@ import nl.avans.ras.model.Vault;
 import nl.avans.ras.model.enums.AdapterKind;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v4.widget.CursorAdapter;
@@ -153,6 +154,7 @@ public class CustomCursorAdapter extends CursorAdapter {
 		String firstname = cursor.getString(cursor.getColumnIndex(COL_FIRSTNAME));
 		String surname = cursor.getString(cursor.getColumnIndex(COL_SURNAME));
 		String surnamePrefix = cursor.getString(cursor.getColumnIndex(COL_SURNAME_PREFIX));
+		byte[] blob = cursor.getBlob(cursor.getColumnIndex(COL_THUMBNAIL));
 		
 		if (surnamePrefix != null && !surnamePrefix.isEmpty()) {
 			title.setText(firstname + " " + surnamePrefix + " " + surname);
@@ -160,7 +162,11 @@ public class CustomCursorAdapter extends CursorAdapter {
 			title.setText(firstname + " " + surname);
 		}
 		
-		image.setImageResource(R.drawable.test);
+		if (blob != null) {
+			image.setImageBitmap(BitmapFactory.decodeByteArray(blob , 0, blob.length));
+		} else {
+			image.setImageResource(R.drawable.no_image_small);
+		}
 	}
 	
 	private void setVaultCell(Cursor cursor, TextView title, TextView subtitle) {

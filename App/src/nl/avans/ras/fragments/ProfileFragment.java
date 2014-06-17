@@ -4,12 +4,15 @@ import nl.avans.ras.R;
 import nl.avans.ras.model.Gymnast;
 import android.app.Activity;
 import android.app.Fragment;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {
@@ -94,6 +97,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 		weightContainer.setText(gymnast.getWeight() + " kg");
 		genderContainer.setText("Man");
 		traingLocationContainer.setText(gymnast.getLocation());
+		
+		// Set the profile image
+		ImageView profileImageContainer = (ImageView) getActivity().findViewById(R.id.profile_image);
+		byte[] blob = gymnast.getProfileImage();
+		Bitmap profileImage = BitmapFactory.decodeByteArray(blob, 0, blob.length);
+		profileImageContainer.setImageBitmap(profileImage);
 	}
 
 	@Override
