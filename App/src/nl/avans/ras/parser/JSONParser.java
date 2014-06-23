@@ -1,6 +1,10 @@
 package nl.avans.ras.parser;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import nl.avans.ras.model.Gymnast;
@@ -116,16 +120,34 @@ public class JSONParser {
 			for(int i = 0; i < content.length(); i++) {
 				JSONObject element = content.getJSONObject(i);
 				
-				Vault vault = new Vault(
-					element.getInt(NODE_VAULT_ID),
-					element.getInt(NODE_GYMNAST_ID), 
-					null,
-					(element.isNull(NODE_D_RATING)) ? -1 : element.getDouble(NODE_D_RATING), 
-					(element.isNull(NODE_E_RATING)) ? -1 : element.getDouble(NODE_E_RATING), 
-					null,
-					null,
-					(element.isNull(NODE_GRAPH_DATA)) ? "" : element.getString(NODE_GRAPH_DATA)
-				);
+				int vaultId = element.getInt(NODE_VAULT_ID);
+				int gymnastId = element.getInt(NODE_GYMNAST_ID);
+				String name = element.getString(NODE_VAULT_NUMBER);
+				double dScore = (element.isNull(NODE_D_RATING)) ? -1 : element.getDouble(NODE_D_RATING); 
+				double eScore = (element.isNull(NODE_E_RATING)) ? -1 : element.getDouble(NODE_E_RATING);
+				double penalty = (element.isNull(NODE_PENALTY)) ? -1 : element.getDouble(NODE_PENALTY);
+				String location = element.getString(NODE_LOCATION);
+				String data = (element.isNull(NODE_GRAPH_DATA)) ? "" : element.getString(NODE_GRAPH_DATA);
+				
+				// Parse timestamp
+				Date date = null;
+				String time = "";
+				try {
+					String timestamp = (element.isNull(NODE_VAULT_DATE)) ? "" : element.getString(NODE_VAULT_DATE);
+//					String timestamp = "2014-06-18 09:04:27";
+					DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+					date = format.parse(timestamp);
+					
+					String[] array = timestamp.split("T");
+					array = array[1].split("\\.");
+					
+					time = array[0];
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				Vault vault = new Vault(vaultId, gymnastId, name, dScore, eScore, location, date, time, data);
 				
 				list.add(vault);
 			}

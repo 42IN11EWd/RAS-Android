@@ -115,10 +115,10 @@ public class ListViewFragment extends Fragment implements OnItemClickListener {
 		case DATES:
 			if (getActivity() instanceof VaultActivity) {
 				VaultActivity mActivity = (VaultActivity) getActivity();
-				customAdapter = new CustomCursorAdapter(mActivity, new DatabaseHelper(mActivity).getAllVaultsFromGymnast(mActivity.getGymnastId()), kind);
+				customAdapter = new CustomCursorAdapter(mActivity, new DatabaseHelper(mActivity).getAllVaultDatesFromGymnast(mActivity.getGymnastId()), kind);
 			} else if (getActivity() instanceof CompareActivity) {
 				CompareActivity mActivity = (CompareActivity) getActivity();
-				customAdapter = new CustomCursorAdapter(mActivity, new DatabaseHelper(mActivity).getAllVaultsFromGymnast(mActivity.getGymnastId()), kind);
+				customAdapter = new CustomCursorAdapter(mActivity, new DatabaseHelper(mActivity).getAllVaultDatesFromGymnast(mActivity.getGymnastId()), kind);
 			}
 			break;
 		case COMPARE:

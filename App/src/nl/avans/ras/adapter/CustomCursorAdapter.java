@@ -171,11 +171,8 @@ public class CustomCursorAdapter extends CursorAdapter {
 	
 	private void setVaultCell(Cursor cursor, TextView title, TextView subtitle) {
 		// Set the title
-		long dateTime = cursor.getLong(cursor.getColumnIndex(COL_DATE));
-		Date date = new Date(dateTime);
-		Format formatter = new SimpleDateFormat("HH:mm:ss");
-		String dateText = formatter.format(date);
-		title.setText(dateText);
+		String time = cursor.getString(cursor.getColumnIndex(COL_TIME));
+		title.setText(time);
 		
 		// Set the subtitle
 		String vaultType = cursor.getString(cursor.getColumnIndex(COL_VAULT_NAME));

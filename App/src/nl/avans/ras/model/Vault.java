@@ -13,14 +13,14 @@ public class Vault implements Parcelable {
 	
 	// Fields
 	private int id, gymnastId;
-	private String name, location;
+	private String name, location, time;
 	private double dScore, eScore, duration;
 	private String data;
 	private ArrayList<Double> speedData, distanceData;
 	private Date date;
 	
 	// Constructor
-	public Vault(int id, int gymnastId, String name, double dScore, double eScore, String location, Date date, String data) {
+	public Vault(int id, int gymnastId, String name, double dScore, double eScore, String location, Date date, String time, String data) {
 		this.id = id;
 		this.gymnastId = gymnastId;
 		this.name = name;
@@ -29,6 +29,7 @@ public class Vault implements Parcelable {
 		this.location = location;
 		this.date = date;
 		this.data = data;
+		this.time = time;
 		
 		// Convert the data to speedData and distanceData
 		convertDataToSpeedAndDistanceData();
@@ -59,6 +60,7 @@ public class Vault implements Parcelable {
 	public String 	getName() 		{ return name; }
 	public String 	getLocation()	{ return location; }
 	public String 	getData()		{ return data; }
+	public String	getTime()		{ return time; }
 	public Date		getDate()		{ return date; }
 	
 	public ArrayList<Double> getSpeedData() 	{ return speedData; }

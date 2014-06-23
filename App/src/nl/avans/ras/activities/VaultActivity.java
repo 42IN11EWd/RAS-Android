@@ -90,7 +90,7 @@ public class VaultActivity extends Activity implements ListViewFragment.OnDateSe
 			if (type == UserType.GYMNAST) {
 				new Networking(this).getVaultsOfSpecificGymnast(gymnastId);
 			} else if (type == UserType.TRAINER) {
-				new Networking(this).getVaultsOfSpecificGymnast(gymnastId);
+				new Networking(this).getAllVaults();
 			}
 		}
      	

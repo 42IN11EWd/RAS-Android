@@ -15,8 +15,13 @@ public class JSONNodes {
 	// Vault nodes
 	static final String NODE_VAULT_ID = "vault_id";
 	static final String NODE_D_RATING = "rating_official_D";
-	static final String NODE_E_RATING= "rating_official_E";
+	static final String NODE_E_RATING = "rating_official_E";
+	static final String NODE_PENALTY = "penalty";
 	static final String NODE_GRAPH_DATA = "graphdata";
+	static final String NODE_VAULT_NUMBER = "vaultnumber";
+	static final String NODE_LOCATION = "location";
+	static final String NODE_VAULT_KIND = "vaultkind";
+	static final String NODE_VAULT_DATE = "timestamp";
 	
 	// Vaultnumber nodes
 	static final String NODE_VAULTNUMBER_ID = "vaultnumber_id";
