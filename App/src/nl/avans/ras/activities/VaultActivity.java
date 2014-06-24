@@ -132,6 +132,19 @@ public class VaultActivity extends Activity implements ListViewFragment.OnDateSe
 		case R.id.filter_menu_item:
 			showFilterDialog();
 			return true;
+		case R.id.refresh_menu_item:
+			dbHelper.clearVaultCache();
+			
+			SharedPreferences sharedPreferences =  this.getSharedPreferences(LoginActivity.ACTIVE_USER, 0);
+			UserType type = sharedPreferences.getInt(User.USER_TYPE, 1) == 0 ? UserType.TRAINER : UserType.GYMNAST;
+			
+			mProgressDialog = ProgressDialog.show(this, null, "Loading Vaults...", false);
+			if (type == UserType.GYMNAST) {
+				new Networking(this).getVaultsOfSpecificGymnast(gymnastId);
+			} else if (type == UserType.TRAINER) {
+				new Networking(this).getAllVaults();
+			}
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}

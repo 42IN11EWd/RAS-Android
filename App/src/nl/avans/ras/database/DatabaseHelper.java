@@ -123,21 +123,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	
 	public void clearAllCache() {
 		SQLiteDatabase db = this.getWritableDatabase();
-		db.delete(CREATE_REFRSH_GYMNAST_DATE_TABLE, "", null);
-		db.delete(CREATE_REFRSH_VAULT_DATE_TABLE, "", null);
+//		db.delete(CREATE_REFRSH_GYMNAST_DATE_TABLE, "", null);
+//		db.delete(CREATE_REFRSH_VAULT_DATE_TABLE, "", null);
 		db.delete(VAULT_TABLE, "", null);
 		db.delete(GYMNAST_TABLE, "", null);
 	}
 	
 	public void clearVaultCache() {
 		SQLiteDatabase db = this.getWritableDatabase();
-		db.delete(CREATE_REFRSH_VAULT_DATE_TABLE, "", null);
+//		db.delete(CREATE_REFRSH_VAULT_DATE_TABLE, "", null);
 		db.delete(VAULT_TABLE, "", null);
 	}
 	
 	public void clearGymnastCache() {
 		SQLiteDatabase db = this.getWritableDatabase();
-		db.delete(CREATE_REFRSH_GYMNAST_DATE_TABLE, "", null);
+//		db.delete(CREATE_REFRSH_GYMNAST_DATE_TABLE, "", null);
 		db.delete(GYMNAST_TABLE, "", null);
 	}
 	

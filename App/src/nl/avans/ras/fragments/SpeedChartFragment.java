@@ -30,7 +30,14 @@ public class SpeedChartFragment extends ChartFragment {
 			double[] graphData = vaultCollection.get(x).getSpeedGraphData();
 			GraphViewData[] dataContainer = new GraphViewData[graphData.length];
 			for (int y = 0; y < graphData.length; y++) {
-				dataContainer[y] = new GraphViewData(y, graphData[y] + (x * 5));
+				double speed = graphData[y];
+				if (graphData[y] > 14) {
+					speed = 14;
+				}
+				if (graphData[y] < 0) {
+					speed = 0;
+				}
+				dataContainer[y] = new GraphViewData(y, speed);
 			}
 			Gymnast gymnast = new DatabaseHelper(getActivity()).getGymnast(vaultCollection.get(x).getGymnastId());
 			GraphViewSeries serie = new GraphViewSeries(gymnast.getName() + ", " + vaultCollection.get(x).getName(), null, dataContainer);

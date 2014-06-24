@@ -2,12 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     
 	<item
-        android:id="@+id/filter_menu_item"
-        android:orderInCategory="100"
-        android:showAsAction="ifRoom"
-        android:title="@string/filter_title"/>
-	
-	<item
         android:id="@+id/refresh_menu_item"
         android:orderInCategory="100"
         android:showAsAction="ifRoom"

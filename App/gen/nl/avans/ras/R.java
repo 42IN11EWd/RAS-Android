@@ -386,27 +386,28 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     public static final class drawable {
         public static final int black_circle=0x7f020000;
         public static final int button_background=0x7f020001;
-        public static final int edit_text_background=0x7f020002;
-        public static final int filter_button_background=0x7f020003;
-        public static final int ic_drawer=0x7f020004;
-        public static final int ic_launcher=0x7f020005;
-        public static final int icon=0x7f020006;
-        public static final int icon_right=0x7f020007;
-        public static final int no_image=0x7f020008;
-        public static final int no_image_small=0x7f020009;
-        public static final int orange_circle=0x7f02000a;
-        public static final int splashscreen_image=0x7f02000b;
-        public static final int title_dialog=0x7f02000c;
-        public static final int vpi__tab_indicator=0x7f02000d;
-        public static final int vpi__tab_selected_focused_holo=0x7f02000e;
-        public static final int vpi__tab_selected_holo=0x7f02000f;
-        public static final int vpi__tab_selected_pressed_holo=0x7f020010;
-        public static final int vpi__tab_unselected_focused_holo=0x7f020011;
-        public static final int vpi__tab_unselected_holo=0x7f020012;
-        public static final int vpi__tab_unselected_pressed_holo=0x7f020013;
+        public static final int drawer_shadow=0x7f020002;
+        public static final int edit_text_background=0x7f020003;
+        public static final int filter_button_background=0x7f020004;
+        public static final int ic_action_refresh=0x7f020005;
+        public static final int ic_drawer=0x7f020006;
+        public static final int ic_launcher=0x7f020007;
+        public static final int icon=0x7f020008;
+        public static final int icon_right=0x7f020009;
+        public static final int no_image=0x7f02000a;
+        public static final int no_image_small=0x7f02000b;
+        public static final int orange_circle=0x7f02000c;
+        public static final int splashscreen_image=0x7f02000d;
+        public static final int title_dialog=0x7f02000e;
+        public static final int vpi__tab_indicator=0x7f02000f;
+        public static final int vpi__tab_selected_focused_holo=0x7f020010;
+        public static final int vpi__tab_selected_holo=0x7f020011;
+        public static final int vpi__tab_selected_pressed_holo=0x7f020012;
+        public static final int vpi__tab_unselected_focused_holo=0x7f020013;
+        public static final int vpi__tab_unselected_holo=0x7f020014;
+        public static final int vpi__tab_unselected_pressed_holo=0x7f020015;
     }
     public static final class id {
-        public static final int action_settings=0x7f060045;
         public static final int bottom=0x7f060003;
         public static final int cell_profile_imageview=0x7f06000c;
         public static final int cell_profile_username=0x7f06000d;
@@ -449,6 +450,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int profile_training_location_title=0x7f060026;
         public static final int profile_weight_container=0x7f060025;
         public static final int profile_weight_title=0x7f060024;
+        public static final int refresh_menu_item=0x7f060045;
         public static final int save_new_password_button=0x7f06002c;
         public static final int settings_button=0x7f060041;
         public static final int splashscreen=0x7f060042;
@@ -510,68 +512,69 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     public static final class menu {
         public static final int compare=0x7f0d0000;
         public static final int list=0x7f0d0001;
-        public static final int main=0x7f0d0002;
+        public static final int profile=0x7f0d0002;
     }
     public static final class string {
         public static final int action_settings=0x7f0c0002;
-        public static final int age_title=0x7f0c0009;
+        public static final int age_title=0x7f0c000a;
         public static final int app_name=0x7f0c0000;
-        public static final int cancel=0x7f0c0026;
-        public static final int change_password_title=0x7f0c0021;
-        public static final int chart_button_title=0x7f0c0017;
+        public static final int cancel=0x7f0c0027;
+        public static final int change_password_title=0x7f0c0022;
+        public static final int chart_button_title=0x7f0c0018;
         /**  Chart page 
          */
-        public static final int chart_title=0x7f0c0019;
-        public static final int clear_button_title=0x7f0c0028;
-        public static final int compare_button_title=0x7f0c0016;
+        public static final int chart_title=0x7f0c001a;
+        public static final int clear_button_title=0x7f0c0029;
+        public static final int compare_button_title=0x7f0c0017;
         /**  Compare page 
          */
-        public static final int compare_title=0x7f0c0018;
-        public static final int competition_title=0x7f0c0013;
-        public static final int confirm_new_password=0x7f0c001f;
-        public static final int d_score_title=0x7f0c0011;
-        public static final int divider=0x7f0c0027;
-        public static final int drawer_close=0x7f0c0004;
+        public static final int compare_title=0x7f0c0019;
+        public static final int competition_title=0x7f0c0014;
+        public static final int confirm_new_password=0x7f0c0020;
+        public static final int d_score_title=0x7f0c0012;
+        public static final int divider=0x7f0c0028;
+        public static final int drawer_close=0x7f0c0005;
         /**  Drawer layout 
          */
-        public static final int drawer_open=0x7f0c0003;
-        public static final int duration_title=0x7f0c000f;
-        public static final int e_score_title=0x7f0c0010;
+        public static final int drawer_open=0x7f0c0004;
+        public static final int duration_title=0x7f0c0010;
+        public static final int e_score_title=0x7f0c0011;
         /**  Filter dialog page 
          */
-        public static final int filter_title=0x7f0c0024;
+        public static final int filter_title=0x7f0c0025;
         public static final int hello_world=0x7f0c0001;
-        public static final int length_title=0x7f0c000a;
-        public static final int location_title=0x7f0c0015;
-        public static final int login_password=0x7f0c0007;
+        public static final int length_title=0x7f0c000b;
+        public static final int location_title=0x7f0c0016;
+        public static final int login_password=0x7f0c0008;
         /**  Login page 
          */
-        public static final int login_title=0x7f0c0005;
-        public static final int login_username=0x7f0c0006;
+        public static final int login_title=0x7f0c0006;
+        public static final int login_username=0x7f0c0007;
         /**  Menu page 
          */
-        public static final int menu_logout_title=0x7f0c0022;
-        public static final int menu_settings_title=0x7f0c0023;
-        public static final int new_password=0x7f0c001e;
-        public static final int new_password_title=0x7f0c001d;
-        public static final int ok=0x7f0c0025;
-        public static final int old_password=0x7f0c001c;
-        public static final int old_password_title=0x7f0c001b;
-        public static final int penalty_title=0x7f0c0012;
+        public static final int menu_logout_title=0x7f0c0023;
+        public static final int menu_settings_title=0x7f0c0024;
+        public static final int new_password=0x7f0c001f;
+        public static final int new_password_title=0x7f0c001e;
+        public static final int ok=0x7f0c0026;
+        public static final int old_password=0x7f0c001d;
+        public static final int old_password_title=0x7f0c001c;
+        public static final int penalty_title=0x7f0c0013;
         /**  Profile page 
          */
-        public static final int profile_title=0x7f0c0008;
-        public static final int save_new_password_title=0x7f0c0020;
+        public static final int profile_title=0x7f0c0009;
+        public static final int refresh_title=0x7f0c0003;
+        public static final int save_new_password_title=0x7f0c0021;
         /**  Settings page 
          */
-        public static final int settings_title=0x7f0c001a;
-        public static final int turnbond_id_title=0x7f0c000c;
-        public static final int vault_button_title=0x7f0c000d;
+        public static final int settings_title=0x7f0c001b;
+        public static final int turnbond_id_title=0x7f0c000d;
+        public static final int vault_button_title=0x7f0c000e;
         /**  Vault page 
          */
-        public static final int vault_title=0x7f0c000e;
-        public static final int vault_type_title=0x7f0c0014;
-        public static final int weight_title=0x7f0c000b;
+        public static final int vault_title=0x7f0c000f;
+        public static final int vault_type_title=0x7f0c0015;
+        public static final int weight_title=0x7f0c000c;
     }
     public static final class style {
         /** 

@@ -118,7 +118,7 @@ public class ProfileActivity extends Activity implements View.OnClickListener,
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.profile, menu);
 		return true;
 	}
 	
@@ -137,7 +137,10 @@ public class ProfileActivity extends Activity implements View.OnClickListener,
         }
         // Handle your other action bar items...
         int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		if (id == R.id.refresh_menu_item) {
+			dbHelper.clearAllCache();
+			mProgressDialog = ProgressDialog.show(this, null, "Loading Gymnasts...", false);
+			new Networking(this).getAllGymnasts();
 			return true;
 		}
 		

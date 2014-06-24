@@ -90,8 +90,6 @@ public class ChartActivity extends FragmentActivity {
 		    	this.finish();
 		    }
 			break;
-		case R.id.action_settings:
-			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
