@@ -23,6 +23,8 @@ public class DatabaseNodes {
 	public static final String COL_VAULT_NAME = "name";
 	public static final String COL_D_SCORE = "dScore";
 	public static final String COL_E_SCORE = "eScore";
+	public static final String COL_PENALTY = "penalty";
+	public static final String COL_VAULT_KIND = "kind";
 	public static final String COL_DATE = "date";
 	public static final String COL_TIME = "time";
 	public static final String COL_DATA = "data";
@@ -49,7 +51,8 @@ public class DatabaseNodes {
 	static final String CREATE_VAULT_TABLE = 
 	"CREATE TABLE IF NOT EXISTS " + VAULT_TABLE + " (" + COL_ID + " INTEGER PRIMARY KEY, " + COL_VAULT_ID + " INTEGER, " 
 								  + COL_GYMNAST_ID + " INTEGER, "  + COL_VAULT_NAME + " TEXT, " + COL_D_SCORE + " DECIMAL, " 
-								  + COL_E_SCORE + " DECIMAL, " + COL_LOCATION + " TEXT, " + COL_DATE + " LONG, " + COL_TIME + " TEXT, " + COL_DATA + " TEXT)";
+								  + COL_E_SCORE + " DECIMAL, " + COL_PENALTY + " DECIMAL, " + COL_LOCATION + " TEXT, " 
+								  + COL_VAULT_KIND + " TEXT, " + COL_DATE + " LONG, " + COL_TIME + " TEXT, " + COL_DATA + " TEXT)";
 	
 	static final String CREATE_GYMNAST_TABLE = 
 	"CREATE TABLE IF NOT EXISTS " + GYMNAST_TABLE + " (" + COL_ID + " TEXT, " 

@@ -42,14 +42,14 @@ public class SpeedChartFragment extends ChartFragment {
 		graphView.getGraphViewStyle().setGridColor(Color.BLACK);
 		graphView.getGraphViewStyle().setHorizontalLabelsColor(Color.BLACK);
 		graphView.getGraphViewStyle().setVerticalLabelsColor(Color.BLACK);
-		graphView.getGraphViewStyle().setTextSize(getResources().getDimension(R.dimen.small_font));
+		graphView.getGraphViewStyle().setTextSize(getResources().getDimension(R.dimen.extra_small_font));
 		graphView.getGraphViewStyle().setNumHorizontalLabels(5);
 		graphView.getGraphViewStyle().setNumVerticalLabels(10);
 		  	  
 		if (vaultCollection != null && vaultCollection.size() > 1) {
 			graphView.setShowLegend(true);
 	    	graphView.setLegendAlign(LegendAlign.BOTTOM);
-	        graphView.setLegendWidth(300);
+	        graphView.setLegendWidth(375);
 	    }
 		  	
 	  	RelativeLayout layout = (RelativeLayout) getView().findViewById(R.id.graph_container);  

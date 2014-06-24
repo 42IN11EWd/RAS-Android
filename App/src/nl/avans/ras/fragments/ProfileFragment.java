@@ -63,7 +63,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 		TextView ageTitle = (TextView) getActivity().findViewById(R.id.profile_age_title);
 		TextView lengthTitle = (TextView) getActivity().findViewById(R.id.profile_length_title);
 		TextView weightTitle = (TextView) getActivity().findViewById(R.id.profile_weight_title);
-		TextView genderTitle = (TextView) getActivity().findViewById(R.id.profile_gender_title);
 		TextView traingLocationTitle = (TextView) getActivity().findViewById(R.id.profile_training_location_title);
 		
 		// Create the containers
@@ -71,7 +70,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 		TextView ageContainer = (TextView) getActivity().findViewById(R.id.profile_age_container);
 		TextView lengthContainer = (TextView) getActivity().findViewById(R.id.profile_length_container);
 		TextView weightContainer = (TextView) getActivity().findViewById(R.id.profile_weight_container);
-		TextView genderContainer = (TextView) getActivity().findViewById(R.id.profile_gender_container);
 		TextView traingLocationContainer = (TextView) getActivity().findViewById(R.id.profile_training_location_container);
 	
 		// Create a new font
@@ -81,29 +79,23 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 		ageTitle.setTypeface(tfl);
 		lengthTitle.setTypeface(tfl);
 		weightTitle.setTypeface(tfl);
-		genderTitle.setTypeface(tfl);
 		traingLocationTitle.setTypeface(tfl);
 		nameContainer.setTypeface(tfl);
 		ageContainer.setTypeface(tfl);
 		lengthContainer.setTypeface(tfl);
 		weightContainer.setTypeface(tfl);
-		genderContainer.setTypeface(tfl);
 		traingLocationContainer.setTypeface(tfl);
 		
 		// Set the content of the containers
 		nameContainer.setText(gymnast.getName());
-		ageContainer.setText("" + gymnast.getBirthday());
+		ageContainer.setText(gymnast.getBirthdayString());
 		lengthContainer.setText(gymnast.getLength() + " cm");
 		weightContainer.setText(gymnast.getWeight() + " kg");
-		genderContainer.setText("Man");
 		traingLocationContainer.setText(gymnast.getTurnbondId());
 		
 		// Set the profile image
 		ImageView profileImageContainer = (ImageView) getActivity().findViewById(R.id.profile_image);
 		profileImageContainer.setVisibility(View.GONE);
-//		byte[] blob = gymnast.getProfileImage();
-//		Bitmap profileImage = BitmapFactory.decodeByteArray(blob, 0, blob.length);
-//		profileImageContainer.setImageBitmap(profileImage);
 	}
 
 	@Override

@@ -1,5 +1,8 @@
 package nl.avans.ras.model;
 
+import java.text.DateFormat;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Gymnast {
@@ -36,7 +39,6 @@ public class Gymnast {
 	
 	// Getters
 	public int 		getId() 			{ return id; }
-	public Date		getBirthday() 		{ return birthday; }
 	public int 		getLength() 		{ return length; }
 	public int 		getWeight() 		{ return weight; }
 	public String 	getFirstname() 		{ return firstname; }
@@ -46,4 +48,14 @@ public class Gymnast {
 	public String 	getTurnbondId()		{ return turnbondId; }
 	public byte[] 	getProfileImage() 	{ return profileImage; }
 	public byte[] 	getThumbnail() 		{ return thumbnail; }
+	public Date 	getBirthday()		{ return birthday; }
+	
+	public String getBirthdayString() {
+		if (birthday != null) {
+			Format formatter = new SimpleDateFormat("dd-MM-yyyy");
+			String birthdayText = formatter.format(birthday);
+			return birthdayText;
+		}
+		return "";
+	}
 }

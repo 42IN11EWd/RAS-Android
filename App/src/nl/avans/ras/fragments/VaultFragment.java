@@ -85,17 +85,21 @@ public class VaultFragment extends Fragment implements View.OnClickListener {
 		TextView durationTitle = (TextView) getActivity().findViewById(R.id.vault_duration_title);
 		TextView dScoreTitle = (TextView) getActivity().findViewById(R.id.vault_d_score_title);
 		TextView eScoreTitle = (TextView) getActivity().findViewById(R.id.vault_e_score_title);
+		TextView penaltyTitle = (TextView) getActivity().findViewById(R.id.vault_penalty_title);
 		TextView vaultTypeTitle = (TextView) getActivity().findViewById(R.id.vault_type_title);
 		TextView vaultLocationTitle = (TextView) getActivity().findViewById(R.id.vault_location_title);
-				
+		TextView vaultKindTitle = (TextView) getActivity().findViewById(R.id.vault_competition_title);		
+		
 		// Create the containers
 		TextView nameContainer = (TextView) getActivity().findViewById(R.id.profile_name_container);
 		TextView dateContainer = (TextView) getActivity().findViewById(R.id.date_container);
 		TextView durationContainer = (TextView) getActivity().findViewById(R.id.vault_duration_container);
 		TextView dScoreContainer = (TextView) getActivity().findViewById(R.id.vault_d_score_container);
 		TextView eScoreContainer = (TextView) getActivity().findViewById(R.id.vault_e_score_container);
+		TextView penaltyContainer = (TextView) getActivity().findViewById(R.id.vault_penalty_container);
 		TextView vaultTypeContainer = (TextView) getActivity().findViewById(R.id.vault_type_container);
 		TextView vaultLocationContainer = (TextView) getActivity().findViewById(R.id.vault_location_container);
+		TextView vaultKindContainer = (TextView) getActivity().findViewById(R.id.vault_competition_container);
 			
 		// Create a new font
 		Typeface tfl = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Light.ttf");
@@ -104,23 +108,29 @@ public class VaultFragment extends Fragment implements View.OnClickListener {
 		durationTitle.setTypeface(tfl);
 		dScoreTitle.setTypeface(tfl);
 		eScoreTitle.setTypeface(tfl);
+		penaltyTitle.setTypeface(tfl);
 		vaultTypeTitle.setTypeface(tfl);
 		vaultLocationTitle.setTypeface(tfl);
+		vaultKindTitle.setTypeface(tfl);
 		nameContainer.setTypeface(tfl);
 		dateContainer.setTypeface(tfl);
 		durationContainer.setTypeface(tfl);
 		dScoreContainer.setTypeface(tfl);
 		eScoreContainer.setTypeface(tfl);
+		penaltyContainer.setTypeface(tfl);
 		vaultTypeContainer.setTypeface(tfl);
 		vaultLocationContainer.setTypeface(tfl);
+		vaultKindContainer.setTypeface(tfl);
 				
 		// Set the content of the containers
 		nameContainer.setText(gymnast.getName());
 		durationContainer.setText("" + vault.getDuration() + " sec");
 		dScoreContainer.setText("" + vault.getDScore());
 		eScoreContainer.setText("" + vault.getEScore());
+		penaltyContainer.setText("" + vault.getPenalty());
 		vaultTypeContainer.setText(vault.getName());
 		vaultLocationContainer.setText(vault.getLocation());
+		vaultKindContainer.setText(vault.getKind());
 	}
 
 	@Override

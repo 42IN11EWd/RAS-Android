@@ -11,6 +11,7 @@ public class JSONNodes {
 	static final String NODE_PROFILE_IMAGE = "picture";
 	static final String NODE_THUMBNAIL = "picture_small";
 	static final String NODE_TURNBOND_ID = "turnbondID";
+	static final String NODE_BIRTHDAY = "birthdate";
 	
 	// Vault nodes
 	static final String NODE_VAULT_ID = "vault_id";

@@ -91,22 +91,6 @@
 			        android:layout_height="wrap_content" >
 			 
 			        <TextView
-			            android:id="@+id/profile_gender_title"
-			            android:text="@string/gender_title"
-			            style="@style/table_row_title_style" />
-			 
-			        <TextView
-			            android:id="@+id/profile_gender_container"
-			            android:text="Column 2"
-			            style="@style/table_row_input_style" />
-			    </TableRow>
-			    
-	            <TableRow
-			        android:id="@+id/tableRow1"
-			        android:layout_width="match_parent"
-			        android:layout_height="wrap_content" >
-			 
-			        <TextView
 			            android:id="@+id/profile_training_location_title"
 			            android:text="@string/turnbond_id_title"
 			            style="@style/table_row_title_style" />

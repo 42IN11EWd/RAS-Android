@@ -19,8 +19,6 @@
     <string name="age_title">Age</string>
     <string name="length_title">Length</string>
     <string name="weight_title">Weight</string>
-    <string name="gender_title">Gender</string>
-    <string name="location_title">Location</string>
     <string name="turnbond_id_title">Turnbond ID</string>
     <string name="vault_button_title">See vaults</string>
     
@@ -29,7 +27,10 @@
     <string name="duration_title">Duration</string>
     <string name="e_score_title">E-Score</string>
     <string name="d_score_title">D-Score</string>
+    <string name="penalty_title">Penalty</string>
+    <string name="competition_title">Competition</string>
     <string name="vault_type_title">Vault type</string>
+    <string name="location_title">Location</string>
     <string name="compare_button_title">Compare this vault</string>
     <string name="chart_button_title">Chart information</string>
     

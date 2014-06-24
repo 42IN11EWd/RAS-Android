@@ -56,7 +56,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             statement.bindString(3, firstname != null && !firstname.isEmpty() ? firstname : "");
             statement.bindString(4, surname != null && !surname.isEmpty() ? surname : "");
             statement.bindString(5, surnamePrefix != null && !surnamePrefix.isEmpty() ? surnamePrefix : "");
-            statement.bindLong(6, gymnast.getBirthday()!= null ? gymnast.getBirthday().getTime() : new Date().getTime());
+            statement.bindLong(6, gymnast.getBirthday()!= null ? gymnast.getBirthday().getTime() : 0);
             statement.bindLong(7, gymnast.getLength());
             statement.bindLong(8, gymnast.getWeight());
             statement.bindString(9, gymnast.getTurnbondId());
@@ -72,7 +72,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public void insertVaultCollection(ArrayList<Vault> vaultCollection) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		// Insert the data
-		String sql = "INSERT INTO " + VAULT_TABLE + " VALUES (?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO " + VAULT_TABLE + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         SQLiteStatement statement = db.compileStatement(sql);
         db.beginTransaction();
         for (Vault vault: vaultCollection) {
@@ -85,10 +85,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             statement.bindString(4, name != null && !name.isEmpty() ? name : "");
             statement.bindDouble(5, vault.getDScore());
             statement.bindDouble(6, vault.getEScore());
-          	statement.bindString(7, location != null && !location.isEmpty() ? location : "");
-            statement.bindLong(8, vault.getDate() != null ? vault.getDate().getTime() : new Date().getTime());
-            statement.bindString(9, vault.getTime() != null ? vault.getTime() : "");
-            statement.bindString(10, vault.getData() != null ? vault.getData() : "");
+            statement.bindDouble(7, vault.getPenalty());
+          	statement.bindString(8, location != null && !location.isEmpty() ? location : "");
+            statement.bindString(9, vault.getKind());
+          	statement.bindLong(10, vault.getDate() != null ? vault.getDate().getTime() : new Date().getTime());
+            statement.bindString(11, vault.getTime() != null ? vault.getTime() : "");
+            statement.bindString(12, vault.getData() != null ? vault.getData() : "");
          	statement.execute();
         }
         db.setTransactionSuccessful();	
@@ -156,11 +158,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		Cursor cursor = db.rawQuery(selectQuery, null);
 		// Get all the users
 		if(cursor != null && cursor.moveToNext()) {
+			Date birthday = null;
+			if (cursor.getLong(cursor.getColumnIndex(COL_BIRTHDAY)) != 0) {
+				birthday = new Date(cursor.getLong(cursor.getColumnIndex(COL_BIRTHDAY)));
+			}
+			
 			int gymnastId = cursor.getInt(cursor.getColumnIndex(COL_GYMNAST_ID));
 			String firstname = cursor.getString(cursor.getColumnIndex(COL_FIRSTNAME));
 			String surname = cursor.getString(cursor.getColumnIndex(COL_SURNAME));
 			String surnamePrefix = cursor.getString(cursor.getColumnIndex(COL_SURNAME_PREFIX));
-			Date birthday = new Date(cursor.getLong(cursor.getColumnIndex(COL_BIRTHDAY)));
 			int length = cursor.getInt(cursor.getColumnIndex(COL_LENGTH));
 			int weight = cursor.getInt(cursor.getColumnIndex(COL_WEIGHT));
 			String location = cursor.getString(cursor.getColumnIndex(COL_LOCATION));
@@ -200,12 +206,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			String name = cursor.getString(cursor.getColumnIndex(COL_VAULT_NAME));
 			double dScore = cursor.getDouble(cursor.getColumnIndex(COL_D_SCORE));
 			double eScore = cursor.getDouble(cursor.getColumnIndex(COL_E_SCORE));
+			double penalty = cursor.getDouble(cursor.getColumnIndex(COL_PENALTY));
 			String type = cursor.getString(cursor.getColumnIndex(COL_VAULT_NAME));
 			String location = cursor.getString(cursor.getColumnIndex(COL_LOCATION));
+			String kind = cursor.getString(cursor.getColumnIndex(COL_VAULT_KIND));
 			String data = cursor.getString(cursor.getColumnIndex(COL_DATA));
 			Date date = new Date(cursor.getLong(cursor.getColumnIndex(COL_DATE)));
 			String time = cursor.getString(cursor.getColumnIndex(COL_TIME));
-			mVault = new Vault(vaultId, gymnastId, name, dScore, eScore, location, date, time, data);
+			mVault = new Vault(vaultId, gymnastId, name, dScore, eScore, penalty, location, kind, date, time, data);
 		}
 		cursor.close();
 		// Return the news item

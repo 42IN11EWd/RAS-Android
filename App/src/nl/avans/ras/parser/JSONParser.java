@@ -36,19 +36,26 @@ public class JSONParser {
 			for(int i = 0; i < content.length(); i++) {
 				JSONObject element = content.getJSONObject(i);
 				
+				Date date = null;
+				try {
+					String timestamp = (element.isNull(NODE_BIRTHDAY)) ? "" : element.getString(NODE_BIRTHDAY);
+					DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+					date = format.parse(timestamp);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
 				Gymnast gymnast = new Gymnast(
 					element.getInt(NODE_GYMNAST_ID),
 					element.getString(NODE_NAME),
 					element.getString(NODE_SURNAME),
 					(element.isNull(NODE_SURNAME_PREFIX)) ? null : element.getString(NODE_SURNAME_PREFIX),
-					null,
+					date,
 					(element.isNull(NODE_LENGTH)) ? 0 : element.getInt(NODE_LENGTH),
 					(element.isNull(NODE_WEIGHT)) ? 0 : element.getInt(NODE_WEIGHT),
 					(element.isNull(NODE_TURNBOND_ID)) ? null : element.getString(NODE_TURNBOND_ID),
-//					(element.isNull(NODE_PROFILE_IMAGE)) ? new byte[0] : element.getString(NODE_PROFILE_IMAGE).getBytes(),
 					new byte[0],
 					new byte[0]
-//					(element.isNull(NODE_THUMBNAIL)) ? new byte[0] : element.getString(NODE_THUMBNAIL).getBytes()
 				);
 				
 				list.add(gymnast);
@@ -127,6 +134,7 @@ public class JSONParser {
 				double eScore = (element.isNull(NODE_E_RATING)) ? -1 : element.getDouble(NODE_E_RATING);
 				double penalty = (element.isNull(NODE_PENALTY)) ? -1 : element.getDouble(NODE_PENALTY);
 				String location = element.getString(NODE_LOCATION);
+				String kind = (element.isNull(NODE_VAULT_KIND)) ? "" : element.getString(NODE_VAULT_KIND);
 				String data = (element.isNull(NODE_GRAPH_DATA)) ? "" : element.getString(NODE_GRAPH_DATA);
 				
 				// Parse timestamp
@@ -147,7 +155,7 @@ public class JSONParser {
 					e.printStackTrace();
 				}
 				
-				Vault vault = new Vault(vaultId, gymnastId, name, dScore, eScore, location, date, time, data);
+				Vault vault = new Vault(vaultId, gymnastId, name, dScore, eScore, penalty, location, kind, date, time, data);
 				
 				list.add(vault);
 			}
