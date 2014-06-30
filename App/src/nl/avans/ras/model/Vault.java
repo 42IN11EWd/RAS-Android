@@ -56,8 +56,8 @@ public class Vault implements Parcelable {
 	// Getters
 	public int 		getId() 		{ return id; }
 	public int 		getGymnastId() 	{ return gymnastId; }
-	public double 	getEScore()		{ return eScore; }
-	public double 	getDScore() 	{ return dScore; }
+	public double 	getEScore()		{ return eScore > 0 ? eScore : 0; }
+	public double 	getDScore() 	{ return dScore > 0 ? dScore : 0; }
 	public double	getDuration()	{ return duration; }
 	public double 	getPenalty()	{ return penalty < 0 ? 0 : penalty; }
 	public String 	getName() 		{ return name; }

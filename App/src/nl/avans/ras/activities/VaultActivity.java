@@ -86,11 +86,16 @@ public class VaultActivity extends Activity implements ListViewFragment.OnDateSe
 			insertFragment();
 //			}
 		} else {
-			mProgressDialog = ProgressDialog.show(this, null, "Loading Vaults...", false);
 			if (type == UserType.GYMNAST) {
+				mProgressDialog = ProgressDialog.show(this, null, "Loading Vaults...", false);
 				new Networking(this).getVaultsOfSpecificGymnast(gymnastId);
 			} else if (type == UserType.TRAINER) {
-				new Networking(this).getAllVaults();
+				if (!dbHelper.hasVaults()) {
+					mProgressDialog = ProgressDialog.show(this, null, "Loading Vaults...", false);
+					new Networking(this).getAllVaults();
+				} else {
+					insertFragment();
+				}				
 			}
 		}
      	
@@ -153,7 +158,6 @@ public class VaultActivity extends Activity implements ListViewFragment.OnDateSe
 		mProgressDialog.dismiss();
 		
 		dbHelper.insertVaultCollection(vaultCollection);
-		dbHelper.insertUpdateVaultDate(new Date());
 		
 		insertFragment();
 	}
@@ -181,7 +185,8 @@ public class VaultActivity extends Activity implements ListViewFragment.OnDateSe
 		// Create a new profile list fragment
     	ListViewFragment vaultListFragment = new ListViewFragment();
     	vaultListFragment.setAdapterKind(AdapterKind.VAULTS);
-     	
+     	vaultListFragment.setDate(date);
+    	
      	// Replace the fragment
 		FragmentTransaction transaction = getFragmentManager().beginTransaction();
 		transaction.setCustomAnimations(animator.slide_in_left, animator.slide_out_right, animator.slide_in_right, animator.slide_out_left);

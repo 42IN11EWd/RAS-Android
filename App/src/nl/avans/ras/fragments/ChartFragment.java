@@ -33,31 +33,22 @@ public class ChartFragment extends Fragment {
 		int color;
 		switch (index) {
 		case 1:
-			color = Color.BLACK;
-			break;
-		case 2:
-			color = Color.YELLOW;
-			break;
-		case 3:
-			color = Color.GREEN;
-			break;
-		case 4:
 			color = Color.RED;
 			break;
-		case 5:
-			color = Color.WHITE;
+		case 2:
+			color = Color.GREEN;
 			break;
-		case 6:
+		case 3:
+			color = Color.BLACK;
+			break;
+		case 4:
 			color = Color.MAGENTA;
 			break;
-		case 7:
+		case 5:
 			color = Color.GRAY;
 			break;
-		case 8:
+		case 6:
 			color = Color.CYAN;
-			break;
-		case 9:
-			color = Color.BLUE;
 			break;
 		default:
 			color = -1;

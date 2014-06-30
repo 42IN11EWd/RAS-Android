@@ -37,6 +37,7 @@ public class ListViewFragment extends Fragment implements OnItemClickListener {
 	private AdapterKind kind;
 	private Cursor cursor;
 	private ListView list;
+	private Date date;
 	
 	// Setters
 	public void setAdapterKind(AdapterKind kind) {
@@ -47,6 +48,11 @@ public class ListViewFragment extends Fragment implements OnItemClickListener {
 	public void setCursor(Cursor cursor) {
 		if (cursor != null) {
 			this.cursor = cursor;
+		}
+	}
+	public void setDate(Date date) {
+		if (date != null) {
+			this.date = date;
 		}
 	}
 	
@@ -108,7 +114,7 @@ public class ListViewFragment extends Fragment implements OnItemClickListener {
 				if (cursor != null) {
 					customAdapter = new CustomCursorAdapter(mActivity, cursor, kind);
 				} else {
-					customAdapter = new CustomCursorAdapter(mActivity, new DatabaseHelper(mActivity).getAllVaultsFromGymnast(mActivity.getGymnastId(), new Date()), kind);
+					customAdapter = new CustomCursorAdapter(mActivity, new DatabaseHelper(mActivity).getAllVaultsFromGymnast(mActivity.getGymnastId(), date), kind);
 				}				
 			}
 			break;
@@ -124,7 +130,7 @@ public class ListViewFragment extends Fragment implements OnItemClickListener {
 		case COMPARE:
 			if (getActivity() instanceof CompareActivity) {
 				CompareActivity mActivity = (CompareActivity) getActivity();
-				customAdapter = new CustomCursorAdapter(mActivity, new DatabaseHelper(mActivity).getAllVaultsFromGymnast(mActivity.getGymnastId()), kind);
+				customAdapter = new CustomCursorAdapter(mActivity, new DatabaseHelper(mActivity).getAllVaultsFromGymnast(mActivity.getGymnastId(), date), kind);
 			}
 			break;
 		}

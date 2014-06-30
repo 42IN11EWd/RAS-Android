@@ -9,7 +9,7 @@ import android.os.Handler;
 
 public class SplashScreenActivity extends Activity {
 
-	private static final int SPLASH_DISPLAY_TIME = 1250; /* 0.5 second */
+	private static final int SPLASH_DISPLAY_TIME = 10000; /* 0.5 second */
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

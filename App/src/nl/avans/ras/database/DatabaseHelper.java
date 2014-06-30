@@ -22,8 +22,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		db.execSQL(CREATE_REFRSH_GYMNAST_DATE_TABLE);
-		db.execSQL(CREATE_REFRSH_VAULT_DATE_TABLE);
 		db.execSQL(CREATE_GYMNAST_TABLE);
 		db.execSQL(CREATE_VAULT_TABLE);
 	}
@@ -95,24 +93,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         db.setTransactionSuccessful();	
         db.endTransaction();
-	}
-	
-	public void insertUpdateGymnastDate(Date date) {
-		SQLiteDatabase db = this.getWritableDatabase();
-		ContentValues cv = new ContentValues();
-		// Add the content
-		cv.put(COL_GYMNAST_DATE, date.getTime());
-		// Insert the content
-		db.insert(CREATE_REFRSH_GYMNAST_DATE_TABLE, null, cv);
-	}
-	
-	public void insertUpdateVaultDate(Date date) {
-		SQLiteDatabase db = this.getWritableDatabase();
-		ContentValues cv = new ContentValues();
-		// Add the content
-		cv.put(COL_VAULT_DATE, date.getTime());
-		// Insert the content
-		db.insert(CREATE_REFRSH_VAULT_DATE_TABLE, null, cv);
 	}
 	
 	/******************************************************************
@@ -255,7 +235,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	// Get all vaults
 	public Cursor getAllVaultsFromGymnast(int id, Date date) {
 		// Define the select query
-		String selectQuery = "SELECT * FROM " + VAULT_TABLE + " WHERE " + COL_GYMNAST_ID + " = '" + id + "'";
+		String selectQuery = "SELECT * FROM " + VAULT_TABLE + " WHERE " + COL_GYMNAST_ID + " = '" + id + "' AND " + COL_DATE + " = '" + date.getTime() + "'";
 		// Create the database
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor = db.rawQuery(selectQuery, null);

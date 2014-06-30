@@ -151,7 +151,7 @@ public class CompareActivity extends Activity implements ListViewFragment.OnProf
 		// Create a new profile list fragment
     	ListViewFragment vaultListFragment = new ListViewFragment();
     	vaultListFragment.setAdapterKind(AdapterKind.COMPARE);
-    	// TODO: function to set the date
+    	vaultListFragment.setDate(date);
      	
      	// Replace the fragment
 		FragmentTransaction transaction = getFragmentManager().beginTransaction();

@@ -210,7 +210,6 @@ public class ProfileActivity extends Activity implements View.OnClickListener,
         	mProgressDialog.dismiss();
 		
 		dbHelper.insertGymnastCollection(gymnastCollection);
-		dbHelper.insertUpdateGymnastDate(new Date());
 		
 		insertFragment();
 	}

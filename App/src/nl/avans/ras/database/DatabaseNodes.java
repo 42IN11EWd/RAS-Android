@@ -41,13 +41,7 @@ public class DatabaseNodes {
 	public static final String COL_PROFILE_IMAGE = "profile_image";
 	public static final String COL_THUMBNAIL = "thumbnail";
 	
-	// Create table Strings
-	static final String CREATE_REFRSH_GYMNAST_DATE_TABLE = 
-	"CREATE TABLE IF NOT EXISTS " + REFRSH_GYMNAST_DATE_TABLE + " (" + COL_GYMNAST_DATE + " LONG)";
-	
-	static final String CREATE_REFRSH_VAULT_DATE_TABLE = 
-	"CREATE TABLE IF NOT EXISTS " + REFRSH_VAULT_DATE_TABLE + " (" + COL_VAULT_DATE + " LONG)";
-	
+	// Create table Strings	
 	static final String CREATE_VAULT_TABLE = 
 	"CREATE TABLE IF NOT EXISTS " + VAULT_TABLE + " (" + COL_ID + " INTEGER PRIMARY KEY, " + COL_VAULT_ID + " INTEGER, " 
 								  + COL_GYMNAST_ID + " INTEGER, "  + COL_VAULT_NAME + " TEXT, " + COL_D_SCORE + " DECIMAL, " 
